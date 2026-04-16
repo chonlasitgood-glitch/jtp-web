@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>JTP Portal - โรงเรียนจังหารฐิตวิริยาประชาสรรค์</title>
+    
+    <!-- Tailwind CSS (สำหรับจัดโครงสร้างและหน้าตา) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Prompt สำหรับภาษาไทยที่อ่านง่าย ดูทันสมัย -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome (สำหรับไอคอนต่างๆ) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- กำหนด Theme และ CSS เพิ่มเติม -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Prompt', 'sans-serif'],
+                    },
+                    colors: {
+                        'school-yellow': '#FACC15', /* เหลืองสดใส */
+                        'school-yellow-dark': '#EAB308',
+                        'school-dark': '#1F2937',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #F3F4F6;
+            -webkit-tap-highlight-color: transparent; /* ปิดแถบสีฟ้าเวลากดปุ่มบนมือถือ */
+        }
+        
+        /* สร้าง Animation สำหรับการสลับหน้าจอ */
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        .slide-up {
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ซ่อน Scrollbar สำหรับ App Container แต่ยังเลื่อนได้ */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="flex flex-col h-screen overflow-hidden text-gray-800">
+
+    <!-- ================= HEADER (แถบด้านบน) ================= -->
+    <header class="bg-white shadow-sm z-20 relative">
+        <div class="h-1 bg-school-yellow"></div> <!-- เส้นขอบบนสีเหลือง -->
+        <div class="max-w-md mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <!-- โลโก้จำลอง (ใช้วงกลมสีเหลืองแทน) -->
+                <div class="w-10 h-10 rounded-full bg-school-yellow text-white flex items-center justify-center font-bold text-xl shadow-inner">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div>
+                    <h1 class="text-sm font-bold leading-tight text-school-dark">จังหารฐิตวิริยาประชาสรรค์</h1>
+                    <p class="text-xs text-gray-500">JTP School Portal</p>
+                </div>
+            </div>
+            
+            <!-- ปุ่มแจ้งเตือน และ โปรไฟล์ -->
+            <div class="flex items-center gap-3">
+                <button class="relative p-2 text-gray-400 hover:text-school-yellow transition-colors">
+                    <i class="fa-regular fa-bell text-xl"></i>
+                    <span class="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white"></span>
+                </button>
+                <div class="w-8 h-8 rounded-full bg-gray-200 overflow-hidden border border-gray-300">
+                    <img src="https://i.pravatar.cc/100?img=11" alt="Profile" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ================= MAIN CONTENT AREA ================= -->
+    <main class="flex-1 relative overflow-hidden bg-gray-50 max-w-md mx-auto w-full shadow-lg">
+        
+        <!-- === 1. หน้า Dashboard หลัก (รวมแอป) === -->
+        <div id="home-view" class="absolute inset-0 overflow-y-auto no-scrollbar p-4 fade-in pb-24">
+            
+            <!-- การ์ดต้อนรับ -->
+            <div class="bg-gradient-to-r from-school-yellow to-school-yellow-dark rounded-2xl p-5 mb-6 text-white shadow-md relative overflow-hidden">
+                <div class="relative z-10">
+                    <h2 class="text-lg">สวัสดี, <span class="font-bold">ครูสมชาย ใจดี</span></h2>
+                    <p class="text-sm opacity-90 mb-3">วันพฤหัสบดีที่ 16 เมษายน 2569</p>
+                    <div class="bg-white/20 rounded-lg p-2 backdrop-blur-sm inline-block">
+                        <p class="text-xs font-medium"><i class="fa-solid fa-bullhorn mr-1"></i> แจ้งเตือน: ประชุมครูประจำเดือน พรุ่งนี้ 13:00 น.</p>
+                    </div>
+                </div>
+                <i class="fa-solid fa-school absolute -bottom-4 -right-4 text-8xl text-white opacity-20"></i>
+            </div>
+
+            <h3 class="text-sm font-bold text-gray-500 mb-3 px-1 uppercase tracking-wider">ระบบงานโรงเรียน</h3>
+            
+            <!-- Grid รวมแอป (App Launcher) -->
+            <div class="grid grid-cols-4 gap-y-6 gap-x-2" id="app-grid">
+                <!-- ไอคอนแอปจะถูกสร้างด้วย JavaScript ตรงนี้ -->
+            </div>
+
+            <!-- ส่วนเสริม (Widget ข่าวสาร) -->
+            <h3 class="text-sm font-bold text-gray-500 mb-3 mt-8 px-1 uppercase tracking-wider">ข่าวสารล่าสุด</h3>
+            <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+                <div class="flex gap-3 mb-3 border-b border-gray-100 pb-3">
+                    <div class="w-16 h-12 bg-gray-200 rounded text-gray-400 flex items-center justify-center text-xs">ภาพข่าว</div>
+                    <div>
+                        <h4 class="text-sm font-semibold text-gray-800">ประกาศรับสมัครนักเรียน ม.1 และ ม.4</h4>
+                        <p class="text-xs text-gray-500">12 เม.ย. 69</p>
+                    </div>
+                </div>
+                <div class="flex gap-3">
+                    <div class="w-16 h-12 bg-gray-200 rounded text-gray-400 flex items-center justify-center text-xs">ภาพข่าว</div>
+                    <div>
+                        <h4 class="text-sm font-semibold text-gray-800">ผลการแข่งขันกีฬาสีประจำปี</h4>
+                        <p class="text-xs text-gray-500">10 เม.ย. 69</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- === 2. หน้าต่างสำหรับเปิดแอปย่อย (SPA Container) === -->
+        <div id="app-viewer" class="absolute inset-0 bg-white z-10 hidden flex-col slide-up">
+            <!-- App Sub-header -->
+            <div class="bg-white px-4 py-3 flex items-center border-b border-gray-100 shadow-sm sticky top-0 z-20">
+                <button onclick="closeApp()" class="w-10 h-10 -ml-2 rounded-full flex items-center justify-center text-gray-500 hover:bg-gray-100 transition-colors">
+                    <i class="fa-solid fa-chevron-left text-lg"></i>
+                </button>
+                <div class="flex-1 text-center pr-8">
+                    <h2 id="current-app-title" class="font-bold text-gray-800">ชื่อแอป</h2>
+                </div>
+            </div>
+            
+            <!-- พื้นที่โหลดเนื้อหาแอปย่อย (Dynamic Content) -->
+            <div id="app-content-area" class="flex-1 overflow-y-auto bg-gray-50 p-4">
+                <!-- HTML ของแอปย่อยจะถูก Inject ใส่ที่นี่ผ่าน JavaScript -->
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ================= BOTTOM NAVIGATION ================= -->
+    <nav class="bg-white border-t border-gray-200 z-20 sticky bottom-0">
+        <div class="max-w-md mx-auto px-6 py-2 flex justify-between items-center pb-safe">
+            <!-- pb-safe สำหรับ iOS ที่มีขอบจอด้านล่าง -->
+            <button onclick="closeApp()" class="flex flex-col items-center p-2 text-school-yellow">
+                <i class="fa-solid fa-house text-xl mb-1"></i>
+                <span class="text-[10px] font-medium">หน้าแรก</span>
+            </button>
+            <button class="flex flex-col items-center p-2 text-gray-400 hover:text-school-yellow transition-colors">
+                <i class="fa-solid fa-calendar-days text-xl mb-1"></i>
+                <span class="text-[10px] font-medium">ปฏิทิน</span>
+            </button>
+            <button class="flex flex-col items-center p-2 text-gray-400 hover:text-school-yellow transition-colors">
+                <i class="fa-solid fa-qrcode text-xl mb-1"></i>
+                <span class="text-[10px] font-medium">สแกน</span>
+            </button>
+            <button class="flex flex-col items-center p-2 text-gray-400 hover:text-school-yellow transition-colors">
+                <i class="fa-solid fa-bars text-xl mb-1"></i>
+                <span class="text-[10px] font-medium">เมนู</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ================= JAVASCRIPT (หัวใจของ SPA) ================= -->
+    <script>
+        // 1. ฐานข้อมูลจำลองของระบบต่างๆ ในโรงเรียน
+        const schoolApps = [
+            {
+                id: 'attendance',
+                title: 'เช็คชื่อเข้าเรียน',
+                icon: 'fa-user-check',
+                bgColor: 'bg-blue-500',
+                renderContent: () => mockupAttendanceApp()
+            },
+            {
+                id: 'grades',
+                title: 'ระบบเกรด ปพ.',
+                icon: 'fa-file-signature',
+                bgColor: 'bg-green-500',
+                renderContent: () => mockupGradesApp()
+            },
+            {
+                id: 'schedule',
+                title: 'ตารางสอน',
+                icon: 'fa-clock',
+                bgColor: 'bg-purple-500',
+                renderContent: () => mockupScheduleApp()
+            },
+            {
+                id: 'behavior',
+                title: 'งานกิจการฯ',
+                icon: 'fa-scale-balanced',
+                bgColor: 'bg-red-500',
+                renderContent: () => `<div class="text-center mt-10 text-gray-500"><i class="fa-solid fa-person-digging text-4xl mb-3"></i><br>ระบบกำลังอยู่ระหว่างการพัฒนา</div>`
+            },
+            {
+                id: 'e-leave',
+                title: 'ระบบลางาน',
+                icon: 'fa-envelope-open-text',
+                bgColor: 'bg-teal-500',
+                renderContent: () => `<div class="text-center mt-10 text-gray-500">หน้าแบบฟอร์มขออนุญาตลางาน</div>`
+            },
+            {
+                id: 'library',
+                title: 'ห้องสมุด',
+                icon: 'fa-book-open',
+                bgColor: 'bg-orange-500',
+                renderContent: () => `<div class="text-center mt-10 text-gray-500">ระบบค้นหาและยืมคืนหนังสือ</div>`
+            },
+            {
+                id: 'canteen',
+                title: 'เงินติดบัตร',
+                icon: 'fa-utensils',
+                bgColor: 'bg-pink-500',
+                renderContent: () => `<div class="text-center mt-10 text-gray-500">ยอดเงินคงเหลือและประวัติการซื้ออาหาร</div>`
+            },
+            {
+                id: 'more',
+                title: 'เพิ่มเติม',
+                icon: 'fa-ellipsis',
+                bgColor: 'bg-gray-300',
+                textColor: 'text-gray-700',
+                renderContent: () => `<div class="text-center mt-10 text-gray-500">แสดงแอปทั้งหมด...</div>`
+            }
+        ];
+
+        // 2. ฟังก์ชันวาดไอคอนแอปลงในหน้า Home
+        function renderAppGrid() {
+            const gridContainer = document.getElementById('app-grid');
+            let html = '';
+            
+            schoolApps.forEach(app => {
+                const textStyle = app.textColor || 'text-white';
+                html += `
+                    <button onclick="openApp('${app.id}')" class="flex flex-col items-center group touch-manipulation">
+                        <div class="w-14 h-14 ${app.bgColor} ${textStyle} rounded-2xl flex items-center justify-center text-2xl shadow-sm mb-2 group-active:scale-95 transition-transform">
+                            <i class="fa-solid ${app.icon}"></i>
+                        </div>
+                        <span class="text-[10px] text-gray-700 text-center font-medium leading-tight max-w-full px-1 line-clamp-2">${app.title}</span>
+                    </button>
+                `;
+            });
+            
+            gridContainer.innerHTML = html;
+        }
+
+        // 3. ฟังก์ชันเปิดแอป (SPA Routing Logic)
+        function openApp(appId) {
+            const app = schoolApps.find(a => a.id === appId);
+            if(!app) return;
+
+            // เปลี่ยนชื่อบน Header
+            document.getElementById('current-app-title').textContent = app.title;
+            
+            // โหลดเนื้อหา (ในระบบจริง ตรงนี้จะใช้ fetch() ไปดึงหน้า php หรือ API มาแสดง)
+            document.getElementById('app-content-area').innerHTML = app.renderContent();
+
+            // สลับหน้าจอ
+            document.getElementById('home-view').classList.add('hidden');
+            const viewer = document.getElementById('app-viewer');
+            viewer.classList.remove('hidden');
+            viewer.classList.add('flex');
+            
+            // รีเซ็ต Animation
+            viewer.classList.remove('slide-up');
+            void viewer.offsetWidth; // trigger reflow
+            viewer.classList.add('slide-up');
+        }
+
+        // 4. ฟังก์ชันกลับหน้าหลัก
+        function closeApp() {
+            document.getElementById('app-viewer').classList.add('hidden');
+            document.getElementById('app-viewer').classList.remove('flex');
+            document.getElementById('home-view').classList.remove('hidden');
+            document.getElementById('app-content-area').innerHTML = ''; // เคลียร์เมมโมรี่
+        }
+
+        // ================= MOCKUP CONTENT GENERATORS =================
+        // ฟังก์ชันสร้าง UI จำลองสำหรับแอปต่างๆ เพื่อให้เห็นภาพการทำงาน
+
+        function mockupAttendanceApp() {
+            return `
+                <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 mb-4">
+                    <div class="flex justify-between items-center mb-4">
+                        <div>
+                            <h3 class="font-bold text-gray-800">มัธยมศึกษาปีที่ 4/1</h3>
+                            <p class="text-xs text-gray-500">คาบโฮมรูม</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs text-gray-500">มาเรียน</span><br>
+                            <span class="text-xl font-bold text-green-600">38/40</span>
+                        </div>
+                    </div>
+                    
+                    <!-- รายชื่อนักเรียนจำลอง -->
+                    <div class="space-y-3 mt-4">
+                        ${[
+                            {id: '1', name: 'ด.ช. กฤษณะ รักเรียน', status: 'present'},
+                            {id: '2', name: 'ด.ญ. ขวัญใจ ใฝ่ดี', status: 'absent'},
+                            {id: '3', name: 'นาย คณิน ยินดี', status: 'present'},
+                        ].map(student => `
+                            <div class="flex items-center justify-between p-3 border rounded-lg ${student.status === 'absent' ? 'bg-red-50 border-red-200' : 'border-gray-200'}">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-xs font-bold text-gray-500">${student.id}</div>
+                                    <span class="text-sm font-medium ${student.status === 'absent' ? 'text-red-700' : 'text-gray-700'}">${student.name}</span>
+                                </div>
+                                <div class="flex gap-2">
+                                    <button class="w-8 h-8 rounded-full flex items-center justify-center ${student.status === 'present' ? 'bg-green-500 text-white' : 'bg-gray-100 text-gray-400'}"><i class="fa-solid fa-check"></i></button>
+                                    <button class="w-8 h-8 rounded-full flex items-center justify-center ${student.status === 'absent' ? 'bg-red-500 text-white' : 'bg-gray-100 text-gray-400'}"><i class="fa-solid fa-xmark"></i></button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <button class="w-full bg-school-yellow text-school-dark font-bold py-3 rounded-lg mt-6 shadow-sm">
+                        บันทึกการเช็คชื่อ
+                    </button>
+                </div>
+            `;
+        }
+
+        function mockupScheduleApp() {
+            return `
+                <div class="flex justify-between items-center mb-4 px-1">
+                    <h3 class="font-bold text-gray-800">ตารางสอน วันพฤหัสบดี</h3>
+                    <button class="text-school-yellow text-sm font-medium">ดูทั้งหมด</button>
+                </div>
+                
+                <div class="relative pl-6 border-l-2 border-school-yellow space-y-6">
+                    <!-- คาบ 1 -->
+                    <div class="relative">
+                        <div class="absolute -left-[29px] top-1 w-4 h-4 rounded-full bg-school-yellow border-4 border-gray-50"></div>
+                        <div class="bg-white p-3 rounded-lg shadow-sm border border-gray-100">
+                            <p class="text-xs text-school-yellow-dark font-bold mb-1">08:30 - 09:20 (คาบ 1)</p>
+                            <h4 class="font-bold text-gray-800">คณิตศาสตร์เพิ่มเติม (ค31201)</h4>
+                            <p class="text-sm text-gray-500 mt-1"><i class="fa-solid fa-location-dot mr-1"></i> ห้อง 423 | ชั้น ม.4/1</p>
+                        </div>
+                    </div>
+                    
+                    <!-- คาบ 2 (กำลังสอน) -->
+                    <div class="relative">
+                        <div class="absolute -left-[31px] top-1 w-5 h-5 rounded-full bg-blue-500 border-4 border-gray-50 shadow-sm flex items-center justify-center">
+                           <div class="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                        </div>
+                        <div class="bg-blue-50 p-3 rounded-lg shadow-sm border border-blue-200">
+                            <span class="inline-block px-2 py-1 bg-blue-500 text-white text-[10px] rounded mb-1 font-medium">กำลังสอน</span>
+                            <p class="text-xs text-blue-600 font-bold mb-1 mt-1">09:20 - 10:10 (คาบ 2)</p>
+                            <h4 class="font-bold text-gray-800">คณิตศาสตร์เพิ่มเติม (ค31201)</h4>
+                            <p class="text-sm text-gray-600 mt-1"><i class="fa-solid fa-location-dot mr-1"></i> ห้อง 423 | ชั้น ม.4/2</p>
+                        </div>
+                    </div>
+                    
+                    <!-- คาบว่าง -->
+                    <div class="relative">
+                        <div class="absolute -left-[29px] top-1 w-4 h-4 rounded-full bg-gray-300 border-4 border-gray-50"></div>
+                        <div class="bg-gray-100 p-3 rounded-lg border border-gray-200 border-dashed">
+                            <p class="text-xs text-gray-500 font-bold mb-1">10:10 - 11:00 (คาบ 3)</p>
+                            <h4 class="text-gray-500 italic">คาบว่าง</h4>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function mockupGradesApp() {
+            return `
+                <div class="grid grid-cols-2 gap-3 mb-4">
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-gray-100 text-center">
+                        <p class="text-xs text-gray-500 mb-1">ปีการศึกษา</p>
+                        <p class="font-bold text-gray-800">2568 / เทอม 2</p>
+                    </div>
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-gray-100 text-center">
+                        <p class="text-xs text-gray-500 mb-1">กำหนดส่งเกรด</p>
+                        <p class="font-bold text-red-500">20 มี.ค. 69</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="p-3 bg-gray-50 border-b border-gray-100 flex justify-between items-center">
+                        <h4 class="font-bold text-gray-700 text-sm">รายวิชาที่รับผิดชอบ</h4>
+                    </div>
+                    
+                    <div class="divide-y divide-gray-100">
+                        <div class="p-3 flex justify-between items-center hover:bg-gray-50 cursor-pointer">
+                            <div>
+                                <h5 class="text-sm font-bold text-gray-800">ค31201 คณิตฯ เพิ่มเติม</h5>
+                                <p class="text-xs text-gray-500 mt-1">ม.4/1 (40 คน)</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="px-2 py-1 bg-green-100 text-green-700 text-[10px] rounded-full font-medium">ส่งแล้ว</span>
+                            </div>
+                        </div>
+                        <div class="p-3 flex justify-between items-center hover:bg-gray-50 cursor-pointer">
+                            <div>
+                                <h5 class="text-sm font-bold text-gray-800">ค31201 คณิตฯ เพิ่มเติม</h5>
+                                <p class="text-xs text-gray-500 mt-1">ม.4/2 (38 คน)</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="px-2 py-1 bg-yellow-100 text-yellow-700 text-[10px] rounded-full font-medium">กำลังดำเนินการ (70%)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Initialize ทันทีที่โหลดหน้าเสร็จ
+        document.addEventListener('DOMContentLoaded', () => {
+            renderAppGrid();
+        });
+
+    </script>
+</body>
+</html>
