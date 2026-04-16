@@ -6,6 +6,11 @@
     <meta name="referrer" content="no-referrer">
     <title>ITA ONLINE - โรงเรียนจังหารฐิตวิริยาประชาสรรค์</title>
     
+    <!-- Favicon -->
+    <link rel="icon" href="./logo/jtplogo.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="./logo/jtplogo.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="./logo/jtplogo.png">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -86,10 +91,9 @@
     <header class="fixed w-full top-0 z-50 glass-nav transition-all duration-300 shadow-sm bg-white/95">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
+                <!-- เปลี่ยนปุ่มให้มีโลโก้โรงเรียน -->
                 <a href="index.html" class="flex-shrink-0 flex items-center gap-3 cursor-pointer group">
-                    <div class="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center text-slate-600 group-hover:bg-primary-500 group-hover:text-slate-900 transition-colors">
-                        <i data-lucide="arrow-left" class="w-5 h-5"></i>
-                    </div>
+                    <img src="./logo/jtplogo.png" alt="โลโก้โรงเรียน" class="w-10 h-10 sm:w-12 sm:h-12 object-contain group-hover:scale-105 transition-transform" onerror="this.onerror=null;this.src='https://placehold.co/100x100/e2e8f0/cbd5e0?text=Logo';">
                     <div class="hidden sm:block">
                         <h1 class="text-base font-bold leading-tight text-slate-900 group-hover:text-primary-600 transition-colors">กลับสู่หน้าหลัก</h1>
                         <p class="text-xs text-slate-500 font-medium tracking-wide">โรงเรียนจังหารฐิตวิริยาประชาสรรค์</p>
@@ -472,9 +476,10 @@
 
     <!-- Footer -->
     <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 text-center text-sm">
-        <div class="max-w-7xl mx-auto px-4">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col items-center gap-3">
+            <img src="./logo/jtplogo.png" alt="โลโก้โรงเรียน" class="w-10 h-10 object-contain bg-white rounded-lg p-1 mb-2" onerror="this.onerror=null;this.src='https://placehold.co/100x100/e2e8f0/cbd5e0?text=Logo';">
             <p>&copy; 2026 โรงเรียนจังหารฐิตวิริยาประชาสรรค์ (JTP). สงวนลิขสิทธิ์.</p>
-            <p class="mt-2">พัฒนาโดย <a href="https://www.kruboat.com" target="_blank" class="text-primary-400 hover:text-primary-300 transition-colors font-medium">ครูโบ๊ท ชลสิทธิ์ วิเชียรพันธ์ (www.kruboat.com)</a></p>
+            <p>พัฒนาโดย <a href="https://www.kruboat.com" target="_blank" class="text-primary-400 hover:text-primary-300 transition-colors font-medium">ครูโบ๊ท ชลสิทธิ์ วิเชียรพันธ์ (www.kruboat.com)</a></p>
         </div>
     </footer>
 
@@ -487,19 +492,8 @@
             const content = button.nextElementSibling;
             const icon = button.querySelector('.accordion-icon');
             
-            // Toggle current
             content.classList.toggle('open');
             icon.classList.toggle('open');
-            
-            // Optional: Close others (Uncomment below if you want only one open at a time)
-            /*
-            document.querySelectorAll('.accordion-content').forEach((el) => {
-                if (el !== content && el.classList.contains('open')) {
-                    el.classList.remove('open');
-                    el.previousElementSibling.querySelector('.accordion-icon').classList.remove('open');
-                }
-            });
-            */
         }
         
         // Open the first accordion by default on load
