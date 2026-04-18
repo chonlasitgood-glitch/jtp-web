@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html lang="th" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="no-referrer">
     <title>โรงเรียนจังหารฐิตวิริยาประชาสรรค์ - JTP</title>
-    
+
     <!-- Favicon -->
     <link rel="icon" href="./logo/jtplogo.ico" type="image/x-icon">
     <link rel="shortcut icon" href="./logo/jtplogo.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="./logo/jtplogo.png">
-    
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Google Fonts: Prompt -->
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
@@ -66,7 +67,7 @@
             }
         }
     </script>
-    
+
     <style>
         body {
             font-family: 'Prompt', sans-serif;
@@ -80,7 +81,7 @@
             backdrop-filter: blur(16px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.3);
         }
-        
+
         .glass-card {
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(10px);
@@ -91,6 +92,7 @@
         .card-hover-effect {
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
         .card-hover-effect:hover {
             transform: translateY(-8px);
             box-shadow: 0 20px 40px -10px rgba(202, 138, 4, 0.15);
@@ -102,9 +104,17 @@
             display: block;
             animation: fadeIn 0.2s ease-out forwards;
         }
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Text Gradients */
@@ -120,17 +130,24 @@
             background-image: radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px);
             background-size: 20px 20px;
         }
-        
+
         .bg-pattern-grid {
             background-image: linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+                linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
             background-size: 30px 30px;
         }
 
-        .hide-scroll::-webkit-scrollbar { display: none; }
-        .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+        .hide-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scroll {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
     </style>
 </head>
+
 <body class="text-slate-800">
 
     <!-- Navigation Bar -->
@@ -139,44 +156,75 @@
             <div class="flex justify-between items-center h-20">
                 <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer group" onclick="window.scrollTo(0,0)">
                     <div class="relative">
-                        <div class="absolute inset-0 bg-primary-400 rounded-full blur-md opacity-40 group-hover:opacity-70 transition-opacity"></div>
-                        <img src="./logo/jtplogo.png" alt="โลโก้โรงเรียน" class="relative w-11 h-11 md:w-12 md:h-12 object-contain group-hover:scale-105 transition-transform" onerror="this.onerror=null;this.src='https://placehold.co/100x100/e2e8f0/cbd5e0?text=Logo';">
+                        <div
+                            class="absolute inset-0 bg-primary-400 rounded-full blur-md opacity-40 group-hover:opacity-70 transition-opacity">
+                        </div>
+                        <img src="./logo/jtplogo.png" alt="โลโก้โรงเรียน"
+                            class="relative w-11 h-11 md:w-12 md:h-12 object-contain group-hover:scale-105 transition-transform"
+                            onerror="this.onerror=null;this.src='https://placehold.co/100x100/e2e8f0/cbd5e0?text=Logo';">
                     </div>
                     <div class="hidden sm:block">
-                        <h1 class="text-base md:text-lg font-bold leading-tight text-slate-900 group-hover:text-primary-600 transition-colors">โรงเรียนจังหารฐิตวิริยาประชาสรรค์</h1>
-                        <p class="text-[10px] md:text-xs text-slate-500 font-medium tracking-wide uppercase">Janghanthitviriyaprachasan School</p>
+                        <h1
+                            class="text-base md:text-lg font-bold leading-tight text-slate-900 group-hover:text-primary-600 transition-colors">
+                            โรงเรียนจังหารฐิตวิริยาประชาสรรค์</h1>
+                        <p class="text-[10px] md:text-xs text-slate-500 font-medium tracking-wide uppercase">
+                            Janghanthitviriyaprachasan School</p>
                     </div>
                 </div>
 
                 <!-- Desktop Menu -->
                 <nav class="hidden lg:flex space-x-1 items-center">
-                    <a href="#" class="px-3 py-2 text-primary-600 font-semibold rounded-lg bg-primary-50/80 backdrop-blur-sm border border-primary-100 shadow-sm">หน้าแรก</a>
-                    <a href="#news" class="px-3 py-2 text-slate-600 hover:text-primary-600 font-medium rounded-lg hover:bg-slate-50 transition-colors">ข่าวประชาสัมพันธ์</a>
-                    <a href="#eservice" class="px-3 py-2 text-slate-600 hover:text-primary-600 font-medium rounded-lg hover:bg-slate-50 transition-colors">E-Service</a>
-                    <a href="#ita" class="px-3 py-2 text-slate-600 hover:text-primary-600 font-medium rounded-lg hover:bg-slate-50 transition-colors">ITA ONLINE</a>
-                    
+                    <a href="#"
+                        class="px-3 py-2 text-primary-600 font-semibold rounded-lg bg-primary-50/80 backdrop-blur-sm border border-primary-100 shadow-sm">หน้าแรก</a>
+                    <a href="#news"
+                        class="px-3 py-2 text-slate-600 hover:text-primary-600 font-medium rounded-lg hover:bg-slate-50 transition-colors">ข่าวประชาสัมพันธ์</a>
+                    <a href="#eservice"
+                        class="px-3 py-2 text-slate-600 hover:text-primary-600 font-medium rounded-lg hover:bg-slate-50 transition-colors">E-Service</a>
+                    <a href="#ita"
+                        class="px-3 py-2 text-slate-600 hover:text-primary-600 font-medium rounded-lg hover:bg-slate-50 transition-colors">ITA
+                        ONLINE</a>
+
                     <div class="relative dropdown group">
-                        <button class="flex items-center px-3 py-2 text-slate-600 hover:text-primary-600 font-medium rounded-lg hover:bg-slate-50 transition-colors">
-                            เกี่ยวกับเรา <i data-lucide="chevron-down" class="w-4 h-4 ml-1 text-slate-400 group-hover:text-primary-600 transition-transform group-hover:rotate-180"></i>
+                        <button
+                            class="flex items-center px-3 py-2 text-slate-600 hover:text-primary-600 font-medium rounded-lg hover:bg-slate-50 transition-colors">
+                            เกี่ยวกับเรา <i data-lucide="chevron-down"
+                                class="w-4 h-4 ml-1 text-slate-400 group-hover:text-primary-600 transition-transform group-hover:rotate-180"></i>
                         </button>
                         <div class="dropdown-menu absolute hidden pt-2 w-52 -ml-4 z-50">
-                            <div class="bg-white/95 backdrop-blur-xl rounded-2xl shadow-xl ring-1 ring-black/5 p-2 border border-white">
-                                <a href="#about-admin" class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-primary-50 hover:text-primary-700 rounded-xl transition-colors font-medium">ผู้บริหาร / บุคลากร</a>
-                                <a href="#about-philosophy" class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-primary-50 hover:text-primary-700 rounded-xl transition-colors font-medium">ปรัชญา / คติพจน์</a>
-                                <a href="#about-vision" class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-primary-50 hover:text-primary-700 rounded-xl transition-colors font-medium">วิสัยทัศน์ / พันธกิจ</a>
-                                <a href="#about-history" class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-primary-50 hover:text-primary-700 rounded-xl transition-colors font-medium">ประวัติความเป็นมา</a>
+                            <div
+                                class="bg-white/95 backdrop-blur-xl rounded-2xl shadow-xl ring-1 ring-black/5 p-2 border border-white">
+                                <a href="#about-admin"
+                                    class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-primary-50 hover:text-primary-700 rounded-xl transition-colors font-medium">ผู้บริหาร
+                                    / บุคลากร</a>
+                                <a href="#about-philosophy"
+                                    class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-primary-50 hover:text-primary-700 rounded-xl transition-colors font-medium">ปรัชญา
+                                    / คติพจน์</a>
+                                <a href="#about-vision"
+                                    class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-primary-50 hover:text-primary-700 rounded-xl transition-colors font-medium">วิสัยทัศน์
+                                    / พันธกิจ</a>
+                                <a href="#about-history"
+                                    class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-primary-50 hover:text-primary-700 rounded-xl transition-colors font-medium">ประวัติความเป็นมา</a>
                             </div>
                         </div>
                     </div>
 
                     <div class="relative dropdown group">
-                        <button class="flex items-center px-3 py-2 text-slate-600 hover:text-primary-600 font-medium rounded-lg hover:bg-slate-50 transition-colors">
-                            ร้องเรียน <i data-lucide="chevron-down" class="w-4 h-4 ml-1 text-slate-400 group-hover:text-primary-600 transition-transform group-hover:rotate-180"></i>
+                        <button
+                            class="flex items-center px-3 py-2 text-slate-600 hover:text-primary-600 font-medium rounded-lg hover:bg-slate-50 transition-colors">
+                            ร้องเรียน <i data-lucide="chevron-down"
+                                class="w-4 h-4 ml-1 text-slate-400 group-hover:text-primary-600 transition-transform group-hover:rotate-180"></i>
                         </button>
                         <div class="dropdown-menu absolute hidden pt-2 w-52 right-0 z-50">
-                            <div class="bg-white/95 backdrop-blur-xl rounded-2xl shadow-xl ring-1 ring-black/5 p-2 border border-white">
-                                <a href="https://docs.google.com/forms/d/e/1FAIpQLScd7NjXXNyI61POP_QCCYagSUMc-B4NMEnIp6pK0Xifiastfg/viewform" target="_blank" rel="noopener noreferrer" class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-primary-50 hover:text-primary-700 rounded-xl transition-colors font-medium flex items-center justify-between">ทั่วไป <i data-lucide="external-link" class="w-3 h-3 opacity-50"></i></a>
-                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMthneBa6NELBT_Zw_Hn2Ni5FP3X1VgGDO2cgAYOs29HwqTw/viewform" target="_blank" rel="noopener noreferrer" class="block px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 hover:text-red-700 rounded-xl transition-colors font-medium flex items-center justify-between">การทุจริต <i data-lucide="external-link" class="w-3 h-3 opacity-50"></i></a>
+                            <div
+                                class="bg-white/95 backdrop-blur-xl rounded-2xl shadow-xl ring-1 ring-black/5 p-2 border border-white">
+                                <a href="https://docs.google.com/forms/d/e/1FAIpQLScd7NjXXNyI61POP_QCCYagSUMc-B4NMEnIp6pK0Xifiastfg/viewform"
+                                    target="_blank" rel="noopener noreferrer"
+                                    class="block px-4 py-2.5 text-sm text-slate-600 hover:bg-primary-50 hover:text-primary-700 rounded-xl transition-colors font-medium flex items-center justify-between">ทั่วไป
+                                    <i data-lucide="external-link" class="w-3 h-3 opacity-50"></i></a>
+                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMthneBa6NELBT_Zw_Hn2Ni5FP3X1VgGDO2cgAYOs29HwqTw/viewform"
+                                    target="_blank" rel="noopener noreferrer"
+                                    class="block px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 hover:text-red-700 rounded-xl transition-colors font-medium flex items-center justify-between">การทุจริต
+                                    <i data-lucide="external-link" class="w-3 h-3 opacity-50"></i></a>
                             </div>
                         </div>
                     </div>
@@ -184,7 +232,8 @@
 
                 <!-- Mobile Menu Button -->
                 <div class="lg:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="p-2 rounded-xl bg-slate-50 text-slate-600 hover:bg-primary-50 hover:text-primary-600 focus:outline-none transition-colors border border-slate-100">
+                    <button id="mobile-menu-btn"
+                        class="p-2 rounded-xl bg-slate-50 text-slate-600 hover:bg-primary-50 hover:text-primary-600 focus:outline-none transition-colors border border-slate-100">
                         <i data-lucide="menu" class="w-5 h-5"></i>
                     </button>
                 </div>
@@ -192,110 +241,169 @@
         </div>
 
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden lg:hidden bg-white/95 backdrop-blur-xl border-t border-slate-100 max-h-[80vh] overflow-y-auto">
+        <div id="mobile-menu"
+            class="hidden lg:hidden bg-white/95 backdrop-blur-xl border-t border-slate-100 max-h-[80vh] overflow-y-auto">
             <div class="px-4 pt-4 pb-6 space-y-2 shadow-2xl">
-                <a href="#" class="block px-4 py-3 rounded-xl text-sm font-semibold bg-primary-50 text-primary-700 border border-primary-100">หน้าแรก</a>
-                <a href="#news" class="block px-4 py-3 rounded-xl text-sm font-medium text-slate-600 hover:bg-slate-50 border border-transparent">ข่าวประชาสัมพันธ์</a>
-                <a href="#eservice" class="block px-4 py-3 rounded-xl text-sm font-medium text-slate-600 hover:bg-slate-50 border border-transparent">E-Service</a>
-                <a href="#ita" class="block px-4 py-3 rounded-xl text-sm font-medium text-slate-600 hover:bg-slate-50 border border-transparent">ITA ONLINE</a>
-                <a href="#about-admin" class="block px-4 py-3 rounded-xl text-sm font-medium text-slate-600 hover:bg-slate-50 border border-transparent">เกี่ยวกับเรา</a>
+                <a href="#"
+                    class="block px-4 py-3 rounded-xl text-sm font-semibold bg-primary-50 text-primary-700 border border-primary-100">หน้าแรก</a>
+                <a href="#news"
+                    class="block px-4 py-3 rounded-xl text-sm font-medium text-slate-600 hover:bg-slate-50 border border-transparent">ข่าวประชาสัมพันธ์</a>
+                <a href="#eservice"
+                    class="block px-4 py-3 rounded-xl text-sm font-medium text-slate-600 hover:bg-slate-50 border border-transparent">E-Service</a>
+                <a href="#ita"
+                    class="block px-4 py-3 rounded-xl text-sm font-medium text-slate-600 hover:bg-slate-50 border border-transparent">ITA
+                    ONLINE</a>
+                <a href="#about-admin"
+                    class="block px-4 py-3 rounded-xl text-sm font-medium text-slate-600 hover:bg-slate-50 border border-transparent">เกี่ยวกับเรา</a>
                 <div class="h-px bg-slate-100 my-2"></div>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLScd7NjXXNyI61POP_QCCYagSUMc-B4NMEnIp6pK0Xifiastfg/viewform" target="_blank" rel="noopener noreferrer" class="block px-4 py-3 rounded-xl text-sm font-medium text-slate-600 hover:bg-slate-50 border border-transparent flex justify-between items-center">ร้องเรียนทั่วไป <i data-lucide="external-link" class="w-4 h-4 opacity-50"></i></a>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMthneBa6NELBT_Zw_Hn2Ni5FP3X1VgGDO2cgAYOs29HwqTw/viewform" target="_blank" rel="noopener noreferrer" class="block px-4 py-3 rounded-xl text-sm font-medium text-red-600 hover:bg-red-50 border border-red-100/50 flex justify-between items-center">ร้องเรียนการทุจริต <i data-lucide="external-link" class="w-4 h-4 opacity-50"></i></a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScd7NjXXNyI61POP_QCCYagSUMc-B4NMEnIp6pK0Xifiastfg/viewform"
+                    target="_blank" rel="noopener noreferrer"
+                    class="block px-4 py-3 rounded-xl text-sm font-medium text-slate-600 hover:bg-slate-50 border border-transparent flex justify-between items-center">ร้องเรียนทั่วไป
+                    <i data-lucide="external-link" class="w-4 h-4 opacity-50"></i></a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMthneBa6NELBT_Zw_Hn2Ni5FP3X1VgGDO2cgAYOs29HwqTw/viewform"
+                    target="_blank" rel="noopener noreferrer"
+                    class="block px-4 py-3 rounded-xl text-sm font-medium text-red-600 hover:bg-red-50 border border-red-100/50 flex justify-between items-center">ร้องเรียนการทุจริต
+                    <i data-lucide="external-link" class="w-4 h-4 opacity-50"></i></a>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="relative min-h-[100svh] flex items-center pt-24 pb-12 lg:pt-28 lg:pb-16 overflow-hidden bg-pattern-grid">
+    <section
+        class="relative min-h-[100svh] flex items-center pt-24 pb-12 lg:pt-28 lg:pb-16 overflow-hidden bg-pattern-grid">
         <!-- Animated Blobs Background -->
         <div class="absolute inset-0 -z-10 overflow-hidden">
-            <div class="absolute top-0 right-0 -mr-20 -mt-20 w-[400px] h-[400px] lg:w-[600px] lg:h-[600px] bg-primary-200/40 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
-            <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-[300px] h-[300px] lg:w-[500px] lg:h-[500px] bg-amber-200/40 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-yellow-100/30 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob animation-delay-4000"></div>
+            <div
+                class="absolute top-0 right-0 -mr-20 -mt-20 w-[400px] h-[400px] lg:w-[600px] lg:h-[600px] bg-primary-200/40 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob">
+            </div>
+            <div
+                class="absolute bottom-0 left-0 -ml-20 -mb-20 w-[300px] h-[300px] lg:w-[500px] lg:h-[500px] bg-amber-200/40 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000">
+            </div>
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-yellow-100/30 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob animation-delay-4000">
+            </div>
         </div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative w-full">
             <div class="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-                
+
                 <!-- Text Content -->
                 <div class="text-center lg:text-left lg:col-span-5 order-2 lg:order-1">
-                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/60 backdrop-blur-sm border border-primary-200 shadow-sm mb-4 sm:mb-6 animate-float">
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/60 backdrop-blur-sm border border-primary-200 shadow-sm mb-4 sm:mb-6 animate-float">
                         <span class="relative flex h-2 w-2">
-                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
-                          <span class="relative inline-flex rounded-full h-2 w-2 bg-primary-500"></span>
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-primary-500"></span>
                         </span>
-                        <span class="text-primary-800 text-xs font-semibold tracking-wide uppercase">ยินดีต้อนรับสู่ JTP</span>
+                        <span class="text-primary-800 text-xs font-semibold tracking-wide uppercase">ยินดีต้อนรับสู่
+                            JTP</span>
                     </div>
-                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-[1.15] mb-4 lg:mb-6">
+                    <h1
+                        class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-[1.15] mb-4 lg:mb-6">
                         มุ่งมั่นพัฒนาวิชาการ<br>
                         <span class="text-gradient">สืบสานวัฒนธรรม</span>
                     </h1>
                     <p class="text-sm sm:text-base text-slate-600 mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed">
-                        โรงเรียนจังหารฐิตวิริยาประชาสรรค์ แหล่งเรียนรู้ที่ทันสมัย มุ่งเน้นสร้างเยาวชนให้เป็นคนดี มีความรู้ คู่คุณธรรม นำชุมชนสู่ความยั่งยืน
+                        โรงเรียนจังหารฐิตวิริยาประชาสรรค์ แหล่งเรียนรู้ที่ทันสมัย มุ่งเน้นสร้างเยาวชนให้เป็นคนดี
+                        มีความรู้ คู่คุณธรรม นำชุมชนสู่ความยั่งยืน
                     </p>
                     <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
-                        <a href="#news" class="group relative px-6 py-3 bg-primary-500 text-slate-900 rounded-xl font-bold transition-all hover:bg-primary-400 hover:shadow-glow flex items-center justify-center gap-2 text-sm overflow-hidden">
-                            <span class="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-black"></span>
-                            <i data-lucide="newspaper" class="w-4 h-4 relative z-10 group-hover:scale-110 transition-transform"></i>
+                        <a href="#news"
+                            class="group relative px-6 py-3 bg-primary-500 text-slate-900 rounded-xl font-bold transition-all hover:bg-primary-400 hover:shadow-glow flex items-center justify-center gap-2 text-sm overflow-hidden">
+                            <span
+                                class="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-black"></span>
+                            <i data-lucide="newspaper"
+                                class="w-4 h-4 relative z-10 group-hover:scale-110 transition-transform"></i>
                             <span class="relative z-10">ข่าวสารล่าสุด</span>
                         </a>
-                        <a href="#eservice" class="group px-6 py-3 bg-white/80 backdrop-blur-sm hover:bg-white text-slate-700 border border-slate-200 rounded-xl font-medium transition-all shadow-sm hover:shadow-md flex items-center justify-center gap-2 text-sm">
-                            <i data-lucide="monitor" class="w-4 h-4 text-primary-500 group-hover:animate-bounce"></i> E-Service
+                        <a href="#eservice"
+                            class="group px-6 py-3 bg-white/80 backdrop-blur-sm hover:bg-white text-slate-700 border border-slate-200 rounded-xl font-medium transition-all shadow-sm hover:shadow-md flex items-center justify-center gap-2 text-sm">
+                            <i data-lucide="monitor" class="w-4 h-4 text-primary-500 group-hover:animate-bounce"></i>
+                            E-Service
                         </a>
                     </div>
                 </div>
 
                 <!-- Visuals Composition -->
                 <div class="lg:col-span-7 order-1 lg:order-2 relative w-full mt-4 lg:mt-0">
-                    
-                    <div class="absolute -top-4 -right-2 sm:-top-6 sm:-right-4 bg-white/90 backdrop-blur-md p-2.5 sm:p-3.5 rounded-2xl shadow-xl flex items-center gap-3 animate-float z-30 border border-white/50">
-                        <div class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-green-400 to-green-500 text-white rounded-full flex items-center justify-center shrink-0 shadow-inner">
+
+                    <div
+                        class="absolute -top-4 -right-2 sm:-top-6 sm:-right-4 bg-white/90 backdrop-blur-md p-2.5 sm:p-3.5 rounded-2xl shadow-xl flex items-center gap-3 animate-float z-30 border border-white/50">
+                        <div
+                            class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-green-400 to-green-500 text-white rounded-full flex items-center justify-center shrink-0 shadow-inner">
                             <i data-lucide="award" class="w-4 h-4 sm:w-5 sm:h-5"></i>
                         </div>
                         <div>
                             <p class="text-[10px] sm:text-xs font-bold text-slate-800 leading-tight">โรงเรียนคุณภาพ</p>
-                            <p class="text-[8px] sm:text-[10px] text-green-600 font-semibold uppercase">ประจำอำเภอจังหาร</p>
+                            <p class="text-[8px] sm:text-[10px] text-green-600 font-semibold uppercase">ประจำอำเภอจังหาร
+                            </p>
                         </div>
                     </div>
 
                     <div class="flex flex-col gap-2 sm:gap-3 w-full relative z-20">
                         <!-- Poster Slider -->
-                        <div class="w-full aspect-video rounded-2xl sm:rounded-[1.5rem] overflow-hidden shadow-[0_20px_50px_-12px_rgba(0,0,0,0.2)] bg-slate-900 group relative border-4 border-white/40">
-                            <div id="poster-loading" class="absolute inset-0 flex items-center justify-center bg-slate-100 z-50">
-                                <div class="w-8 h-8 border-4 border-slate-300 border-t-primary-500 rounded-full animate-spin"></div>
+                        <div
+                            class="w-full aspect-video rounded-2xl sm:rounded-[1.5rem] overflow-hidden shadow-[0_20px_50px_-12px_rgba(0,0,0,0.2)] bg-slate-900 group relative border-4 border-white/40">
+                            <div id="poster-loading"
+                                class="absolute inset-0 flex items-center justify-center bg-slate-100 z-50">
+                                <div
+                                    class="w-8 h-8 border-4 border-slate-300 border-t-primary-500 rounded-full animate-spin">
+                                </div>
                             </div>
-                            <div id="hero-slider" class="flex w-full h-full transition-transform duration-700 ease-in-out"></div>
-                            
-                            <div class="absolute inset-0 pointer-events-none rounded-2xl sm:rounded-[1.5rem] ring-1 ring-inset ring-black/10"></div>
-                            
-                            <button id="slider-prev" class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 bg-white/20 hover:bg-white/90 backdrop-blur-md text-white hover:text-slate-900 rounded-full flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 shadow-lg z-20 hidden border border-white/30">
+                            <div id="hero-slider"
+                                class="flex w-full h-full transition-transform duration-700 ease-in-out"></div>
+
+                            <div
+                                class="absolute inset-0 pointer-events-none rounded-2xl sm:rounded-[1.5rem] ring-1 ring-inset ring-black/10">
+                            </div>
+
+                            <button id="slider-prev"
+                                class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 bg-white/20 hover:bg-white/90 backdrop-blur-md text-white hover:text-slate-900 rounded-full flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 shadow-lg z-20 hidden border border-white/30">
                                 <i data-lucide="chevron-left" class="w-4 h-4 md:w-5 md:h-5"></i>
                             </button>
-                            <button id="slider-next" class="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 bg-white/20 hover:bg-white/90 backdrop-blur-md text-white hover:text-slate-900 rounded-full flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 shadow-lg z-20 hidden border border-white/30">
+                            <button id="slider-next"
+                                class="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 bg-white/20 hover:bg-white/90 backdrop-blur-md text-white hover:text-slate-900 rounded-full flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 shadow-lg z-20 hidden border border-white/30">
                                 <i data-lucide="chevron-right" class="w-4 h-4 md:w-5 md:h-5"></i>
                             </button>
-                            <div id="slider-indicators" class="absolute bottom-3 md:bottom-5 left-1/2 -translate-y-1/2 -translate-x-1/2 flex gap-2 z-20"></div>
+                            <div id="slider-indicators"
+                                class="absolute bottom-3 md:bottom-5 left-1/2 -translate-y-1/2 -translate-x-1/2 flex gap-2 z-20">
+                            </div>
                         </div>
 
                         <!-- 3 Small Images Grid -->
                         <div class="grid grid-cols-3 gap-2 sm:gap-3 w-full">
-                            <div class="w-full aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden shadow-md border-[3px] border-white relative group cursor-pointer bg-slate-100" onclick="openModal('./photo/photo1.jpg')">
-                                <img src="./photo/photo1.jpg" alt="บรรยากาศ 1" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null;this.src='https://placehold.co/600x450/e2e8f0/cbd5e0?text=Photo+1';">
-                                <div class="absolute inset-0 bg-primary-900/0 group-hover:bg-primary-900/20 transition-colors duration-300 flex items-center justify-center">
-                                    <i data-lucide="search" class="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transform scale-50 group-hover:scale-100 transition-all duration-300"></i>
+                            <div class="w-full aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden shadow-md border-[3px] border-white relative group cursor-pointer bg-slate-100"
+                                onclick="openModal('./photo/photo1.jpg')">
+                                <img src="./photo/photo1.jpg" alt="บรรยากาศ 1"
+                                    class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                                    onerror="this.onerror=null;this.src='https://placehold.co/600x450/e2e8f0/cbd5e0?text=Photo+1';">
+                                <div
+                                    class="absolute inset-0 bg-primary-900/0 group-hover:bg-primary-900/20 transition-colors duration-300 flex items-center justify-center">
+                                    <i data-lucide="search"
+                                        class="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transform scale-50 group-hover:scale-100 transition-all duration-300"></i>
                                 </div>
                             </div>
-                            <div class="w-full aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden shadow-md border-[3px] border-white relative group cursor-pointer bg-slate-100" onclick="openModal('./photo/photo2.jpg')">
-                                <img src="./photo/photo2.jpg" alt="บรรยากาศ 2" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null;this.src='https://placehold.co/600x450/e2e8f0/cbd5e0?text=Photo+2';">
-                                <div class="absolute inset-0 bg-primary-900/0 group-hover:bg-primary-900/20 transition-colors duration-300 flex items-center justify-center">
-                                    <i data-lucide="search" class="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transform scale-50 group-hover:scale-100 transition-all duration-300"></i>
+                            <div class="w-full aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden shadow-md border-[3px] border-white relative group cursor-pointer bg-slate-100"
+                                onclick="openModal('./photo/photo2.jpg')">
+                                <img src="./photo/photo2.jpg" alt="บรรยากาศ 2"
+                                    class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                                    onerror="this.onerror=null;this.src='https://placehold.co/600x450/e2e8f0/cbd5e0?text=Photo+2';">
+                                <div
+                                    class="absolute inset-0 bg-primary-900/0 group-hover:bg-primary-900/20 transition-colors duration-300 flex items-center justify-center">
+                                    <i data-lucide="search"
+                                        class="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transform scale-50 group-hover:scale-100 transition-all duration-300"></i>
                                 </div>
                             </div>
-                            <div class="w-full aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden shadow-md border-[3px] border-white relative group cursor-pointer bg-slate-100" onclick="openModal('./photo/photo3.jpg')">
-                                <img src="./photo/photo3.jpg" alt="บรรยากาศ 3" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null;this.src='https://placehold.co/600x450/e2e8f0/cbd5e0?text=Photo+3';">
-                                <div class="absolute inset-0 bg-primary-900/0 group-hover:bg-primary-900/20 transition-colors duration-300 flex items-center justify-center">
-                                    <i data-lucide="search" class="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transform scale-50 group-hover:scale-100 transition-all duration-300"></i>
+                            <div class="w-full aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden shadow-md border-[3px] border-white relative group cursor-pointer bg-slate-100"
+                                onclick="openModal('./photo/photo3.jpg')">
+                                <img src="./photo/photo3.jpg" alt="บรรยากาศ 3"
+                                    class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                                    onerror="this.onerror=null;this.src='https://placehold.co/600x450/e2e8f0/cbd5e0?text=Photo+3';">
+                                <div
+                                    class="absolute inset-0 bg-primary-900/0 group-hover:bg-primary-900/20 transition-colors duration-300 flex items-center justify-center">
+                                    <i data-lucide="search"
+                                        class="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transform scale-50 group-hover:scale-100 transition-all duration-300"></i>
                                 </div>
                             </div>
                         </div>
@@ -314,23 +422,29 @@
                     <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-2 flex items-center gap-2">
                         <i data-lucide="bell-ring" class="w-6 h-6 text-primary-500"></i> ข่าวประชาสัมพันธ์
                     </h2>
-                    <p class="text-sm sm:text-base text-slate-600">ติดตามข่าวสาร กิจกรรม และความเคลื่อนไหวล่าสุดของโรงเรียน</p>
+                    <p class="text-sm sm:text-base text-slate-600">ติดตามข่าวสาร กิจกรรม
+                        และความเคลื่อนไหวล่าสุดของโรงเรียน</p>
                 </div>
-                <a href="news.html" class="text-sm font-semibold text-primary-600 hover:text-primary-700 flex items-center gap-1 group bg-primary-50 px-4 py-2 rounded-lg transition-colors">
-                    ดูทั้งหมด <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                <a href="news.html"
+                    class="text-sm font-semibold text-primary-600 hover:text-primary-700 flex items-center gap-1 group bg-primary-50 px-4 py-2 rounded-lg transition-colors">
+                    ดูทั้งหมด <i data-lucide="arrow-right"
+                        class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
                 </a>
             </div>
 
             <div id="latest-news-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
                 <!-- Loading State -->
                 <div class="col-span-full flex flex-col items-center justify-center py-16">
-                    <div class="w-10 h-10 border-4 border-slate-200 border-t-primary-500 rounded-full animate-spin mb-4"></div>
+                    <div
+                        class="w-10 h-10 border-4 border-slate-200 border-t-primary-500 rounded-full animate-spin mb-4">
+                    </div>
                     <p class="text-slate-500 text-sm font-medium">กำลังโหลดข่าวสารล่าสุด...</p>
                 </div>
             </div>
-            
+
             <div class="mt-8 text-center md:hidden">
-                 <a href="news.html" class="inline-flex items-center justify-center px-6 py-3 bg-slate-900 text-white rounded-xl text-sm font-medium transition-colors shadow-lg shadow-slate-900/20">
+                <a href="news.html"
+                    class="inline-flex items-center justify-center px-6 py-3 bg-slate-900 text-white rounded-xl text-sm font-medium transition-colors shadow-lg shadow-slate-900/20">
                     ดูข่าวสารทั้งหมด <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
                 </a>
             </div>
@@ -340,47 +454,79 @@
     <!-- Quick Access / E-Service Section -->
     <section id="eservice" class="py-16 lg:py-24 bg-white relative overflow-hidden">
         <!-- Decor blobs -->
-        <div class="absolute -right-20 top-20 w-64 h-64 bg-primary-50 rounded-full blur-3xl opacity-60 pointer-events-none"></div>
-        <div class="absolute -left-20 bottom-20 w-64 h-64 bg-blue-50 rounded-full blur-3xl opacity-60 pointer-events-none"></div>
+        <div
+            class="absolute -right-20 top-20 w-64 h-64 bg-primary-50 rounded-full blur-3xl opacity-60 pointer-events-none">
+        </div>
+        <div
+            class="absolute -left-20 bottom-20 w-64 h-64 bg-blue-50 rounded-full blur-3xl opacity-60 pointer-events-none">
+        </div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center max-w-2xl mx-auto mb-12 lg:mb-16">
                 <span class="text-primary-600 font-bold tracking-wider text-xs uppercase mb-2 block">Quick Access</span>
-                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">บริการอิเล็กทรอนิกส์ <span class="text-gradient">(E-Service)</span></h2>
-                <p class="text-sm sm:text-base text-slate-500">ระบบสารสนเทศและบริการออนไลน์ เพื่อความสะดวกรวดเร็วสำหรับนักเรียน ผู้ปกครอง และบุคลากร</p>
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">บริการอิเล็กทรอนิกส์ <span
+                        class="text-gradient">(E-Service)</span></h2>
+                <p class="text-sm sm:text-base text-slate-500">ระบบสารสนเทศและบริการออนไลน์
+                    เพื่อความสะดวกรวดเร็วสำหรับนักเรียน ผู้ปกครอง และบุคลากร</p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 lg:gap-8">
-                <a href="news.html" target="_blank" class="group glass-card rounded-3xl p-6 sm:p-8 card-hover-effect flex flex-col items-center text-center relative overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-br from-fuchsia-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <div class="relative w-16 h-16 bg-white border border-fuchsia-100 text-fuchsia-500 rounded-2xl flex items-center justify-center mb-5 shadow-sm group-hover:scale-110 group-hover:shadow-fuchsia-200/50 transition-all duration-300">
+                <a href="news.html" target="_blank"
+                    class="group glass-card rounded-3xl p-6 sm:p-8 card-hover-effect flex flex-col items-center text-center relative overflow-hidden">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-fuchsia-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div
+                        class="relative w-16 h-16 bg-white border border-fuchsia-100 text-fuchsia-500 rounded-2xl flex items-center justify-center mb-5 shadow-sm group-hover:scale-110 group-hover:shadow-fuchsia-200/50 transition-all duration-300">
                         <i data-lucide="image" class="w-7 h-7"></i>
                     </div>
-                    <h3 class="text-base sm:text-lg font-bold text-slate-800 mb-2 relative z-10">ดาวน์โหลดภาพกิจกรรม</h3>
+                    <h3 class="text-base sm:text-lg font-bold text-slate-800 mb-2 relative z-10">ดาวน์โหลดภาพกิจกรรม
+                    </h3>
                     <p class="text-xs sm:text-sm text-slate-500 relative z-10">คลังภาพกิจกรรมต่างๆ ของโรงเรียน</p>
                 </a>
 
-                <a href="https://jtp.mis-stu.net/" target="_blank" class="group glass-card rounded-3xl p-6 sm:p-8 card-hover-effect flex flex-col items-center text-center relative overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-br from-emerald-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <div class="relative w-16 h-16 bg-white border border-emerald-100 text-emerald-500 rounded-2xl flex items-center justify-center mb-5 shadow-sm group-hover:scale-110 group-hover:shadow-emerald-200/50 transition-all duration-300">
+                <a href="https://jtp.mis-stu.net/" target="_blank"
+                    class="group glass-card rounded-3xl p-6 sm:p-8 card-hover-effect flex flex-col items-center text-center relative overflow-hidden">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-emerald-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div
+                        class="relative w-16 h-16 bg-white border border-emerald-100 text-emerald-500 rounded-2xl flex items-center justify-center mb-5 shadow-sm group-hover:scale-110 group-hover:shadow-emerald-200/50 transition-all duration-300">
                         <i data-lucide="heart-handshake" class="w-7 h-7"></i>
                     </div>
-                    <h3 class="text-base sm:text-lg font-bold text-slate-800 mb-2 relative z-10">ดูแลช่วยเหลือนักเรียน</h3>
+                    <h3 class="text-base sm:text-lg font-bold text-slate-800 mb-2 relative z-10">ดูแลช่วยเหลือนักเรียน
+                    </h3>
                     <p class="text-xs sm:text-sm text-slate-500 relative z-10">ระบบคัดกรอง และเยี่ยมบ้าน (MIS-STU)</p>
                 </a>
 
-                <a href="https://sgs.bopp-obec.info/" target="_blank" class="group glass-card rounded-3xl p-6 sm:p-8 card-hover-effect flex flex-col items-center text-center relative overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <div class="relative w-16 h-16 bg-white border border-blue-100 text-blue-500 rounded-2xl flex items-center justify-center mb-5 shadow-sm group-hover:scale-110 group-hover:shadow-blue-200/50 transition-all duration-300">
+                <div
+                    class="group glass-card rounded-3xl p-6 sm:p-8 card-hover-effect flex flex-col items-center text-center relative overflow-hidden">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div
+                        class="relative w-16 h-16 bg-white border border-blue-100 text-blue-500 rounded-2xl flex items-center justify-center mb-5 shadow-sm group-hover:scale-110 group-hover:shadow-blue-200/50 transition-all duration-300">
                         <i data-lucide="graduation-cap" class="w-7 h-7"></i>
                     </div>
                     <h3 class="text-base sm:text-lg font-bold text-slate-800 mb-2 relative z-10">ระบบ SGS</h3>
-                    <p class="text-xs sm:text-sm text-slate-500 relative z-10">ประเมินผลการเรียนสำหรับผู้ปกครอง</p>
-                </a>
+                    <p class="text-xs sm:text-sm text-slate-500 relative z-10 mb-5">ประเมินผลการเรียนสำหรับผู้ปกครอง</p>
+                    <div class="relative z-10 flex w-full gap-2 mt-auto">
+                        <a href="./gpa-check.html"
+                            class="flex-1 py-2 px-1 text-xs sm:text-sm font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-xl transition-colors border border-blue-100 flex items-center justify-center gap-1"><i
+                                data-lucide="book-open" class="w-3.5 h-3.5"></i> วิธีใช้</a>
+                        <a href="https://sgs.bopp-obec.info/" target="_blank"
+                            class="flex-1 py-2 px-1 text-xs sm:text-sm font-semibold text-white bg-blue-500 hover:bg-blue-600 rounded-xl transition-colors shadow-sm shadow-blue-500/30 flex items-center justify-center gap-1">เข้าระบบ
+                            <i data-lucide="external-link" class="w-3.5 h-3.5"></i></a>
+                    </div>
+                </div>
 
-                <a href="#" class="group glass-card rounded-3xl p-6 sm:p-8 card-hover-effect flex flex-col items-center text-center relative overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-br from-amber-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <div class="relative w-16 h-16 bg-white border border-amber-100 text-amber-500 rounded-2xl flex items-center justify-center mb-5 shadow-sm group-hover:scale-110 group-hover:shadow-amber-200/50 transition-all duration-300">
+                <a href="#"
+                    class="group glass-card rounded-3xl p-6 sm:p-8 card-hover-effect flex flex-col items-center text-center relative overflow-hidden">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-amber-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div
+                        class="relative w-16 h-16 bg-white border border-amber-100 text-amber-500 rounded-2xl flex items-center justify-center mb-5 shadow-sm group-hover:scale-110 group-hover:shadow-amber-200/50 transition-all duration-300">
                         <i data-lucide="monitor-smartphone" class="w-7 h-7"></i>
                     </div>
                     <h3 class="text-base sm:text-lg font-bold text-slate-800 mb-2 relative z-10">ระบบสารสนเทศ</h3>
@@ -394,49 +540,66 @@
     <section id="ita" class="py-16 lg:py-24 relative overflow-hidden">
         <div class="absolute inset-0 bg-slate-900"></div>
         <!-- Decorative glowing orbs for dark section -->
-        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary-600/20 rounded-full blur-[100px] pointer-events-none"></div>
-        <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-600/20 rounded-full blur-[100px] pointer-events-none"></div>
-        
+        <div
+            class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary-600/20 rounded-full blur-[100px] pointer-events-none">
+        </div>
+        <div
+            class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-600/20 rounded-full blur-[100px] pointer-events-none">
+        </div>
+
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-16">
                 <div class="lg:w-1/2 text-white text-center lg:text-left">
-                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 backdrop-blur-md border border-white/10 mb-6 shadow-[0_0_15px_rgba(255,255,255,0.05)]">
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 backdrop-blur-md border border-white/10 mb-6 shadow-[0_0_15px_rgba(255,255,255,0.05)]">
                         <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
                         <span class="text-xs font-medium tracking-wide">เปิดเผย โปร่งใส ตรวจสอบได้</span>
                     </div>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold mb-4 lg:mb-6 leading-tight">ITA ONLINE <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-yellow-200">ประเมินคุณธรรมและความโปร่งใส</span></h2>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold mb-4 lg:mb-6 leading-tight">ITA ONLINE <br><span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-yellow-200">ประเมินคุณธรรมและความโปร่งใส</span>
+                    </h2>
                     <p class="text-slate-300 text-sm sm:text-base mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed">
-                        โรงเรียนจังหารฐิตวิริยาประชาสรรค์ มุ่งมั่นบริหารงานด้วยความโปร่งใส มีคุณธรรม และตรวจสอบได้ เพื่อสร้างความเชื่อมั่นให้กับทุกคน
+                        โรงเรียนจังหารฐิตวิริยาประชาสรรค์ มุ่งมั่นบริหารงานด้วยความโปร่งใส มีคุณธรรม และตรวจสอบได้
+                        เพื่อสร้างความเชื่อมั่นให้กับทุกคน
                     </p>
-                    <a href="ita-online.html" class="inline-flex items-center justify-center px-6 py-3 bg-primary-500 text-slate-900 hover:bg-primary-400 rounded-xl font-bold transition-all shadow-[0_0_20px_rgba(234,179,8,0.3)] hover:scale-105">
+                    <a href="ita-online.html"
+                        class="inline-flex items-center justify-center px-6 py-3 bg-primary-500 text-slate-900 hover:bg-primary-400 rounded-xl font-bold transition-all shadow-[0_0_20px_rgba(234,179,8,0.3)] hover:scale-105">
                         เข้าสู่ระบบ ITA <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
                     </a>
                 </div>
-                
+
                 <div class="lg:w-1/2 grid grid-cols-2 gap-3 sm:gap-4 w-full max-w-lg mx-auto">
-                    <div class="bg-white/5 backdrop-blur-lg border border-white/10 p-5 rounded-2xl text-center hover:bg-white/10 transition-colors group cursor-default">
-                        <div class="w-12 h-12 mx-auto bg-primary-500/20 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <div
+                        class="bg-white/5 backdrop-blur-lg border border-white/10 p-5 rounded-2xl text-center hover:bg-white/10 transition-colors group cursor-default">
+                        <div
+                            class="w-12 h-12 mx-auto bg-primary-500/20 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                             <i data-lucide="file-search" class="w-6 h-6 text-primary-400"></i>
                         </div>
                         <h4 class="text-white font-bold text-sm mb-1">OIT</h4>
                         <p class="text-slate-400 text-xs">ข้อมูลสาธารณะ</p>
                     </div>
-                    <div class="bg-white/5 backdrop-blur-lg border border-white/10 p-5 rounded-2xl text-center hover:bg-white/10 transition-colors group cursor-default">
-                        <div class="w-12 h-12 mx-auto bg-primary-500/20 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <div
+                        class="bg-white/5 backdrop-blur-lg border border-white/10 p-5 rounded-2xl text-center hover:bg-white/10 transition-colors group cursor-default">
+                        <div
+                            class="w-12 h-12 mx-auto bg-primary-500/20 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                             <i data-lucide="users" class="w-6 h-6 text-primary-400"></i>
                         </div>
                         <h4 class="text-white font-bold text-sm mb-1">IIT</h4>
                         <p class="text-slate-400 text-xs">ส่วนได้ส่วนเสียภายใน</p>
                     </div>
-                    <div class="bg-white/5 backdrop-blur-lg border border-white/10 p-5 rounded-2xl text-center hover:bg-white/10 transition-colors group cursor-default">
-                        <div class="w-12 h-12 mx-auto bg-primary-500/20 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <div
+                        class="bg-white/5 backdrop-blur-lg border border-white/10 p-5 rounded-2xl text-center hover:bg-white/10 transition-colors group cursor-default">
+                        <div
+                            class="w-12 h-12 mx-auto bg-primary-500/20 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                             <i data-lucide="building" class="w-6 h-6 text-primary-400"></i>
                         </div>
                         <h4 class="text-white font-bold text-sm mb-1">EIT</h4>
                         <p class="text-slate-400 text-xs">ส่วนได้ส่วนเสียภายนอก</p>
                     </div>
-                    <div class="bg-white/5 backdrop-blur-lg border border-white/10 p-5 rounded-2xl text-center hover:bg-white/10 transition-colors group cursor-default">
-                        <div class="w-12 h-12 mx-auto bg-primary-500/20 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <div
+                        class="bg-white/5 backdrop-blur-lg border border-white/10 p-5 rounded-2xl text-center hover:bg-white/10 transition-colors group cursor-default">
+                        <div
+                            class="w-12 h-12 mx-auto bg-primary-500/20 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                             <i data-lucide="award" class="w-6 h-6 text-primary-400"></i>
                         </div>
                         <h4 class="text-white font-bold text-sm mb-1">ผลประเมิน</h4>
@@ -450,59 +613,93 @@
     <!-- About Us Section -->
     <section id="about" class="py-16 lg:py-24 bg-pattern-grid relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            
+
             <!-- 1. ผู้บริหารสถานศึกษา -->
             <div id="about-admin" class="mb-20 sm:mb-24 scroll-mt-24">
                 <div class="text-center max-w-2xl mx-auto mb-10">
-                    <span class="text-primary-600 font-bold tracking-wider text-xs uppercase mb-2 block">Management Team</span>
+                    <span class="text-primary-600 font-bold tracking-wider text-xs uppercase mb-2 block">Management
+                        Team</span>
                     <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">คณะผู้บริหารสถานศึกษา</h2>
                 </div>
                 <div class="flex flex-col sm:flex-row justify-center gap-6 sm:gap-8 lg:gap-12 px-4 sm:px-0">
                     <!-- ผอ. -->
-                    <div class="glass-card p-6 sm:p-8 rounded-[2rem] shadow-soft hover:shadow-[0_20px_40px_-10px_rgba(234,179,8,0.15)] border border-white text-center w-full max-w-[320px] transition-all duration-500 mx-auto sm:mx-0 group">
+                    <div
+                        class="glass-card p-6 sm:p-8 rounded-[2rem] shadow-soft hover:shadow-[0_20px_40px_-10px_rgba(234,179,8,0.15)] border border-white text-center w-full max-w-[320px] transition-all duration-500 mx-auto sm:mx-0 group">
                         <div class="relative w-32 h-32 sm:w-40 sm:h-40 mx-auto mb-6">
                             <!-- Decorative blob behind image -->
-                            <div class="absolute inset-0 bg-gradient-to-tr from-primary-300 to-primary-600 rounded-full rotate-6 opacity-30 blur-lg group-hover:rotate-12 group-hover:opacity-60 transition-all duration-500"></div>
-                            <div class="relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-md bg-slate-100">
-                                <img src="https://lh3.googleusercontent.com/d/11afE1U8na6HT8UbjZwx0VVPSQuzZsCnB" alt="นายสรศักดิ์ สีตาชัย" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-tr from-primary-300 to-primary-600 rounded-full rotate-6 opacity-30 blur-lg group-hover:rotate-12 group-hover:opacity-60 transition-all duration-500">
+                            </div>
+                            <div
+                                class="relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-md bg-slate-100">
+                                <img src="https://lh3.googleusercontent.com/d/11afE1U8na6HT8UbjZwx0VVPSQuzZsCnB"
+                                    alt="นายสรศักดิ์ สีตาชัย"
+                                    class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                             </div>
                         </div>
                         <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-1.5">นายสรศักดิ์ สีตาชัย</h3>
-                        <p class="inline-block px-4 py-1 bg-primary-50 text-primary-700 rounded-full font-semibold text-xs border border-primary-100">ผู้อำนวยการสถานศึกษา</p>
+                        <p
+                            class="inline-block px-4 py-1 bg-primary-50 text-primary-700 rounded-full font-semibold text-xs border border-primary-100">
+                            ผู้อำนวยการสถานศึกษา</p>
                     </div>
                     <!-- รอง ผอ. -->
-                    <div class="glass-card p-6 sm:p-8 rounded-[2rem] shadow-soft hover:shadow-[0_20px_40px_-10px_rgba(234,179,8,0.15)] border border-white text-center w-full max-w-[320px] transition-all duration-500 mx-auto sm:mx-0 group">
+                    <div
+                        class="glass-card p-6 sm:p-8 rounded-[2rem] shadow-soft hover:shadow-[0_20px_40px_-10px_rgba(234,179,8,0.15)] border border-white text-center w-full max-w-[320px] transition-all duration-500 mx-auto sm:mx-0 group">
                         <div class="relative w-32 h-32 sm:w-40 sm:h-40 mx-auto mb-6">
-                            <div class="absolute inset-0 bg-gradient-to-tr from-primary-300 to-primary-600 rounded-full -rotate-6 opacity-30 blur-lg group-hover:-rotate-12 group-hover:opacity-60 transition-all duration-500"></div>
-                            <div class="relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-md bg-slate-100">
-                                <img src="https://lh3.googleusercontent.com/d/1AZQFSWjO5xjyOQMSJgNtmYfVlXwu3LxQ" alt="นายณัฐวุฒิ ศรีสนิท" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-tr from-primary-300 to-primary-600 rounded-full -rotate-6 opacity-30 blur-lg group-hover:-rotate-12 group-hover:opacity-60 transition-all duration-500">
+                            </div>
+                            <div
+                                class="relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-md bg-slate-100">
+                                <img src="https://lh3.googleusercontent.com/d/1AZQFSWjO5xjyOQMSJgNtmYfVlXwu3LxQ"
+                                    alt="นายณัฐวุฒิ ศรีสนิท"
+                                    class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                             </div>
                         </div>
                         <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-1.5">นายณัฐวุฒิ ศรีสนิท</h3>
-                        <p class="inline-block px-4 py-1 bg-primary-50 text-primary-700 rounded-full font-semibold text-xs border border-primary-100">รองผู้อำนวยการสถานศึกษา</p>
+                        <p
+                            class="inline-block px-4 py-1 bg-primary-50 text-primary-700 rounded-full font-semibold text-xs border border-primary-100">
+                            รองผู้อำนวยการสถานศึกษา</p>
                     </div>
+                </div>
+
+                <!-- Organization Chart Button -->
+                <div class="mt-12 text-center relative z-10">
+                    <a href="./member.html"
+                        class="inline-flex items-center justify-center px-8 py-3.5 bg-gradient-to-r from-primary-500 to-primary-600 text-white hover:from-primary-600 hover:to-primary-700 rounded-xl font-bold shadow-lg shadow-primary-500/30 hover:shadow-primary-500/50 transform hover:-translate-y-1 transition-all duration-300 gap-2">
+                        <i data-lucide="users" class="w-5 h-5"></i>
+                        โครงสร้างบุคลากร
+                    </a>
                 </div>
             </div>
 
             <!-- 2. ปรัชญาและคติพจน์ -->
-            <div id="about-philosophy" class="mb-16 sm:mb-20 scroll-mt-24 max-w-4xl mx-auto grid md:grid-cols-2 gap-5 sm:gap-6 items-stretch">
+            <div id="about-philosophy"
+                class="mb-16 sm:mb-20 scroll-mt-24 max-w-4xl mx-auto grid md:grid-cols-2 gap-5 sm:gap-6 items-stretch">
                 <!-- ปรัชญา -->
-                <div class="bg-gradient-to-br from-primary-400 to-primary-600 p-6 sm:p-8 rounded-[1.5rem] text-slate-900 shadow-md relative overflow-hidden group">
-                    <i data-lucide="book-open" class="absolute -top-4 -right-4 w-20 h-20 sm:w-28 sm:h-28 text-primary-200 opacity-20 group-hover:scale-110 group-hover:rotate-12 transition-transform duration-500"></i>
+                <div
+                    class="bg-gradient-to-br from-primary-400 to-primary-600 p-6 sm:p-8 rounded-[1.5rem] text-slate-900 shadow-md relative overflow-hidden group">
+                    <i data-lucide="book-open"
+                        class="absolute -top-4 -right-4 w-20 h-20 sm:w-28 sm:h-28 text-primary-200 opacity-20 group-hover:scale-110 group-hover:rotate-12 transition-transform duration-500"></i>
                     <div class="relative z-10">
-                        <div class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center mb-4">
+                        <div
+                            class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center mb-4">
                             <i data-lucide="book-open" class="w-5 h-5 text-white"></i>
                         </div>
                         <h3 class="text-base sm:text-lg font-bold mb-2 text-slate-900">ปรัชญาของโรงเรียน</h3>
-                        <p class="text-lg sm:text-xl font-extrabold mb-2 leading-snug">"สพฺพปาปสฺสํ อกรณํ<br>กุสสสฺสูปสมฺปทา สจิตฺตปริโยทปนํ"</p>
+                        <p class="text-lg sm:text-xl font-extrabold mb-2 leading-snug">"สพฺพปาปสฺสํ
+                            อกรณํ<br>กุสสสฺสูปสมฺปทา สจิตฺตปริโยทปนํ"</p>
                         <p class="text-sm text-slate-800 font-medium">ละเว้นความชั่ว การทำความดี ทำจิตใจให้ผ่องใส</p>
                     </div>
                 </div>
                 <!-- คติพจน์ -->
-                <div class="glass-card p-6 sm:p-8 rounded-[1.5rem] shadow-sm hover:shadow-md flex flex-col justify-center transition-shadow relative overflow-hidden">
-                    <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-primary-100 rounded-full blur-3xl opacity-50"></div>
+                <div
+                    class="glass-card p-6 sm:p-8 rounded-[1.5rem] shadow-sm hover:shadow-md flex flex-col justify-center transition-shadow relative overflow-hidden">
+                    <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-primary-100 rounded-full blur-3xl opacity-50">
+                    </div>
                     <div class="relative z-10">
-                        <div class="w-10 h-10 bg-primary-50 text-primary-600 rounded-xl flex items-center justify-center mb-4 border border-primary-100">
+                        <div
+                            class="w-10 h-10 bg-primary-50 text-primary-600 rounded-xl flex items-center justify-center mb-4 border border-primary-100">
                             <i data-lucide="graduation-cap" class="w-5 h-5"></i>
                         </div>
                         <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-3">คติพจน์ของโรงเรียน</h3>
@@ -517,64 +714,92 @@
 
             <!-- 3. วิสัยทัศน์และพันธกิจ -->
             <div id="about-vision" class="mb-20 sm:mb-24 scroll-mt-24">
-                <div class="glass-card rounded-[1.5rem] sm:rounded-[2rem] shadow-soft overflow-hidden border border-white">
+                <div
+                    class="glass-card rounded-[1.5rem] sm:rounded-[2rem] shadow-soft overflow-hidden border border-white">
                     <div class="grid lg:grid-cols-2">
                         <div class="p-6 sm:p-10 lg:p-12 border-b lg:border-b-0 lg:border-r border-slate-100/50">
                             <div class="flex items-center gap-3 mb-5">
-                                <div class="w-10 h-10 bg-primary-50 border border-primary-100 text-primary-600 rounded-xl flex items-center justify-center shrink-0 shadow-sm">
+                                <div
+                                    class="w-10 h-10 bg-primary-50 border border-primary-100 text-primary-600 rounded-xl flex items-center justify-center shrink-0 shadow-sm">
                                     <i data-lucide="eye" class="w-5 h-5"></i>
                                 </div>
                                 <h3 class="text-xl font-bold text-slate-900">วิสัยทัศน์ (Vision)</h3>
                             </div>
                             <p class="text-sm sm:text-base text-slate-600 leading-relaxed mb-6">
-                                หลักสูตรโรงเรียนจังหารฐิตวิริยาประชาสรรค์ตามหลักสูตรแกนกลางการศึกษาขั้นพื้นฐาน พุทธศักราช 2552 มุ่งพัฒนาการศึกษาสู่มาตรฐานสากล บนพื้นฐานหลักปรัชญาเศรษฐกิจพอเพียง เพื่อพัฒนาผู้เรียนให้เป็นคนดี มีปัญญา มีความสุข มีศักยภาพ ในการศึกษาต่อและประกอบอาชีพ จึงกำหนดเป็นจุดหมายเพื่อให้เกิดกับผู้เรียน เมื่อจบการศึกษาขั้นพื้นฐาน ดังนี้
+                                หลักสูตรโรงเรียนจังหารฐิตวิริยาประชาสรรค์ตามหลักสูตรแกนกลางการศึกษาขั้นพื้นฐาน
+                                พุทธศักราช 2552 มุ่งพัฒนาการศึกษาสู่มาตรฐานสากล บนพื้นฐานหลักปรัชญาเศรษฐกิจพอเพียง
+                                เพื่อพัฒนาผู้เรียนให้เป็นคนดี มีปัญญา มีความสุข มีศักยภาพ ในการศึกษาต่อและประกอบอาชีพ
+                                จึงกำหนดเป็นจุดหมายเพื่อให้เกิดกับผู้เรียน เมื่อจบการศึกษาขั้นพื้นฐาน ดังนี้
                             </p>
                             <ol class="space-y-3 text-sm sm:text-base text-slate-600">
                                 <li class="flex items-start gap-3">
-                                    <span class="shrink-0 w-5 h-5 rounded-full bg-slate-100 text-slate-500 text-[10px] sm:text-xs flex items-center justify-center font-bold mt-0.5 shadow-sm border border-white">1</span>
-                                    <span class="leading-snug">มีคุณธรรม จริยธรรม และค่านิยมที่พึงประสงค์ ยึดหลักปรัชญาเศรษฐกิจพอเพียง</span>
+                                    <span
+                                        class="shrink-0 w-5 h-5 rounded-full bg-slate-100 text-slate-500 text-[10px] sm:text-xs flex items-center justify-center font-bold mt-0.5 shadow-sm border border-white">1</span>
+                                    <span class="leading-snug">มีคุณธรรม จริยธรรม และค่านิยมที่พึงประสงค์
+                                        ยึดหลักปรัชญาเศรษฐกิจพอเพียง</span>
                                 </li>
                                 <li class="flex items-start gap-3">
-                                    <span class="shrink-0 w-5 h-5 rounded-full bg-slate-100 text-slate-500 text-[10px] sm:text-xs flex items-center justify-center font-bold mt-0.5 shadow-sm border border-white">2</span>
-                                    <span class="leading-snug">มีความรู้ ความสามารถในการสื่อสาร การคิด การแก้ปัญหา การใช้เทคโนโลยี และมีทักษะชีวิต</span>
+                                    <span
+                                        class="shrink-0 w-5 h-5 rounded-full bg-slate-100 text-slate-500 text-[10px] sm:text-xs flex items-center justify-center font-bold mt-0.5 shadow-sm border border-white">2</span>
+                                    <span class="leading-snug">มีความรู้ ความสามารถในการสื่อสาร การคิด การแก้ปัญหา
+                                        การใช้เทคโนโลยี และมีทักษะชีวิต</span>
                                 </li>
                                 <li class="flex items-start gap-3">
-                                    <span class="shrink-0 w-5 h-5 rounded-full bg-slate-100 text-slate-500 text-[10px] sm:text-xs flex items-center justify-center font-bold mt-0.5 shadow-sm border border-white">3</span>
-                                    <span class="leading-snug">มีสุขภาพกายและสุขภาพจิตที่ดี มีสุขนิสัยและรักการออกกำลังกาย</span>
+                                    <span
+                                        class="shrink-0 w-5 h-5 rounded-full bg-slate-100 text-slate-500 text-[10px] sm:text-xs flex items-center justify-center font-bold mt-0.5 shadow-sm border border-white">3</span>
+                                    <span class="leading-snug">มีสุขภาพกายและสุขภาพจิตที่ดี
+                                        มีสุขนิสัยและรักการออกกำลังกาย</span>
                                 </li>
                                 <li class="flex items-start gap-3">
-                                    <span class="shrink-0 w-5 h-5 rounded-full bg-slate-100 text-slate-500 text-[10px] sm:text-xs flex items-center justify-center font-bold mt-0.5 shadow-sm border border-white">4</span>
-                                    <span class="leading-snug">มีความรักชาติ มีจิตสำนึกในความเป็นพลเมืองไทยและพลโลก ตามระบอบประชาธิปไตย</span>
+                                    <span
+                                        class="shrink-0 w-5 h-5 rounded-full bg-slate-100 text-slate-500 text-[10px] sm:text-xs flex items-center justify-center font-bold mt-0.5 shadow-sm border border-white">4</span>
+                                    <span class="leading-snug">มีความรักชาติ มีจิตสำนึกในความเป็นพลเมืองไทยและพลโลก
+                                        ตามระบอบประชาธิปไตย</span>
                                 </li>
                                 <li class="flex items-start gap-3">
-                                    <span class="shrink-0 w-5 h-5 rounded-full bg-slate-100 text-slate-500 text-[10px] sm:text-xs flex items-center justify-center font-bold mt-0.5 shadow-sm border border-white">5</span>
-                                    <span class="leading-snug">มีจิตสำนึกในการอนุรักษ์วัฒนธรรม ภูมิปัญญาไทย สิ่งแวดล้อม และมีจิตสาธารณะ</span>
+                                    <span
+                                        class="shrink-0 w-5 h-5 rounded-full bg-slate-100 text-slate-500 text-[10px] sm:text-xs flex items-center justify-center font-bold mt-0.5 shadow-sm border border-white">5</span>
+                                    <span class="leading-snug">มีจิตสำนึกในการอนุรักษ์วัฒนธรรม ภูมิปัญญาไทย สิ่งแวดล้อม
+                                        และมีจิตสาธารณะ</span>
                                 </li>
                             </ol>
                         </div>
                         <div class="p-6 sm:p-10 lg:p-12 bg-slate-50/50">
                             <div class="flex items-center gap-3 mb-5">
-                                <div class="w-10 h-10 bg-white border border-amber-100 text-amber-500 rounded-xl flex items-center justify-center shrink-0 shadow-sm">
+                                <div
+                                    class="w-10 h-10 bg-white border border-amber-100 text-amber-500 rounded-xl flex items-center justify-center shrink-0 shadow-sm">
                                     <i data-lucide="target" class="w-5 h-5"></i>
                                 </div>
                                 <h3 class="text-xl font-bold text-slate-900">พันธกิจ (Mission)</h3>
                             </div>
                             <ul class="space-y-3 text-sm sm:text-base text-slate-600">
-                                <li class="flex items-start gap-3 bg-white p-3.5 rounded-xl shadow-sm border border-slate-100 hover:border-primary-200 transition-colors">
-                                    <i data-lucide="check-circle-2" class="w-4 h-4 text-primary-500 shrink-0 mt-0.5"></i>
-                                    <span class="leading-snug">ส่งเสริมการพัฒนาแหล่งการเรียนรู้ พัฒนาผู้เรียนทุกคนให้เป็นคนดี มีความรู้ คู่คุณธรรม</span>
+                                <li
+                                    class="flex items-start gap-3 bg-white p-3.5 rounded-xl shadow-sm border border-slate-100 hover:border-primary-200 transition-colors">
+                                    <i data-lucide="check-circle-2"
+                                        class="w-4 h-4 text-primary-500 shrink-0 mt-0.5"></i>
+                                    <span class="leading-snug">ส่งเสริมการพัฒนาแหล่งการเรียนรู้
+                                        พัฒนาผู้เรียนทุกคนให้เป็นคนดี มีความรู้ คู่คุณธรรม</span>
                                 </li>
-                                <li class="flex items-start gap-3 bg-white p-3.5 rounded-xl shadow-sm border border-slate-100 hover:border-primary-200 transition-colors">
-                                    <i data-lucide="check-circle-2" class="w-4 h-4 text-primary-500 shrink-0 mt-0.5"></i>
-                                    <span class="leading-snug">พัฒนาและส่งเสริมบุคลากรให้มีคุณภาพตามเกณฑ์มาตรฐานวิชาชีพครู</span>
+                                <li
+                                    class="flex items-start gap-3 bg-white p-3.5 rounded-xl shadow-sm border border-slate-100 hover:border-primary-200 transition-colors">
+                                    <i data-lucide="check-circle-2"
+                                        class="w-4 h-4 text-primary-500 shrink-0 mt-0.5"></i>
+                                    <span
+                                        class="leading-snug">พัฒนาและส่งเสริมบุคลากรให้มีคุณภาพตามเกณฑ์มาตรฐานวิชาชีพครู</span>
                                 </li>
-                                <li class="flex items-start gap-3 bg-white p-3.5 rounded-xl shadow-sm border border-slate-100 hover:border-primary-200 transition-colors">
-                                    <i data-lucide="check-circle-2" class="w-4 h-4 text-primary-500 shrink-0 mt-0.5"></i>
-                                    <span class="leading-snug">พัฒนาระบบบริหารจัดการให้มีประสิทธิภาพ เน้นการมีส่วนร่วมของทุกภาคส่วน</span>
+                                <li
+                                    class="flex items-start gap-3 bg-white p-3.5 rounded-xl shadow-sm border border-slate-100 hover:border-primary-200 transition-colors">
+                                    <i data-lucide="check-circle-2"
+                                        class="w-4 h-4 text-primary-500 shrink-0 mt-0.5"></i>
+                                    <span class="leading-snug">พัฒนาระบบบริหารจัดการให้มีประสิทธิภาพ
+                                        เน้นการมีส่วนร่วมของทุกภาคส่วน</span>
                                 </li>
-                                <li class="flex items-start gap-3 bg-white p-3.5 rounded-xl shadow-sm border border-slate-100 hover:border-primary-200 transition-colors">
-                                    <i data-lucide="check-circle-2" class="w-4 h-4 text-primary-500 shrink-0 mt-0.5"></i>
-                                    <span class="leading-snug">สนับสนุนส่งเสริมการใช้เทคโนโลยีสารสนเทศและการสื่อสารในการจัดการเรียนการสอน</span>
+                                <li
+                                    class="flex items-start gap-3 bg-white p-3.5 rounded-xl shadow-sm border border-slate-100 hover:border-primary-200 transition-colors">
+                                    <i data-lucide="check-circle-2"
+                                        class="w-4 h-4 text-primary-500 shrink-0 mt-0.5"></i>
+                                    <span
+                                        class="leading-snug">สนับสนุนส่งเสริมการใช้เทคโนโลยีสารสนเทศและการสื่อสารในการจัดการเรียนการสอน</span>
                                 </li>
                             </ul>
                         </div>
@@ -586,45 +811,87 @@
             <div id="about-history" class="scroll-mt-24 max-w-3xl mx-auto">
                 <div class="text-center mb-8">
                     <h3 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">ประวัติความเป็นมา</h3>
-                    <p class="text-sm sm:text-base text-slate-600 leading-relaxed bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
-                        โรงเรียนจังหารฐิตวิริยาประชาสรรค์ ตั้งอยู่หมู่ที่ 5 บริเวณบ้านดงเก่า ตำบลจังหาร อำเภอจังหาร จังหวัดร้อยเอ็ด มีเนื้อที่ 78 ไร่ พระอาจารย์สมชาย ฐิตวิริโย แห่งวัดเขาสุกิม อำเภอท่าใหม่ จังหวัดจันทบุรี คณะกรรมการสภาตำบลจังหาร และศิษยาได้ร่วมกันจัดตั้งโรงเรียนมัธยมประจำตำบลจังหารขึ้น โดยออกสำรวจพื้นที่สาธารณะตามดำริของพระอาจารย์สมชาย ฐิตวิริโย ที่จะสร้างโรงเรียนขึ้นได้พื้นที่ 140 ไร่ ต่อมาภายหลังพื้นที่ส่วนหนึ่งได้ใช้ในการสร้างวัดฐิตวิริยาวนาราม และหอสมุดประชาชน "เฉลิมราชกุมารี"
+                    <p
+                        class="text-sm sm:text-base text-slate-600 leading-relaxed bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
+                        โรงเรียนจังหารฐิตวิริยาประชาสรรค์ ตั้งอยู่หมู่ที่ 5 บริเวณบ้านดงเก่า ตำบลจังหาร อำเภอจังหาร
+                        จังหวัดร้อยเอ็ด มีเนื้อที่ 78 ไร่ พระอาจารย์สมชาย ฐิตวิริโย แห่งวัดเขาสุกิม อำเภอท่าใหม่
+                        จังหวัดจันทบุรี คณะกรรมการสภาตำบลจังหาร
+                        และศิษยาได้ร่วมกันจัดตั้งโรงเรียนมัธยมประจำตำบลจังหารขึ้น
+                        โดยออกสำรวจพื้นที่สาธารณะตามดำริของพระอาจารย์สมชาย ฐิตวิริโย ที่จะสร้างโรงเรียนขึ้นได้พื้นที่
+                        140 ไร่ ต่อมาภายหลังพื้นที่ส่วนหนึ่งได้ใช้ในการสร้างวัดฐิตวิริยาวนาราม และหอสมุดประชาชน
+                        "เฉลิมราชกุมารี"
                     </p>
                 </div>
                 <!-- Compact Timeline -->
                 <div class="relative border-l-2 border-primary-200 ml-3 sm:ml-4 md:ml-6 pl-6 sm:pl-8 space-y-6 py-2">
                     <div class="relative">
-                        <div class="absolute -left-[33px] sm:-left-[41px] bg-primary-500 w-4 h-4 sm:w-5 sm:h-5 rounded-full mt-1 border-[3px] sm:border-4 border-white shadow-sm"></div>
-                        <div class="bg-white p-4 sm:p-5 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow group">
-                            <span class="inline-block px-2.5 py-1 bg-primary-50 text-primary-700 text-xs font-bold rounded-md mb-1.5 border border-primary-100">ปีการศึกษา 2529</span>
-                            <p class="text-sm text-slate-600 leading-snug">กรมสามัญศึกษาได้อนุมัติให้ตั้งเป็นสาขาของโรงเรียนม่วงลาดวิทยาคาร โดยใช้ชื่อว่า "โรงเรียนม่วงลาดวิทยาคาร สาขาตำบลจังหาร" เปิดรับสมัครนักเรียนระดับชั้นมัธยมศึกษาปีที่ 1 จำนวน 3 ห้องเรียน มีนักเรียน 109 คน มีครู-อาจารย์ 6 คน โดยมีครู-อาจารย์จากโรงเรียนม่วงลาดวิทยาคาร มาช่วยสอน และมีนักการภารโรง 1 คน</p>
+                        <div
+                            class="absolute -left-[33px] sm:-left-[41px] bg-primary-500 w-4 h-4 sm:w-5 sm:h-5 rounded-full mt-1 border-[3px] sm:border-4 border-white shadow-sm">
+                        </div>
+                        <div
+                            class="bg-white p-4 sm:p-5 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow group">
+                            <span
+                                class="inline-block px-2.5 py-1 bg-primary-50 text-primary-700 text-xs font-bold rounded-md mb-1.5 border border-primary-100">ปีการศึกษา
+                                2529</span>
+                            <p class="text-sm text-slate-600 leading-snug">
+                                กรมสามัญศึกษาได้อนุมัติให้ตั้งเป็นสาขาของโรงเรียนม่วงลาดวิทยาคาร โดยใช้ชื่อว่า
+                                "โรงเรียนม่วงลาดวิทยาคาร สาขาตำบลจังหาร" เปิดรับสมัครนักเรียนระดับชั้นมัธยมศึกษาปีที่ 1
+                                จำนวน 3 ห้องเรียน มีนักเรียน 109 คน มีครู-อาจารย์ 6 คน
+                                โดยมีครู-อาจารย์จากโรงเรียนม่วงลาดวิทยาคาร มาช่วยสอน และมีนักการภารโรง 1 คน</p>
                         </div>
                     </div>
                     <div class="relative">
-                        <div class="absolute -left-[33px] sm:-left-[41px] bg-primary-500 w-4 h-4 sm:w-5 sm:h-5 rounded-full mt-1 border-[3px] sm:border-4 border-white shadow-sm"></div>
-                        <div class="bg-white p-4 sm:p-5 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow group">
-                            <span class="inline-block px-2.5 py-1 bg-primary-50 text-primary-700 text-xs font-bold rounded-md mb-1.5 border border-primary-100">ปีการศึกษา 2530</span>
-                            <p class="text-sm text-slate-600 leading-snug">กรมสามัญศึกษาได้มีคำสั่งให้เป็นเอกเทศ และเป็นโรงเรียนมัธยมศึกษาประจำตำบล ใช้ชื่อว่า "โรงเรียนจังหารฐิตวิริยาประชาสรรค์" เมื่อวันที่ 26 พฤษภาคม พ.ศ. 2530 และได้เข้าร่วมโครงการขยายโอกาสทางการศึกษา (คอมต.สศ.)</p>
+                        <div
+                            class="absolute -left-[33px] sm:-left-[41px] bg-primary-500 w-4 h-4 sm:w-5 sm:h-5 rounded-full mt-1 border-[3px] sm:border-4 border-white shadow-sm">
+                        </div>
+                        <div
+                            class="bg-white p-4 sm:p-5 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow group">
+                            <span
+                                class="inline-block px-2.5 py-1 bg-primary-50 text-primary-700 text-xs font-bold rounded-md mb-1.5 border border-primary-100">ปีการศึกษา
+                                2530</span>
+                            <p class="text-sm text-slate-600 leading-snug">กรมสามัญศึกษาได้มีคำสั่งให้เป็นเอกเทศ
+                                และเป็นโรงเรียนมัธยมศึกษาประจำตำบล ใช้ชื่อว่า "โรงเรียนจังหารฐิตวิริยาประชาสรรค์"
+                                เมื่อวันที่ 26 พฤษภาคม พ.ศ. 2530 และได้เข้าร่วมโครงการขยายโอกาสทางการศึกษา (คอมต.สศ.)
+                            </p>
                         </div>
                     </div>
                     <div class="relative">
-                        <div class="absolute -left-[33px] sm:-left-[41px] bg-primary-500 w-4 h-4 sm:w-5 sm:h-5 rounded-full mt-1 border-[3px] sm:border-4 border-white shadow-sm"></div>
-                        <div class="bg-white p-4 sm:p-5 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow group">
-                            <span class="inline-block px-2.5 py-1 bg-primary-50 text-primary-700 text-xs font-bold rounded-md mb-1.5 border border-primary-100">ปีการศึกษา 2534</span>
-                            <p class="text-sm text-slate-600 leading-snug">กรมสามัญศึกษาอนุมัติเป็นโรงเรียนในโครงการ มัธยมเพื่อพัฒนาคุณภาพชีวิต และสังคม (มพชส.)</p>
+                        <div
+                            class="absolute -left-[33px] sm:-left-[41px] bg-primary-500 w-4 h-4 sm:w-5 sm:h-5 rounded-full mt-1 border-[3px] sm:border-4 border-white shadow-sm">
+                        </div>
+                        <div
+                            class="bg-white p-4 sm:p-5 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow group">
+                            <span
+                                class="inline-block px-2.5 py-1 bg-primary-50 text-primary-700 text-xs font-bold rounded-md mb-1.5 border border-primary-100">ปีการศึกษา
+                                2534</span>
+                            <p class="text-sm text-slate-600 leading-snug">กรมสามัญศึกษาอนุมัติเป็นโรงเรียนในโครงการ
+                                มัธยมเพื่อพัฒนาคุณภาพชีวิต และสังคม (มพชส.)</p>
                         </div>
                     </div>
                     <div class="relative">
-                        <div class="absolute -left-[33px] sm:-left-[41px] bg-primary-500 w-4 h-4 sm:w-5 sm:h-5 rounded-full mt-1 border-[3px] sm:border-4 border-white shadow-sm"></div>
-                        <div class="bg-white p-4 sm:p-5 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow group">
-                            <span class="inline-block px-2.5 py-1 bg-primary-50 text-primary-700 text-xs font-bold rounded-md mb-1.5 border border-primary-100">ปีการศึกษา 2535</span>
-                            <p class="text-sm text-slate-600 leading-snug">กรมสามัญศึกษาอนุมัติให้เปิดสอน ในระดับมัธยมศึกษาตอนปลาย</p>
+                        <div
+                            class="absolute -left-[33px] sm:-left-[41px] bg-primary-500 w-4 h-4 sm:w-5 sm:h-5 rounded-full mt-1 border-[3px] sm:border-4 border-white shadow-sm">
+                        </div>
+                        <div
+                            class="bg-white p-4 sm:p-5 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow group">
+                            <span
+                                class="inline-block px-2.5 py-1 bg-primary-50 text-primary-700 text-xs font-bold rounded-md mb-1.5 border border-primary-100">ปีการศึกษา
+                                2535</span>
+                            <p class="text-sm text-slate-600 leading-snug">กรมสามัญศึกษาอนุมัติให้เปิดสอน
+                                ในระดับมัธยมศึกษาตอนปลาย</p>
                         </div>
                     </div>
                     <div class="relative">
-                        <div class="absolute -left-[33px] sm:-left-[41px] bg-primary-500 w-4 h-4 sm:w-5 sm:h-5 rounded-full mt-1 border-[3px] sm:border-4 border-white shadow-sm"></div>
-                        <div class="bg-white p-4 sm:p-5 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow group">
-                            <span class="inline-block px-2.5 py-1 bg-primary-50 text-primary-700 text-xs font-bold rounded-md mb-1.5 border border-primary-100">ปีการศึกษา 2536</span>
-                            <p class="text-sm text-slate-600 leading-snug">กรมสามัญศึกษาอนุมัติเป็นโรงเรียนในโครงการ โรงเรียนเพื่อพัฒนาคุณภาพชีวิต และสังคม (รพชส.)</p>
+                        <div
+                            class="absolute -left-[33px] sm:-left-[41px] bg-primary-500 w-4 h-4 sm:w-5 sm:h-5 rounded-full mt-1 border-[3px] sm:border-4 border-white shadow-sm">
+                        </div>
+                        <div
+                            class="bg-white p-4 sm:p-5 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow group">
+                            <span
+                                class="inline-block px-2.5 py-1 bg-primary-50 text-primary-700 text-xs font-bold rounded-md mb-1.5 border border-primary-100">ปีการศึกษา
+                                2536</span>
+                            <p class="text-sm text-slate-600 leading-snug">กรมสามัญศึกษาอนุมัติเป็นโรงเรียนในโครงการ
+                                โรงเรียนเพื่อพัฒนาคุณภาพชีวิต และสังคม (รพชส.)</p>
                         </div>
                     </div>
                 </div>
@@ -636,19 +903,23 @@
     <!-- Footer -->
     <footer class="bg-slate-900 text-slate-300 pt-16 pb-8 border-t border-slate-800 relative overflow-hidden">
         <!-- Footer Top Glow -->
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-primary-500/50 to-transparent"></div>
-        
+        <div
+            class="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-primary-500/50 to-transparent">
+        </div>
+
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 mb-10">
                 <div class="lg:col-span-4">
                     <div class="flex items-center gap-3 mb-5">
                         <div class="bg-white rounded-xl p-1 shadow-md">
-                            <img src="./logo/jtplogo.png" alt="โลโก้โรงเรียน" class="w-10 h-10 object-contain" onerror="this.onerror=null;this.src='https://placehold.co/100x100/e2e8f0/cbd5e0?text=Logo';">
+                            <img src="./logo/jtplogo.png" alt="โลโก้โรงเรียน" class="w-10 h-10 object-contain"
+                                onerror="this.onerror=null;this.src='https://placehold.co/100x100/e2e8f0/cbd5e0?text=Logo';">
                         </div>
                         <h2 class="text-lg font-bold text-white leading-tight">โรงเรียนจังหารฐิตวิริยาประชาสรรค์</h2>
                     </div>
                     <p class="text-slate-400 text-sm mb-5 leading-relaxed">
-                        มุ่งมั่นพัฒนาวิชาการ สืบสานวัฒนธรรม ก้าวล้ำเทคโนโลยี มีคุณธรรม น้อมนำหลักปรัชญาของเศรษฐกิจพอเพียง
+                        มุ่งมั่นพัฒนาวิชาการ สืบสานวัฒนธรรม ก้าวล้ำเทคโนโลยี มีคุณธรรม
+                        น้อมนำหลักปรัชญาของเศรษฐกิจพอเพียง
                     </p>
                     <div class="flex items-start gap-2.5 text-xs text-slate-400">
                         <i data-lucide="map-pin" class="w-4 h-4 text-primary-400 shrink-0 mt-0.5"></i>
@@ -662,7 +933,8 @@
                         <div class="flex items-start gap-2.5">
                             <i data-lucide="phone" class="w-4 h-4 text-primary-400 shrink-0 mt-0.5"></i>
                             <div>
-                                <p class="mb-1"><span class="text-slate-200 font-medium">043-507-137</span> (สำนักงาน)</p>
+                                <p class="mb-1"><span class="text-slate-200 font-medium">043-507-137</span> (สำนักงาน)
+                                </p>
                                 <p><span class="text-slate-200 font-medium">099-259-9323</span> (ผู้อำนวยการ)</p>
                                 <p class="text-primary-500/70 text-[10px] mt-1">*ติดต่อในเวลาราชการเท่านั้น</p>
                             </div>
@@ -670,9 +942,15 @@
                         <div class="flex items-start gap-2.5">
                             <i data-lucide="mail" class="w-4 h-4 text-primary-400 shrink-0 mt-0.5"></i>
                             <div class="space-y-1.5 text-xs sm:text-sm">
-                                <p><a href="mailto:1045450863@pracharath.ac.th" class="hover:text-primary-400 transition-colors">1045450863@pracharath.ac.th</a> (สนง.)</p>
-                                <p><a href="mailto:Sorasak.reru@gmail.com" class="hover:text-primary-400 transition-colors">Sorasak.reru@gmail.com</a> (ผอ.)</p>
-                                <p><a href="mailto:chonlasitgood@gmail.com" class="hover:text-primary-400 transition-colors">chonlasitgood@gmail.com</a> (ผู้ดูแลเว็บไซต์)</p>
+                                <p><a href="mailto:1045450863@pracharath.ac.th"
+                                        class="hover:text-primary-400 transition-colors">1045450863@pracharath.ac.th</a>
+                                    (สนง.)</p>
+                                <p><a href="mailto:Sorasak.reru@gmail.com"
+                                        class="hover:text-primary-400 transition-colors">Sorasak.reru@gmail.com</a>
+                                    (ผอ.)</p>
+                                <p><a href="mailto:chonlasitgood@gmail.com"
+                                        class="hover:text-primary-400 transition-colors">chonlasitgood@gmail.com</a>
+                                    (ผู้ดูแลเว็บไซต์)</p>
                             </div>
                         </div>
                     </div>
@@ -680,35 +958,49 @@
 
                 <div class="lg:col-span-3">
                     <h3 class="text-white font-semibold text-base mb-5">แผนที่ & โซเชียล</h3>
-                    <a href="https://maps.app.goo.gl/SftQCWazFpUxbKWd7" target="_blank" rel="noopener noreferrer" class="block w-full h-24 sm:h-28 bg-slate-800 rounded-xl border border-slate-700 hover:border-primary-500 transition-colors group relative overflow-hidden mb-4">
-                        <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Map" class="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-300">
+                    <a href="https://maps.app.goo.gl/SftQCWazFpUxbKWd7" target="_blank" rel="noopener noreferrer"
+                        class="block w-full h-24 sm:h-28 bg-slate-800 rounded-xl border border-slate-700 hover:border-primary-500 transition-colors group relative overflow-hidden mb-4">
+                        <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            alt="Map"
+                            class="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-300">
                         <div class="absolute inset-0 flex flex-col items-center justify-center">
-                            <i data-lucide="map" class="w-6 h-6 text-primary-400 mb-1.5 group-hover:scale-110 transition-transform duration-300"></i>
-                            <span class="text-xs font-medium text-white bg-slate-900/60 px-2.5 py-0.5 rounded-full backdrop-blur-sm">เปิด Google Maps</span>
+                            <i data-lucide="map"
+                                class="w-6 h-6 text-primary-400 mb-1.5 group-hover:scale-110 transition-transform duration-300"></i>
+                            <span
+                                class="text-xs font-medium text-white bg-slate-900/60 px-2.5 py-0.5 rounded-full backdrop-blur-sm">เปิด
+                                Google Maps</span>
                         </div>
                     </a>
-                    
+
                     <!-- เปลี่ยนปุ่ม Social ให้อยู่แบบเต็มความกว้างและดึงดูดมากขึ้น -->
-                    <a href="https://www.facebook.com/jtpschool" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full px-4 py-2.5 bg-[#1877F2]/10 hover:bg-[#1877F2] text-[#1877F2] hover:text-white rounded-xl transition-all border border-[#1877F2]/20 hover:border-transparent font-medium text-sm group">
-                        <i data-lucide="facebook" class="w-4 h-4 group-hover:scale-110 transition-transform"></i> ติดตามเราบน Facebook
+                    <a href="https://www.facebook.com/jtpschool" target="_blank" rel="noopener noreferrer"
+                        class="flex items-center justify-center gap-2 w-full px-4 py-2.5 bg-[#1877F2]/10 hover:bg-[#1877F2] text-[#1877F2] hover:text-white rounded-xl transition-all border border-[#1877F2]/20 hover:border-transparent font-medium text-sm group">
+                        <i data-lucide="facebook" class="w-4 h-4 group-hover:scale-110 transition-transform"></i>
+                        ติดตามเราบน Facebook
                     </a>
                 </div>
             </div>
 
-            <div class="pt-6 border-t border-slate-800/50 text-center flex flex-col md:flex-row justify-between items-center gap-3">
+            <div
+                class="pt-6 border-t border-slate-800/50 text-center flex flex-col md:flex-row justify-between items-center gap-3">
                 <p class="text-xs text-slate-500">&copy; 2026 โรงเรียนจังหารฐิตวิริยาประชาสรรค์. สงวนลิขสิทธิ์.</p>
-                <p class="text-xs text-slate-500">พัฒนาโดย <a href="https://www.kruboat.com" target="_blank" class="text-primary-500/80 hover:text-primary-400 transition-colors font-medium">ครูโบ๊ท ชลสิทธิ์ วิเชียรพันธ์ (www.kruboat.com)</a></p>
+                <p class="text-xs text-slate-500">พัฒนาโดย <a href="https://www.kruboat.com" target="_blank"
+                        class="text-primary-500/80 hover:text-primary-400 transition-colors font-medium">ครูโบ๊ท
+                        ชลสิทธิ์ วิเชียรพันธ์ (www.kruboat.com)</a></p>
             </div>
         </div>
     </footer>
 
     <!-- Image Modal -->
-    <div id="image-modal" class="fixed inset-0 z-[100] hidden bg-slate-900/95 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+    <div id="image-modal"
+        class="fixed inset-0 z-[100] hidden bg-slate-900/95 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
         <div class="relative max-w-5xl w-full flex justify-center items-center">
-            <button onclick="closeModal()" class="absolute -top-12 right-0 md:-right-12 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 p-2.5 rounded-full transition-colors backdrop-blur-md">
+            <button onclick="closeModal()"
+                class="absolute -top-12 right-0 md:-right-12 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 p-2.5 rounded-full transition-colors backdrop-blur-md">
                 <i data-lucide="x" class="w-5 h-5"></i>
             </button>
-            <img id="modal-image" src="" alt="Expanded Image" class="max-h-[85vh] max-w-full rounded-lg shadow-2xl object-contain">
+            <img id="modal-image" src="" alt="Expanded Image"
+                class="max-h-[85vh] max-w-full rounded-lg shadow-2xl object-contain">
         </div>
     </div>
 
@@ -739,7 +1031,7 @@
         const prevBtn = document.getElementById('slider-prev');
         const nextBtn = document.getElementById('slider-next');
         const posterLoading = document.getElementById('poster-loading');
-        
+
         let validPosters = [];
         let currentSlide = 0;
         let slideInterval;
@@ -762,9 +1054,9 @@
                 if (exists) {
                     validPosters.push(`./poster/poster${index}.jpg`);
                     index++;
-                    if (index > 20) keepChecking = false; 
+                    if (index > 20) keepChecking = false;
                 } else {
-                    keepChecking = false; 
+                    keepChecking = false;
                 }
             }
 
@@ -784,7 +1076,7 @@
             validPosters.forEach((src, i) => {
                 const slide = document.createElement('div');
                 slide.className = 'min-w-full h-full relative';
-                slide.innerHTML = `<img src="${src}" alt="Poster ${i+1}" class="w-full h-full object-cover cursor-pointer" onclick="openModal('${src}')">`;
+                slide.innerHTML = `<img src="${src}" alt="Poster ${i + 1}" class="w-full h-full object-cover cursor-pointer" onclick="openModal('${src}')">`;
                 sliderContainer.appendChild(slide);
 
                 if (indicatorsContainer) {
@@ -855,17 +1147,17 @@
 
         // --- ระบบดึงข่าวล่าสุด ---
         const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxgcdL_LkCeJD1BLM-8--KSgggwYa4d9HdnMyvxoiklxgqfC3s5BQH2Qgxiu5fRsn8u7A/exec';
-        
+
         async function fetchLatestNewsForHome() {
             const grid = document.getElementById('latest-news-grid');
             if (!grid) return;
-            
+
             let allLatestNews = [];
             const today = new Date();
             let year = today.getFullYear();
             let month = today.getMonth() + 1;
             let attempts = 0;
-            const maxAttempts = 6; 
+            const maxAttempts = 6;
 
             try {
                 while (allLatestNews.length < 5 && attempts < maxAttempts) {
@@ -880,7 +1172,7 @@
                     attempts++;
                 }
 
-                grid.innerHTML = ''; 
+                grid.innerHTML = '';
 
                 if (allLatestNews.length > 0) {
                     const latestNews = allLatestNews.slice(0, 5);
@@ -935,4 +1227,5 @@
         });
     </script>
 </body>
+
 </html>

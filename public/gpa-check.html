@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>ระบบ SGS - โรงเรียนจังหารฐิตวิริยาประชาสรรค์</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="./logo/jtplogo.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="./logo/jtplogo.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="./logo/jtplogo.png">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Prompt -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Prompt', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#fefce8',
+                            100: '#fef9c3',
+                            500: '#eab308',
+                            600: '#ca8a04',
+                            700: '#a16207',
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                        'hover': '0 10px 40px -10px rgba(234, 179, 8, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: #fcfcfc;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .card-hover-effect {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-hover-effect:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+        }
+
+        /* Loading Spinner */
+        .loader {
+            border-top-color: #eab308;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Hide Scrollbar */
+        .hide-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scroll {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body class="text-slate-800">
+
+    <!-- Navigation Bar -->
+    <header class="fixed w-full top-0 z-50 glass-nav transition-all duration-300 shadow-sm bg-white/95">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- เปลี่ยนปุ่มให้มีโลโก้โรงเรียน -->
+                <a href="index.html" class="flex-shrink-0 flex items-center gap-3 cursor-pointer group">
+                    <img src="./logo/jtplogo.png" alt="โลโก้โรงเรียน"
+                        class="w-10 h-10 sm:w-12 sm:h-12 object-contain group-hover:scale-105 transition-transform"
+                        onerror="this.onerror=null;this.src='https://placehold.co/100x100/e2e8f0/cbd5e0?text=Logo';">
+                    <div class="hidden sm:block">
+                        <h1
+                            class="text-base font-bold leading-tight text-slate-900 group-hover:text-primary-600 transition-colors">
+                            กลับสู่หน้าหลัก</h1>
+                        <p class="text-xs text-slate-500 font-medium tracking-wide">โรงเรียนจังหารฐิตวิริยาประชาสรรค์
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </header>
+    <main class="pt-28 pb-16 bg-slate-50 min-h-[100svh] px-4">
+        <div class="sgs-modern-wrapper">
+
+            <!-- Hero Section: หัวเรื่องและรายละเอียด -->
+            <div class="sgs-hero-card">
+                <div class="sgs-hero-content">
+                    <div class="sgs-badge">ระบบ SGS</div>
+                    <h2 class="sgs-hero-title">ตรวจสอบผลการเรียน</h2>
+                    <p class="sgs-hero-desc">
+                        สำหรับนักเรียนและผู้ปกครอง สามารถเข้าดูผลการเรียนผ่านระบบ SGS ได้ง่ายๆ
+                        ผ่านเว็บไซต์อย่างเป็นทางการ
+                    </p>
+                    <a href="https://sgs.bopp-obec.info" target="_blank" class="sgs-btn-primary">
+                        เข้าสู่เว็บไซต์ SGS
+                    </a>
+                </div>
+                <div class="sgs-hero-image">
+                    <!-- แก้ไขลิงก์รูปภาพ Header -->
+                    <img src="https://lh3.googleusercontent.com/d/17sXuA0BVvZb0jhHF6bML7UZwAkW5Pwpe"
+                        alt="SGS System Header" loading="lazy">
+                </div>
+            </div>
+
+            <div class="sgs-section-title">
+                <h3><span class="sgs-icon-check">✅</span> ขั้นตอนการตรวจสอบผลการเรียน</h3>
+                <p>ทำตาม 6 ขั้นตอนง่ายๆ ด้านล่างนี้</p>
+            </div>
+
+            <!-- Steps Container -->
+            <div class="sgs-steps-grid">
+
+                <!-- ขั้นตอนที่ 1 -->
+                <div class="sgs-step-card">
+                    <div class="sgs-step-number">1</div>
+                    <div class="sgs-step-info">
+                        <h4 class="sgs-step-name">เลือกเมนูผู้ใช้งาน</h4>
+                        <p>เข้าสู่หน้าแรกของระบบ แล้วเลือกคลิกที่เมนู <strong>"สำหรับนักเรียน/ผู้ปกครอง"</strong></p>
+                    </div>
+                    <div class="sgs-step-mockup">
+                        <!-- แก้ไขลิงก์รูปภาพ 1 -->
+                        <img src="https://lh3.googleusercontent.com/d/1rXnndummA5VNdq1_z0mjFEo7zIqeTvpF"
+                            alt="ขั้นตอนที่ 1" loading="lazy">
+                    </div>
+                </div>
+
+                <!-- ขั้นตอนที่ 2 -->
+                <div class="sgs-step-card">
+                    <div class="sgs-step-number">2</div>
+                    <div class="sgs-step-info">
+                        <h4 class="sgs-step-name">เข้าสู่ระบบ</h4>
+                        <ul class="sgs-step-list">
+                            <li>กรอก <strong>เลขประจำตัวนักเรียน 5 หลัก</strong> (มี 0 นำหน้า เช่น 07111)</li>
+                            <li>กรอก <strong>เลขประจำตัวประชาชน 13 หลัก</strong></li>
+                            <li>คลิกที่ปุ่ม <strong>"เข้าสู่ระบบ"</strong></li>
+                        </ul>
+                    </div>
+                    <div class="sgs-step-mockup">
+                        <!-- แก้ไขลิงก์รูปภาพ 2 -->
+                        <img src="https://lh3.googleusercontent.com/d/15R2sFhOLGRRLn48YnYOeD9kHh-F6ldS9"
+                            alt="ขั้นตอนที่ 2" loading="lazy">
+                    </div>
+                </div>
+
+                <!-- ขั้นตอนที่ 3 -->
+                <div class="sgs-step-card">
+                    <div class="sgs-step-number">3</div>
+                    <div class="sgs-step-info">
+                        <h4 class="sgs-step-name">เลือกเมนูผลการเรียน</h4>
+                        <p>เมื่อเข้าสู่ระบบสำเร็จ ให้คลิกเลือกที่เมนู <strong>"ผลการเรียน"</strong> จากรายการด้านซ้ายมือ
+                            หรือบนหน้าจอ</p>
+                    </div>
+                    <div class="sgs-step-mockup">
+                        <!-- แก้ไขลิงก์รูปภาพ 3 -->
+                        <img src="https://lh3.googleusercontent.com/d/1fsGbZg6I7tLGi6nZPnxpgaZ2fDTk9Cro"
+                            alt="ขั้นตอนที่ 3" loading="lazy">
+                    </div>
+                </div>
+
+                <!-- ขั้นตอนที่ 4 -->
+                <div class="sgs-step-card">
+                    <div class="sgs-step-number">4</div>
+                    <div class="sgs-step-info">
+                        <h4 class="sgs-step-name">คลิกช่องภาคเรียน</h4>
+                        <p>ในหน้าผลการเรียน ให้มองหาและคลิกที่ช่อง <strong>"ภาคเรียน"</strong>
+                            เพื่อเตรียมเลือกปีการศึกษา</p>
+                    </div>
+                    <div class="sgs-step-mockup">
+                        <!-- แก้ไขลิงก์รูปภาพ 4 -->
+                        <img src="https://lh3.googleusercontent.com/d/16Vsd9o5IxmGwRH-W_M3vHpLwxJ5aJR46"
+                            alt="ขั้นตอนที่ 4" loading="lazy">
+                    </div>
+                </div>
+
+                <!-- ขั้นตอนที่ 5 -->
+                <div class="sgs-step-card">
+                    <div class="sgs-step-number">5</div>
+                    <div class="sgs-step-info">
+                        <h4 class="sgs-step-name">เลือกระบุปีและภาคเรียน</h4>
+                        <p>เลือกระบุ <strong>"ปีที่ / ภาคเรียนที่"</strong> โดยให้สังเกตจากชั้นที่ตนเองเรียน ดังนี้:</p>
+                        <div class="sgs-level-grid">
+                            <div class="level-item"><span>ม. 1</span> = ปีที่ 1</div>
+                            <div class="level-item"><span>ม. 4</span> = ปีที่ 1</div>
+                            <div class="level-item"><span>ม. 2</span> = ปีที่ 2</div>
+                            <div class="level-item"><span>ม. 5</span> = ปีที่ 2</div>
+                            <div class="level-item"><span>ม. 3</span> = ปีที่ 3</div>
+                            <div class="level-item"><span>ม. 6</span> = ปีที่ 3</div>
+                        </div>
+                    </div>
+                    <div class="sgs-step-mockup">
+                        <!-- แก้ไขลิงก์รูปภาพ 5 -->
+                        <img src="https://lh3.googleusercontent.com/d/1YFtLOrQ7JSQr5LNO9Rm68ITmpPmf8tZO"
+                            alt="ขั้นตอนที่ 5" loading="lazy">
+                    </div>
+                </div>
+
+                <!-- ขั้นตอนที่ 6 -->
+                <div class="sgs-step-card">
+                    <div class="sgs-step-number">6</div>
+                    <div class="sgs-step-info">
+                        <h4 class="sgs-step-name">ตรวจสอบผลการเรียน</h4>
+                        <p>ระบบจะแสดงผลการเรียนของภาคเรียนที่คุณเลือก
+                            <strong>สามารถตรวจสอบเกรดและผลการเรียนทั้งหมดได้ในหน้านี้ทันที</strong>
+                        </p>
+                    </div>
+                    <div class="sgs-step-mockup">
+                        <!-- แก้ไขลิงก์รูปภาพ 6 -->
+                        <img src="https://lh3.googleusercontent.com/d/17SO4vSvXJWusfcbyfuLnuw1E6ondVPvA"
+                            alt="ขั้นตอนที่ 6" loading="lazy">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <style>
+            /* Root Variables เพื่อให้ปรับแต่งสีได้ง่าย */
+            :root {
+                --sgs-primary: #FACC15;
+                /* สีเหลือง */
+                --sgs-primary-dark: #EAB308;
+                --sgs-secondary: #DC2626;
+                /* สีแดง */
+                --sgs-text-main: #1F2937;
+                --sgs-text-light: #4B5563;
+                --sgs-bg: #F9FAFB;
+                --sgs-card-bg: #FFFFFF;
+            }
+
+            /* คอนเทนเนอร์หลัก */
+            .sgs-modern-wrapper {
+                font-family: 'Kanit', 'Prompt', sans-serif;
+                /* รองรับฟอนต์ไทยยอดนิยมใน WP */
+                color: var(--sgs-text-main);
+                background-color: transparent;
+                max-width: 900px;
+                margin: 0 auto;
+                line-height: 1.6;
+            }
+
+            /* ส่วน Header Card (Hero) */
+            .sgs-hero-card {
+                display: flex;
+                flex-wrap: wrap;
+                background-color: var(--sgs-card-bg);
+                border-radius: 20px;
+                overflow: hidden;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+                margin-bottom: 50px;
+                border-bottom: 5px solid var(--sgs-primary);
+            }
+
+            .sgs-hero-content {
+                flex: 1 1 350px;
+                padding: 40px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+            }
+
+            .sgs-badge {
+                background-color: #FEF3C7;
+                color: #B45309;
+                padding: 6px 14px;
+                border-radius: 20px;
+                font-size: 0.85rem;
+                font-weight: 600;
+                margin-bottom: 15px;
+            }
+
+            .sgs-hero-title {
+                font-size: 1.8rem;
+                font-weight: 700;
+                margin: 0 0 15px 0;
+                color: var(--sgs-text-main);
+            }
+
+            .sgs-hero-desc {
+                color: var(--sgs-text-light);
+                margin-bottom: 25px;
+                font-size: 1rem;
+            }
+
+            .sgs-btn-primary {
+                background-color: var(--sgs-primary);
+                color: #1F2937;
+                padding: 12px 24px;
+                border-radius: 8px;
+                text-decoration: none;
+                font-weight: 600;
+                transition: all 0.3s ease;
+                display: inline-block;
+                box-shadow: 0 4px 6px rgba(250, 204, 21, 0.2);
+            }
+
+            .sgs-btn-primary:hover {
+                background-color: var(--sgs-primary-dark);
+                transform: translateY(-2px);
+                box-shadow: 0 6px 12px rgba(250, 204, 21, 0.3);
+                color: #1F2937;
+            }
+
+            .sgs-hero-image {
+                flex: 1 1 300px;
+                background-color: #f3f4f6;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 20px;
+            }
+
+            .sgs-hero-image img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 12px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            }
+
+            /* หัวข้อ Section */
+            .sgs-section-title {
+                text-align: center;
+                margin-bottom: 40px;
+            }
+
+            .sgs-section-title h3 {
+                font-size: 1.5rem;
+                font-weight: 700;
+                margin: 0 0 8px 0;
+                color: var(--sgs-text-main);
+            }
+
+            .sgs-section-title p {
+                color: var(--sgs-text-light);
+                margin: 0;
+            }
+
+            /* โครงสร้าง Grid ของแต่ละขั้นตอน */
+            .sgs-steps-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .sgs-step-card {
+                display: flex;
+                flex-wrap: wrap;
+                background: var(--sgs-card-bg);
+                border-radius: 16px;
+                padding: 30px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                border: 1px solid #F3F4F6;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .sgs-step-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 12px 25px rgba(0, 0, 0, 0.06);
+                border-color: #FEF08A;
+            }
+
+            .sgs-step-number {
+                position: absolute;
+                top: -15px;
+                left: -15px;
+                font-size: 6rem;
+                font-weight: 900;
+                color: rgba(220, 38, 38, 0.05);
+                /* ตัวเลขใหญ่จางๆ เป็นลายน้ำ */
+                line-height: 1;
+                z-index: 0;
+                pointer-events: none;
+            }
+
+            .sgs-step-info {
+                flex: 1 1 300px;
+                padding-right: 30px;
+                position: relative;
+                z-index: 1;
+            }
+
+            .sgs-step-name {
+                color: var(--sgs-secondary);
+                font-size: 1.25rem;
+                font-weight: 700;
+                margin: 0 0 12px 0;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            /* วงกลมตัวเลขสีแดงหน้าชื่อขั้นตอน */
+            .sgs-step-name::before {
+                content: '';
+                display: inline-block;
+                width: 8px;
+                height: 8px;
+                background-color: var(--sgs-secondary);
+                border-radius: 50%;
+            }
+
+            .sgs-step-info p {
+                color: var(--sgs-text-light);
+                margin: 0 0 15px 0;
+            }
+
+            .sgs-step-list {
+                margin: 0;
+                padding-left: 20px;
+                color: var(--sgs-text-light);
+            }
+
+            .sgs-step-list li {
+                margin-bottom: 8px;
+            }
+
+            /* ตารางชั้นเรียนในขั้นตอนที่ 5 */
+            .sgs-level-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                background: #F9FAFB;
+                padding: 15px;
+                border-radius: 10px;
+                border: 1px dashed #D1D5DB;
+            }
+
+            .level-item {
+                font-size: 0.9rem;
+                color: var(--sgs-text-main);
+            }
+
+            .level-item span {
+                font-weight: 600;
+                color: var(--sgs-secondary);
+            }
+
+            .sgs-step-mockup {
+                flex: 0 0 260px;
+                /* กำหนดความกว้างรูปภาพ */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                z-index: 1;
+            }
+
+            .sgs-step-mockup img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 14px;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+                border: 3px solid #fff;
+                /* ขอบขาวเหมือนเฟรมมือถือ */
+            }
+
+            /* Responsive Design สำหรับมือถือ */
+            @media (max-width: 768px) {
+                .sgs-hero-content {
+                    padding: 30px 20px;
+                    text-align: center;
+                    align-items: center;
+                }
+
+                .sgs-hero-title {
+                    font-size: 1.5rem;
+                }
+
+                .sgs-step-card {
+                    padding: 25px 20px;
+                    flex-direction: column;
+                    gap: 20px;
+                }
+
+                .sgs-step-info {
+                    padding-right: 0;
+                }
+
+                .sgs-step-mockup {
+                    flex: 1 1 auto;
+                    width: 100%;
+                }
+
+                .sgs-step-mockup img {
+                    max-width: 250px;
+                    /* รูปไม่ใหญ่เกินไปในมือถือ */
+                }
+            }
+        </style>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 text-center text-sm">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col items-center gap-3">
+            <img src="./logo/jtplogo.png" alt="โลโก้โรงเรียน"
+                class="w-10 h-10 object-contain bg-white rounded-lg p-1 mb-2">
+            <p>&copy; 2026 โรงเรียนจังหารฐิตวิริยาประชาสรรค์ (JTP). สงวนลิขสิทธิ์.</p>
+            <p>พัฒนาโดย <a href="https://www.kruboat.com" target="_blank"
+                    class="text-primary-400 hover:text-primary-300 transition-colors font-medium">ครูโบ๊ท ชลสิทธิ์
+                    วิเชียรพันธ์ (www.kruboat.com)</a></p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

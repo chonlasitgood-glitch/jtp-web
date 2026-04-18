@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>JTP Portal - โรงเรียนจังหารฐิตวิริยาประชาสรรค์</title>
-    
+
     <!-- Tailwind CSS (สำหรับจัดโครงสร้างและหน้าตา) -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Google Fonts: Prompt สำหรับภาษาไทยที่อ่านง่าย ดูทันสมัย -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- FontAwesome (สำหรับไอคอนต่างๆ) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -36,38 +37,53 @@
     <style>
         body {
             background-color: #F3F4F6;
-            -webkit-tap-highlight-color: transparent; /* ปิดแถบสีฟ้าเวลากดปุ่มบนมือถือ */
+            -webkit-tap-highlight-color: transparent;
+            /* ปิดแถบสีฟ้าเวลากดปุ่มบนมือถือ */
         }
-        
+
         /* สร้าง Animation สำหรับการสลับหน้าจอ */
         .fade-in {
             animation: fadeIn 0.3s ease-in-out;
         }
-        
+
         .slide-up {
             animation: slideUp 0.3s ease-out;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* ซ่อน Scrollbar สำหรับ App Container แต่ยังเลื่อนได้ */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
+
         .no-scrollbar {
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
     </style>
 </head>
+
 <body class="flex flex-col h-screen overflow-hidden text-gray-800">
 
     <!-- ================= HEADER (แถบด้านบน) ================= -->
@@ -76,7 +92,8 @@
         <div class="max-w-md mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center gap-3">
                 <!-- โลโก้จำลอง (ใช้วงกลมสีเหลืองแทน) -->
-                <div class="w-10 h-10 rounded-full bg-school-yellow text-white flex items-center justify-center font-bold text-xl shadow-inner">
+                <div
+                    class="w-10 h-10 rounded-full bg-school-yellow text-white flex items-center justify-center font-bold text-xl shadow-inner">
                     <i class="fa-solid fa-graduation-cap"></i>
                 </div>
                 <div>
@@ -84,12 +101,13 @@
                     <p class="text-xs text-gray-500">JTP School Portal</p>
                 </div>
             </div>
-            
+
             <!-- ปุ่มแจ้งเตือน และ โปรไฟล์ -->
             <div class="flex items-center gap-3">
                 <button class="relative p-2 text-gray-400 hover:text-school-yellow transition-colors">
                     <i class="fa-regular fa-bell text-xl"></i>
-                    <span class="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white"></span>
+                    <span
+                        class="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white"></span>
                 </button>
                 <div class="w-8 h-8 rounded-full bg-gray-200 overflow-hidden border border-gray-300">
                     <img src="https://i.pravatar.cc/100?img=11" alt="Profile" class="w-full h-full object-cover">
@@ -100,24 +118,26 @@
 
     <!-- ================= MAIN CONTENT AREA ================= -->
     <main class="flex-1 relative overflow-hidden bg-gray-50 max-w-md mx-auto w-full shadow-lg">
-        
+
         <!-- === 1. หน้า Dashboard หลัก (รวมแอป) === -->
         <div id="home-view" class="absolute inset-0 overflow-y-auto no-scrollbar p-4 fade-in pb-24">
-            
+
             <!-- การ์ดต้อนรับ -->
-            <div class="bg-gradient-to-r from-school-yellow to-school-yellow-dark rounded-2xl p-5 mb-6 text-white shadow-md relative overflow-hidden">
+            <div
+                class="bg-gradient-to-r from-school-yellow to-school-yellow-dark rounded-2xl p-5 mb-6 text-white shadow-md relative overflow-hidden">
                 <div class="relative z-10">
                     <h2 class="text-lg">สวัสดี, <span class="font-bold">ครูสมชาย ใจดี</span></h2>
                     <p class="text-sm opacity-90 mb-3">วันพฤหัสบดีที่ 16 เมษายน 2569</p>
                     <div class="bg-white/20 rounded-lg p-2 backdrop-blur-sm inline-block">
-                        <p class="text-xs font-medium"><i class="fa-solid fa-bullhorn mr-1"></i> แจ้งเตือน: ประชุมครูประจำเดือน พรุ่งนี้ 13:00 น.</p>
+                        <p class="text-xs font-medium"><i class="fa-solid fa-bullhorn mr-1"></i> แจ้งเตือน:
+                            ประชุมครูประจำเดือน พรุ่งนี้ 13:00 น.</p>
                     </div>
                 </div>
                 <i class="fa-solid fa-school absolute -bottom-4 -right-4 text-8xl text-white opacity-20"></i>
             </div>
 
             <h3 class="text-sm font-bold text-gray-500 mb-3 px-1 uppercase tracking-wider">ระบบงานโรงเรียน</h3>
-            
+
             <!-- Grid รวมแอป (App Launcher) -->
             <div class="grid grid-cols-4 gap-y-6 gap-x-2" id="app-grid">
                 <!-- ไอคอนแอปจะถูกสร้างด้วย JavaScript ตรงนี้ -->
@@ -127,14 +147,16 @@
             <h3 class="text-sm font-bold text-gray-500 mb-3 mt-8 px-1 uppercase tracking-wider">ข่าวสารล่าสุด</h3>
             <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
                 <div class="flex gap-3 mb-3 border-b border-gray-100 pb-3">
-                    <div class="w-16 h-12 bg-gray-200 rounded text-gray-400 flex items-center justify-center text-xs">ภาพข่าว</div>
+                    <div class="w-16 h-12 bg-gray-200 rounded text-gray-400 flex items-center justify-center text-xs">
+                        ภาพข่าว</div>
                     <div>
                         <h4 class="text-sm font-semibold text-gray-800">ประกาศรับสมัครนักเรียน ม.1 และ ม.4</h4>
                         <p class="text-xs text-gray-500">12 เม.ย. 69</p>
                     </div>
                 </div>
                 <div class="flex gap-3">
-                    <div class="w-16 h-12 bg-gray-200 rounded text-gray-400 flex items-center justify-center text-xs">ภาพข่าว</div>
+                    <div class="w-16 h-12 bg-gray-200 rounded text-gray-400 flex items-center justify-center text-xs">
+                        ภาพข่าว</div>
                     <div>
                         <h4 class="text-sm font-semibold text-gray-800">ผลการแข่งขันกีฬาสีประจำปี</h4>
                         <p class="text-xs text-gray-500">10 เม.ย. 69</p>
@@ -147,14 +169,15 @@
         <div id="app-viewer" class="absolute inset-0 bg-white z-10 hidden flex-col slide-up">
             <!-- App Sub-header -->
             <div class="bg-white px-4 py-3 flex items-center border-b border-gray-100 shadow-sm sticky top-0 z-20">
-                <button onclick="closeApp()" class="w-10 h-10 -ml-2 rounded-full flex items-center justify-center text-gray-500 hover:bg-gray-100 transition-colors">
+                <button onclick="closeApp()"
+                    class="w-10 h-10 -ml-2 rounded-full flex items-center justify-center text-gray-500 hover:bg-gray-100 transition-colors">
                     <i class="fa-solid fa-chevron-left text-lg"></i>
                 </button>
                 <div class="flex-1 text-center pr-8">
                     <h2 id="current-app-title" class="font-bold text-gray-800">ชื่อแอป</h2>
                 </div>
             </div>
-            
+
             <!-- พื้นที่โหลดเนื้อหาแอปย่อย (Dynamic Content) -->
             <div id="app-content-area" class="flex-1 overflow-y-auto bg-gray-50 p-4">
                 <!-- HTML ของแอปย่อยจะถูก Inject ใส่ที่นี่ผ่าน JavaScript -->
@@ -253,7 +276,7 @@
         function renderAppGrid() {
             const gridContainer = document.getElementById('app-grid');
             let html = '';
-            
+
             schoolApps.forEach(app => {
                 const textStyle = app.textColor || 'text-white';
                 html += `
@@ -265,18 +288,18 @@
                     </button>
                 `;
             });
-            
+
             gridContainer.innerHTML = html;
         }
 
         // 3. ฟังก์ชันเปิดแอป (SPA Routing Logic)
         function openApp(appId) {
             const app = schoolApps.find(a => a.id === appId);
-            if(!app) return;
+            if (!app) return;
 
             // เปลี่ยนชื่อบน Header
             document.getElementById('current-app-title').textContent = app.title;
-            
+
             // โหลดเนื้อหา (ในระบบจริง ตรงนี้จะใช้ fetch() ไปดึงหน้า php หรือ API มาแสดง)
             document.getElementById('app-content-area').innerHTML = app.renderContent();
 
@@ -285,7 +308,7 @@
             const viewer = document.getElementById('app-viewer');
             viewer.classList.remove('hidden');
             viewer.classList.add('flex');
-            
+
             // รีเซ็ต Animation
             viewer.classList.remove('slide-up');
             void viewer.offsetWidth; // trigger reflow
@@ -320,10 +343,10 @@
                     <!-- รายชื่อนักเรียนจำลอง -->
                     <div class="space-y-3 mt-4">
                         ${[
-                            {id: '1', name: 'ด.ช. กฤษณะ รักเรียน', status: 'present'},
-                            {id: '2', name: 'ด.ญ. ขวัญใจ ใฝ่ดี', status: 'absent'},
-                            {id: '3', name: 'นาย คณิน ยินดี', status: 'present'},
-                        ].map(student => `
+                    { id: '1', name: 'ด.ช. กฤษณะ รักเรียน', status: 'present' },
+                    { id: '2', name: 'ด.ญ. ขวัญใจ ใฝ่ดี', status: 'absent' },
+                    { id: '3', name: 'นาย คณิน ยินดี', status: 'present' },
+                ].map(student => `
                             <div class="flex items-center justify-between p-3 border rounded-lg ${student.status === 'absent' ? 'bg-red-50 border-red-200' : 'border-gray-200'}">
                                 <div class="flex items-center gap-3">
                                     <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-xs font-bold text-gray-500">${student.id}</div>
@@ -436,4 +459,5 @@
 
     </script>
 </body>
+
 </html>
