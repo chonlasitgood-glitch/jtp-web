@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบค้นหาทะเบียนรถนักเรียน</title>
+
+    <!-- Google Fonts: Prompt for Thai -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Prompt', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#fefce8',
+                            100: '#fef9c3',
+                            200: '#fef08a',
+                            300: '#fde047',
+                            400: '#facc15',
+                            500: '#eab308',
+                            600: '#ca8a04',
+                            700: '#a16207',
+                            800: '#854d0e',
+                            900: '#713f12',
+                        },
+                        secondary: '#475569', // Slate-600
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 40px -10px rgba(0,0,0,0.08)',
+                        'glow': '0 0 20px rgba(234, 179, 8, 0.4)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Custom Styles for aesthetic touches */
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: #fafafa;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .bg-pattern-grid {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 1);
+        }
+
+        .card-hover-effect {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-hover-effect:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -10px rgba(202, 138, 4, 0.15);
+            border-color: rgba(234, 179, 8, 0.3);
+        }
+
+        .license-plate {
+            background: linear-gradient(to bottom, #ffffff, #f1f5f9);
+            border: 2px solid #000;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col text-slate-800 bg-pattern-grid pb-12">
+
+    <!-- Header Section -->
+    <nav class="glass-nav sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-5xl mx-auto px-4 py-4 sm:px-6 flex items-center gap-3">
+            <div
+                class="w-10 h-10 bg-primary-100 text-primary-600 rounded-xl flex items-center justify-center shadow-sm border border-primary-200">
+                <i data-lucide="car-front" class="w-6 h-6"></i>
+            </div>
+            <div>
+                <h1 class="font-bold text-xl text-slate-900 tracking-wide">ระบบจัดการยานพาหนะ</h1>
+                <p class="text-slate-500 text-xs">ค้นหาข้อมูลเจ้าของรถและนักเรียน</p>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-5xl mx-auto px-4 w-full mt-8">
+
+        <!-- Search Section -->
+        <section class="glass-card rounded-[2rem] shadow-soft p-6 md:p-8 mb-8 border border-white">
+            <form id="searchForm" class="flex flex-col md:flex-row gap-4"
+                onsubmit="event.preventDefault(); executeSearch();">
+                <div class="relative flex-1">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <i data-lucide="search" class="w-5 h-5 text-primary-500"></i>
+                    </div>
+                    <input type="text" id="searchInput"
+                        class="block w-full pl-12 pr-4 py-4 bg-white/80 backdrop-blur-sm border-2 border-slate-100 rounded-2xl text-lg focus:ring-0 focus:border-primary-400 shadow-soft transition-all text-slate-700 font-medium outline-none placeholder:text-slate-400"
+                        placeholder="พิมพ์เลขทะเบียน, รหัสนักเรียน หรือชื่อ-นามสกุล..." autocomplete="off">
+                    <!-- Clear Button -->
+                    <button type="button" id="clearBtn"
+                        class="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-slate-600 hidden"
+                        onclick="clearSearch()">
+                        <i data-lucide="x-circle" class="w-5 h-5"></i>
+                    </button>
+                </div>
+                <button type="submit"
+                    class="bg-primary-500 hover:bg-primary-400 text-slate-900 font-bold py-4 px-8 rounded-2xl transition-all duration-200 flex items-center justify-center gap-2 whitespace-nowrap shadow-[0_0_15px_rgba(234,179,8,0.3)] hover:shadow-[0_0_20px_rgba(234,179,8,0.4)]">
+                    <span>ค้นหาข้อมูล</span>
+                </button>
+            </form>
+            <div class="mt-3 text-sm text-slate-500 flex items-center gap-1 ml-2">
+                <i data-lucide="info" class="w-4 h-4 text-primary-500"></i>
+                ตัวอย่าง: "1กข 1234", "6601001", "สมชาย"
+            </div>
+        </section>
+
+        <!-- Status / Results Count -->
+        <div id="resultStatus" class="mb-4 text-slate-600 font-medium hidden">
+            <!-- Dynamically populated -->
+        </div>
+
+        <!-- Results Container -->
+        <div id="resultsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Cards will be populated here by default -->
+        </div>
+
+        <!-- Load More Button -->
+        <div id="loadMoreContainer" class="col-span-full flex justify-center mt-8 hidden">
+            <button onclick="loadMore()"
+                class="bg-white border border-slate-200 text-slate-600 hover:border-primary-400 hover:text-primary-600 font-medium py-3 px-8 rounded-full transition-colors flex items-center gap-2 shadow-sm">
+                <i data-lucide="chevron-down" class="w-5 h-5"></i>
+                ดูเพิ่มเติม
+            </button>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-6 mt-auto">
+        <div class="max-w-5xl mx-auto px-4 text-center text-sm font-medium text-slate-500">
+            พัฒนาโดย ครูโบ๊ท ชลสิทธิ์ วิเชียรพันธ์ | <a href="https://www.kruboat.com" target="_blank"
+                class="text-primary-600 hover:text-primary-700 hover:underline transition-colors">www.kruboat.com</a>
+        </div>
+    </footer>
+
+    <!-- Image Modal -->
+    <div id="imageModal"
+        class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-slate-900/80 backdrop-blur-sm"
+        onclick="if(event.target === this) closeImageModal()">
+        <div class="relative max-w-3xl max-h-[90vh] w-full px-4 flex flex-col items-center fade-in">
+            <!-- Close Button -->
+            <button type="button" onclick="closeImageModal()"
+                class="absolute -top-12 right-4 text-white hover:text-primary-300 transition-colors">
+                <i data-lucide="x" class="w-8 h-8"></i>
+            </button>
+            <!-- Image -->
+            <img id="modalImage" src="" alt="รูปภาพเต็ม"
+                class="rounded-xl shadow-2xl max-w-full max-h-[75vh] object-contain bg-slate-100 border-2 border-white/20">
+            <!-- Caption -->
+            <div id="modalCaption" class="text-white mt-4 text-xl font-bold tracking-wide"></div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // --- Mockup Data ---
+        // เพิ่มข้อมูลจำลองเป็น 15 คนเพื่อทดสอบระบบแสดงทีละ 12 คน
+        const mockData = [
+            { studentId: "6601001", name: "นายสมชาย รักเรียน", faculty: "วิศวกรรมศาสตร์", image: "https://ui-avatars.com/api/?name=สมชาย+รักเรียน&background=0D8ABC&color=fff&size=256&font-size=0.3", vehicle: { type: "รถยนต์", brand: "Honda Civic", color: "สีขาว", plate: "1กข 1234", province: "กรุงเทพมหานคร" } },
+            { studentId: "6601002", name: "นางสาวสมหญิง ใจดี", faculty: "บริหารธุรกิจ", image: "https://ui-avatars.com/api/?name=สมหญิง+ใจดี&background=F59E0B&color=fff&size=256&font-size=0.3", vehicle: { type: "รถจักรยานยนต์", brand: "Yamaha Grand Filano", color: "สีแดง", plate: "กขค 999", province: "ร้อยเอ็ด" } },
+            { studentId: "6601003", name: "นายธนภัทร ยอดเยี่ยม", faculty: "สถาปัตยกรรมศาสตร์", image: "https://ui-avatars.com/api/?name=ธนภัทร+ยอด&background=10B981&color=fff&size=256&font-size=0.3", vehicle: { type: "รถยนต์", brand: "Toyota Yaris", color: "สีดำ", plate: "ขง 5555", province: "เชียงใหม่" } },
+            { studentId: "6502015", name: "นางสาวอารยา แสนสวย", faculty: "ศิลปกรรมศาสตร์", image: "https://ui-avatars.com/api/?name=อารยา+แสน&background=8B5CF6&color=fff&size=256&font-size=0.3", vehicle: { type: "รถจักรยานยนต์", brand: "Honda Scoopy i", color: "สีชมพู", plate: "1กข 1234", province: "ขอนแก่น" } },
+            { studentId: "6409922", name: "นายกิตติพงษ์ กล้าหาญ", faculty: "วิทยาศาสตร์", image: "https://ui-avatars.com/api/?name=กิตติพงษ์+ก&background=EF4444&color=fff&size=256&font-size=0.3", vehicle: { type: "รถยนต์", brand: "Isuzu D-Max", color: "สีเทา", plate: "บบ 8888", province: "นครราชสีมา" } },
+            { studentId: "6601006", name: "นายสมศักดิ์ มั่นคง", faculty: "วิศวกรรมศาสตร์", image: "https://ui-avatars.com/api/?name=สมศักดิ์+มั่นคง&background=64748B&color=fff&size=256", vehicle: { type: "รถยนต์", brand: "Mazda 2", color: "สีแดง", plate: "กต 1111", province: "ชลบุรี" } },
+            { studentId: "6601007", name: "นางสาววิภาดา สดใส", faculty: "พยาบาลศาสตร์", image: "https://ui-avatars.com/api/?name=วิภาดา+สดใส&background=EC4899&color=fff&size=256", vehicle: { type: "รถจักรยานยนต์", brand: "Honda Wave", color: "สีน้ำเงิน", plate: "ขข 222", province: "อุบลราชธานี" } },
+            { studentId: "6601008", name: "นายณัฐพล ทองดี", faculty: "นิติศาสตร์", image: "https://ui-avatars.com/api/?name=ณัฐพล+ทองดี&background=3B82F6&color=fff&size=256", vehicle: { type: "รถยนต์", brand: "Nissan Almera", color: "สีขาว", plate: "งง 3333", province: "สงขลา" } },
+            { studentId: "6601009", name: "นางสาวแพรวา น่ารัก", faculty: "นิเทศศาสตร์", image: "https://ui-avatars.com/api/?name=แพรวา+น่ารัก&background=F43F5E&color=fff&size=256", vehicle: { type: "รถยนต์", brand: "MG ZS", color: "สีฟ้า", plate: "จจ 4444", province: "เชียงราย" } },
+            { studentId: "6601010", name: "นายธีรเทพ มุ่งมั่น", faculty: "เกษตรศาสตร์", image: "https://ui-avatars.com/api/?name=ธีรเทพ+มุ่งมั่น&background=84CC16&color=fff&size=256", vehicle: { type: "รถจักรยานยนต์", brand: "Vespa LX 125", color: "สีเหลือง", plate: "ฉฉ 555", province: "อุดรธานี" } },
+            { studentId: "6601011", name: "นางสาวสุนิสา งามประเสริฐ", faculty: "มนุษยศาสตร์", image: "https://ui-avatars.com/api/?name=สุนิสา+งาม&background=D946EF&color=fff&size=256", vehicle: { type: "รถยนต์", brand: "Honda City", color: "สีเทา", plate: "ชช 6666", province: "นนทบุรี" } },
+            { studentId: "6601012", name: "นายพงศกร รุ่งเรือง", faculty: "วิทยาศาสตร์", image: "https://ui-avatars.com/api/?name=พงศกร+รุ่ง&background=06B6D4&color=fff&size=256", vehicle: { type: "รถจักรยานยนต์", brand: "Yamaha MT-15", color: "สีดำ", plate: "ซซ 777", province: "ภูเก็ต" } },
+            { studentId: "6601013", name: "นางสาวมณีรัตน์ เพชรแท้", faculty: "แพทยศาสตร์", image: "https://ui-avatars.com/api/?name=มณีรัตน์+เพชร&background=14B8A6&color=fff&size=256", vehicle: { type: "รถยนต์", brand: "Toyota Corolla Cross", color: "สีขาว", plate: "ฌฌ 8888", province: "ปทุมธานี" } },
+            { studentId: "6601014", name: "นายเอกรินทร์ ชาญชัย", faculty: "รัฐศาสตร์", image: "https://ui-avatars.com/api/?name=เอกรินทร์+ชาญ&background=EAB308&color=fff&size=256", vehicle: { type: "รถจักรยานยนต์", brand: "Honda PCX", color: "สีแดง", plate: "ญญ 999", province: "นครปฐม" } },
+            { studentId: "6601015", name: "นางสาวจันทร์เพ็ญ สว่าง", faculty: "ศึกษาศาสตร์", image: "https://ui-avatars.com/api/?name=จันทร์เพ็ญ+ส&background=8B5CF6&color=fff&size=256", vehicle: { type: "รถยนต์", brand: "Mitsubishi Attrage", color: "สีเงิน", plate: "ฎฎ 1010", province: "สมุทรปราการ" } }
+        ];
+
+        // --- Pagination Variables ---
+        let currentPage = 1;
+        const itemsPerPage = 12;
+
+        // --- DOM Elements ---
+        const searchInput = document.getElementById('searchInput');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const resultStatus = document.getElementById('resultStatus');
+        const clearBtn = document.getElementById('clearBtn');
+        const loadMoreContainer = document.getElementById('loadMoreContainer');
+
+        // Initial Load - แสดงข้อมูลเริ่มต้นเมื่อโหลดหน้าเว็บ
+        document.addEventListener('DOMContentLoaded', () => {
+            showDefaultData();
+        });
+
+        // --- Event Listeners ---
+        searchInput.addEventListener('input', function () {
+            // Show/Hide clear button
+            if (this.value.length > 0) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+                // ถ้าลบคำค้นหาจนหมด ให้กลับไปแสดงข้อมูลเริ่มต้น
+                currentPage = 1;
+                showDefaultData();
+            }
+        });
+
+        // --- Functions ---
+        function showDefaultData() {
+            const dataToShow = mockData.slice(0, currentPage * itemsPerPage);
+
+            resultStatus.innerHTML = `แสดงข้อมูลนักเรียนทั้งหมด <span class="font-bold text-primary-600">${mockData.length}</span> รายการ`;
+            resultStatus.classList.remove('hidden');
+
+            renderCards(dataToShow);
+
+            // ตรวจสอบว่ายังมีข้อมูลให้โหลดต่อหรือไม่
+            if (mockData.length > currentPage * itemsPerPage) {
+                loadMoreContainer.classList.remove('hidden');
+            } else {
+                loadMoreContainer.classList.add('hidden');
+            }
+        }
+
+        function loadMore() {
+            currentPage++;
+            showDefaultData();
+        }
+
+        function clearSearch() {
+            searchInput.value = '';
+            clearBtn.classList.add('hidden');
+            searchInput.focus();
+
+            // กลับไปแสดงข้อมูลทั้งหมด
+            currentPage = 1;
+            showDefaultData();
+        }
+
+        function executeSearch() {
+            const query = searchInput.value.trim().toLowerCase();
+
+            if (!query) {
+                // ถ้าค้นหาตัวเปล่าๆ ให้เด้งสีแดงแล้วกลับเป็นค่าเริ่มต้น
+                searchInput.classList.add('ring-2', 'ring-rose-400');
+                setTimeout(() => searchInput.classList.remove('ring-2', 'ring-rose-400'), 500);
+                currentPage = 1;
+                showDefaultData();
+                return;
+            }
+
+            // ซ่อนปุ่มโหลดเพิ่มขณะค้นหา
+            loadMoreContainer.classList.add('hidden');
+
+            // Simulate loading state
+            resultsContainer.innerHTML = `
+                <div class="col-span-full flex justify-center py-12">
+                    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
+                </div>
+            `;
+            resultStatus.classList.add('hidden');
+
+            // Simulate network delay for better UX feel
+            setTimeout(() => {
+                const results = mockData.filter(student => {
+                    const cleanPlate = student.vehicle.plate.replace(/\s/g, '').toLowerCase();
+                    const cleanQuery = query.replace(/\s/g, '').toLowerCase();
+
+                    return student.studentId.includes(query) ||
+                        student.name.toLowerCase().includes(query) ||
+                        cleanPlate.includes(cleanQuery);
+                });
+
+                if (results.length === 0) {
+                    resultStatus.innerHTML = `ค้นหา <span class="font-bold text-slate-800">"${query}"</span> ไม่พบข้อมูล`;
+                    resultsContainer.innerHTML = `
+                        <div class="col-span-full flex flex-col items-center justify-center py-16 text-center text-slate-500 fade-in">
+                            <div class="bg-rose-50 p-6 rounded-full mb-4">
+                                <i data-lucide="search-x" class="w-16 h-16 text-rose-400"></i>
+                            </div>
+                            <h3 class="text-xl font-medium text-slate-700 mb-2">ไม่พบข้อมูลที่ตรงกัน</h3>
+                            <p>ลองตรวจสอบตัวสะกด, เลขทะเบียน หรือรหัสนักเรียนอีกครั้ง</p>
+                        </div>
+                    `;
+                } else {
+                    resultStatus.innerHTML = `พบข้อมูล <span class="font-bold text-primary-600">${results.length}</span> รายการ สำหรับ "${query}"`;
+                    renderCards(results);
+                }
+            }, 400); // 400ms delay
+        }
+
+        function renderCards(results) {
+            resultsContainer.innerHTML = '';
+
+            results.forEach(student => {
+                const card = document.createElement('div');
+                card.className = "glass-card rounded-[1.5rem] shadow-sm hover:shadow-soft transition-all border border-white overflow-hidden fade-in group card-hover-effect";
+
+                // Vehicle Type Icon Logic
+                const isCar = student.vehicle.type === "รถยนต์";
+                const vIcon = isCar ? "car" : "bike";
+
+                card.innerHTML = `
+                    <div class="p-6 relative overflow-hidden h-full flex flex-col">
+                        <div class="absolute inset-0 bg-primary-50 rounded-full blur-3xl opacity-0 group-hover:opacity-60 transition-opacity"></div>
+                        <div class="flex flex-col sm:flex-row gap-6 items-start sm:items-center relative z-10 flex-grow">
+                            <!-- Profile Image -->
+                            <div class="shrink-0 relative">
+                                <img src="${student.image}" alt="รูปของ ${student.name}" class="w-20 h-20 rounded-full object-cover border-[3px] border-white shadow-sm cursor-pointer hover:border-primary-200 transition-all duration-300" onclick="openImageModal('${student.image}', '${student.name}')" onerror="this.src='https://ui-avatars.com/api/?name=User&background=cbd5e1&color=fff'">
+                                <div class="absolute inset-0 bg-black/40 rounded-full flex items-center justify-center opacity-0 hover:opacity-100 cursor-pointer transition-opacity duration-300 pointer-events-none">
+                                    <i data-lucide="zoom-in" class="w-5 h-5 text-white"></i>
+                                </div>
+                            </div>
+                            
+                            <!-- Student Info -->
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md border border-slate-100 text-xs font-medium bg-slate-50 text-slate-500">
+                                        <i data-lucide="user" class="w-3 h-3"></i>
+                                        รหัสนักเรียน: ${student.studentId}
+                                    </span>
+                                </div>
+                                <h2 class="text-lg font-bold text-slate-800 truncate leading-tight">${student.name}</h2>
+                                <p class="text-sm text-slate-500 mt-1 flex items-center gap-1 font-medium">
+                                    <i data-lucide="book-open" class="w-4 h-4 text-primary-500"></i> ${student.faculty}
+                                </p>
+                            </div>
+                        </div>
+
+                        <hr class="my-4 border-slate-100">
+
+                        <!-- Vehicle Info -->
+                        <div class="bg-slate-50/80 rounded-xl p-4 flex flex-col items-center justify-between gap-4 border border-slate-100/50 mt-auto">
+                            
+                            <div class="flex-1 w-full text-center sm:text-left flex flex-col xl:flex-row items-center gap-4">
+                                <div class="shrink-0">
+                                    <div class="license-plate p-1.5 w-32 text-center flex flex-col justify-center items-center bg-white">
+                                        <div class="text-xl font-bold tracking-wider text-slate-900 leading-none pb-0.5">${student.vehicle.plate}</div>
+                                        <div class="text-[10px] font-medium text-slate-700 border-t border-slate-300 w-full pt-0.5 truncate">${student.vehicle.province}</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex-1 w-full">
+                                    <ul class="text-xs text-slate-600 space-y-1.5 font-medium">
+                                        <li class="flex items-center justify-center sm:justify-start gap-1.5"><i data-lucide="${isCar ? 'car' : 'moped'}" class="w-3.5 h-3.5 text-slate-400"></i> <span class="text-slate-400">ประเภท:</span> ${student.vehicle.type}</li>
+                                        <li class="flex items-center justify-center sm:justify-start gap-1.5"><i data-lucide="tag" class="w-3.5 h-3.5 text-slate-400"></i> <span class="text-slate-400">รุ่น:</span> ${student.vehicle.brand}</li>
+                                        <li class="flex items-center justify-center sm:justify-start gap-1.5"><i data-lucide="palette" class="w-3.5 h-3.5 text-slate-400"></i> <span class="text-slate-400">สี:</span> ${student.vehicle.color}</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                `;
+                resultsContainer.appendChild(card);
+            });
+
+            // Re-initialize icons for newly added DOM elements
+            lucide.createIcons();
+        }
+
+        // --- Image Modal Functions ---
+        const imageModal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalCaption = document.getElementById('modalCaption');
+
+        function openImageModal(imageUrl, name) {
+            modalImage.src = imageUrl;
+            modalCaption.textContent = name;
+            imageModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // ล็อกการเลื่อนหน้าจอด้านหลัง
+            lucide.createIcons(); // โหลดไอคอนปุ่มปิด
+        }
+
+        function closeImageModal() {
+            imageModal.classList.add('hidden');
+            document.body.style.overflow = ''; // ปลดล็อกการเลื่อนหน้าจอ
+            setTimeout(() => modalImage.src = '', 200); // เคลียร์รูปเก่าทิ้งหลังจากปิด
+        }
+
+        // ปิด Modal เมื่อกดปุ่ม Escape บนคีย์บอร์ด
+        document.addEventListener('keydown', function (event) {
+            if (event.key === "Escape" && !imageModal.classList.contains('hidden')) {
+                closeImageModal();
+            }
+        });
+    </script>
+</body>
+
+</html>

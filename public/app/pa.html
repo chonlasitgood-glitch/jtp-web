@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบส่งผลงานบุคลากร</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Prompt -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Prompt', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#fefce8',
+                            100: '#fef9c3',
+                            200: '#fef08a',
+                            300: '#fde047',
+                            400: '#facc15',
+                            500: '#eab308',
+                            600: '#ca8a04',
+                            700: '#a16207',
+                            800: '#854d0e',
+                            900: '#713f12',
+                        },
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 40px -10px rgba(0,0,0,0.08)',
+                        'glow': '0 0 20px rgba(234, 179, 8, 0.4)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: #fafafa;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 1);
+        }
+
+        .card-hover-effect {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-hover-effect:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -10px rgba(202, 138, 4, 0.15);
+            border-color: rgba(234, 179, 8, 0.3);
+        }
+
+        .bg-pattern-grid {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .loader {
+            border: 4px solid #fef08a;
+            border-radius: 50%;
+            border-top: 4px solid #eab308;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col text-slate-800 bg-pattern-grid">
+
+    <!-- Navbar -->
+    <nav class="glass-nav sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-primary-100 text-primary-600 rounded-xl flex items-center justify-center shadow-sm border border-primary-200">
+                        <i data-lucide="folder-kanban" class="w-6 h-6"></i>
+                    </div>
+                    <span class="font-bold text-xl text-slate-900" id="system-title">กำลังโหลดข้อมูล...</span>
+                </div>
+                <div>
+                    <span id="system-status-badge"
+                        class="px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-500 border border-slate-200 shadow-sm">
+                        กำลังตรวจสอบสถานะ
+                    </span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+
+        <!-- Summary Dashboard -->
+        <div
+            class="glass-card rounded-[2rem] shadow-soft p-6 md:p-8 mb-8 flex flex-col md:flex-row justify-between items-center gap-6 border border-white">
+            <div class="text-center md:text-left">
+                <span class="text-primary-600 font-bold tracking-wider text-xs uppercase mb-1 block">รายละเอียดการส่งงาน</span>
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-900" id="event-name">หัวข้อ: ...</h2>
+                <p class="text-slate-500 mt-2 text-sm md:text-base" id="event-desc">กรุณาอัปโหลดไฟล์ลง Google Drive
+                    ของท่านและนำลิงก์มาส่งที่นี่</p>
+            </div>
+            <div class="flex gap-4 text-center w-full md:w-auto justify-center">
+                <div class="bg-gradient-to-b from-green-50 to-white p-4 rounded-2xl border border-green-100 min-w-[110px] shadow-sm relative overflow-hidden group">
+                    <div class="absolute -right-4 -top-4 w-12 h-12 bg-green-100 rounded-full blur-xl group-hover:bg-green-200 transition-colors"></div>
+                    <p class="text-xs text-green-600 font-bold uppercase tracking-wider relative z-10">ส่งแล้ว</p>
+                    <p class="text-3xl font-extrabold text-green-700 mt-1 relative z-10" id="count-submitted">0</p>
+                </div>
+                <div class="bg-gradient-to-b from-rose-50 to-white p-4 rounded-2xl border border-rose-100 min-w-[110px] shadow-sm relative overflow-hidden group">
+                    <div class="absolute -right-4 -top-4 w-12 h-12 bg-rose-100 rounded-full blur-xl group-hover:bg-rose-200 transition-colors"></div>
+                    <p class="text-xs text-rose-600 font-bold uppercase tracking-wider relative z-10">ยังไม่ส่ง</p>
+                    <p class="text-3xl font-extrabold text-rose-700 mt-1 relative z-10" id="count-pending">0</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="mb-8 relative max-w-2xl mx-auto">
+            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <i data-lucide="search" class="h-5 w-5 text-primary-500"></i>
+            </div>
+            <input type="text" id="searchInput" onkeyup="filterTeachers()" placeholder="ค้นหาชื่อ หรือ กลุ่มสาระฯ..."
+                class="block w-full pl-12 pr-4 py-4 border-2 border-slate-100 rounded-2xl focus:ring-0 focus:border-primary-400 bg-white/80 backdrop-blur-sm shadow-soft transition-all text-slate-700 font-medium placeholder-slate-400">
+        </div>
+
+        <!-- Loading State -->
+        <div id="loading-container" class="flex flex-col items-center justify-center py-20">
+            <div class="loader mb-4"></div>
+            <p class="text-gray-500">กำลังเชื่อมต่อฐานข้อมูล...</p>
+        </div>
+
+        <!-- Teachers Grid -->
+        <div id="teachers-grid"
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 hidden">
+            <!-- Cards will be injected here via JS -->
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-6 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center text-sm font-medium text-slate-500">
+            พัฒนาโดย ครูโบ๊ท ชลสิทธิ์ วิเชียรพันธ์ | <a href="https://www.kruboat.com" target="_blank"
+                class="text-primary-600 hover:text-primary-700 hover:underline transition-colors">www.kruboat.com</a>
+        </div>
+    </footer>
+
+    <!-- Submit Modal -->
+    <div id="submitModal"
+        class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-[2rem] shadow-2xl w-full max-w-md overflow-hidden transform transition-all border border-white">
+            <div class="bg-gradient-to-r from-primary-500 to-primary-600 px-6 py-5 flex justify-between items-center relative overflow-hidden">
+                <div class="absolute -right-10 -top-10 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+                <h3 class="text-lg font-bold text-white relative z-10 flex items-center gap-2"><i data-lucide="upload-cloud" class="w-5 h-5"></i> ส่งลิงก์ผลงาน</h3>
+                <button onclick="closeModal()" class="text-white/70 hover:text-white transition-colors relative z-10 bg-white/10 p-1.5 rounded-full hover:bg-white/20">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <div class="p-6 md:p-8">
+                <div class="flex items-center gap-4 mb-6 bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                    <img id="modal-photo" src="" alt=""
+                        class="w-16 h-16 rounded-full object-cover border-4 border-white shadow-sm">
+                    <div>
+                        <p class="font-bold text-lg text-slate-800" id="modal-name">ชื่อ - สกุล</p>
+                        <p class="text-sm font-medium text-slate-500 bg-white px-2 py-0.5 rounded-md inline-block mt-1 border border-slate-200" id="modal-dept">กลุ่มสาระ</p>
+                    </div>
+                </div>
+
+                <form id="submitForm" onsubmit="submitWork(event)">
+                    <input type="hidden" id="modal-teacher-id">
+
+                    <div class="mb-4">
+                        <label class="block text-sm font-bold text-slate-700 mb-2">ลิงก์ Google Drive ของท่าน <span
+                                class="text-rose-500">*</span></label>
+                        <input type="url" id="modal-link" required placeholder="https://drive.google.com/..."
+                            class="w-full px-4 py-3 border-2 border-slate-200 rounded-xl focus:ring-0 focus:border-primary-400 bg-white transition-colors text-slate-700 font-medium">
+                        <div class="flex items-start gap-2 mt-2 bg-amber-50 p-2.5 rounded-lg border border-amber-100">
+                            <i data-lucide="info" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i>
+                            <p class="text-xs text-amber-700 font-medium leading-relaxed">กรุณาตั้งค่าสิทธิ์ลิงก์เป็น <br><span class="font-bold">"ทุกคนที่มีลิงก์ (Anyone with the link)"</span> ก่อนส่ง</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3 mt-8">
+                        <button type="button" onclick="closeModal()"
+                            class="flex-1 px-4 py-3 border-2 border-slate-200 text-slate-600 font-bold rounded-xl hover:bg-slate-50 hover:border-slate-300 transition-colors">
+                            ยกเลิก
+                        </button>
+                        <button type="submit" id="btn-submit"
+                            class="flex-1 px-4 py-3 bg-primary-500 text-slate-900 font-bold rounded-xl hover:bg-primary-400 transition-all flex justify-center items-center gap-2 shadow-[0_0_15px_rgba(234,179,8,0.3)] hover:shadow-[0_0_20px_rgba(234,179,8,0.4)]">
+                            <i data-lucide="send" class="w-4 h-4"></i> ยืนยันการส่ง
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // กำหนดค่าการทำงานของไอคอน
+        lucide.createIcons();
+
+        // =========================================================
+        // URL ของ Web App ที่ได้จาก Google Apps Script
+        const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbz7Kh0lTfYvKN_UJnkgLIrsKO-qfdd1LILcWpeyxEsdFj-oPqSa3QrVSIlx7aH7tpAFCA/exec";
+        // =========================================================
+
+        let teachersData = [];
+        let systemConfig = {};
+
+        // ฟังก์ชันแปลงลิงก์ Google Drive ให้เป็น Direct Image Link
+        function formatGoogleDriveImageUrl(url) {
+            if (!url) return null;
+            // เช็คว่าเป็นลิงก์จาก Google Drive หรือไม่
+            const driveRegex = /(?:https:\/\/)?(?:drive\.google\.com\/(?:file\/d\/|open\?id=)|docs\.google\.com\/.*?id=)([a-zA-Z0-9_-]+)/;
+            const match = url.match(driveRegex);
+
+            if (match && match[1]) {
+                const fileId = match[1];
+                // เปลี่ยนมาใช้ Thumbnail Endpoint ซึ่งจะเลี่ยงการถูกบล็อกและทำงานคล้าย lh3
+                return `https://drive.google.com/thumbnail?id=${fileId}&sz=w500`;
+            }
+            return url; // ถ้าไม่ใช่ลิงก์ Google Drive ก็คืนค่าเดิมกลับไป
+        }
+
+        // โหลดข้อมูลเมื่อเปิดหน้าเว็บ
+        document.addEventListener('DOMContentLoaded', fetchData);
+
+        async function fetchData() {
+            if (GAS_WEBAPP_URL === "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE") {
+                Swal.fire('ข้อผิดพลาด', 'กรุณาใส่ URL ของ Google Apps Script ในโค้ด HTML ก่อน', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(GAS_WEBAPP_URL);
+                const result = await response.json();
+
+                if (result.status === 'success') {
+                    teachersData = result.data.teachers;
+                    systemConfig = result.data.config;
+
+                    updateUIConfig();
+                    renderTeachersGrid();
+
+                    document.getElementById('loading-container').classList.add('hidden');
+                    document.getElementById('teachers-grid').classList.remove('hidden');
+                } else {
+                    throw new Error("Failed to load data");
+                }
+            } catch (error) {
+                console.error(error);
+                Swal.fire('เกิดข้อผิดพลาด', 'ไม่สามารถเชื่อมต่อฐานข้อมูลได้ กรุณาลองใหม่', 'error');
+                document.getElementById('loading-container').innerHTML = '<p class="text-red-500">เชื่อมต่อล้มเหลว กรุณารีเฟรชหน้าเว็บ</p>';
+            }
+        }
+
+        function updateUIConfig() {
+            // อัปเดตชื่อระบบและหัวข้อ
+            document.getElementById('system-title').textContent = systemConfig.SystemName || 'ระบบส่งผลงาน';
+            document.getElementById('event-name').textContent = systemConfig.CurrentEvent || 'หัวข้อการส่งงาน';
+            document.getElementById('event-desc').textContent = systemConfig.Description || '';
+
+            // จัดการสถานะระบบ (เปิด/ปิด)
+            const statusBadge = document.getElementById('system-status-badge');
+            if (systemConfig.Status === 'OPEN') {
+                statusBadge.textContent = 'เปิดระบบ';
+                statusBadge.classList.replace('bg-gray-500', 'bg-green-500');
+            } else {
+                statusBadge.textContent = 'ปิดระบบ';
+                statusBadge.classList.replace('bg-gray-500', 'bg-red-500');
+            }
+        }
+
+        function renderTeachersGrid(filterText = '') {
+            const grid = document.getElementById('teachers-grid');
+            grid.innerHTML = '';
+
+            let submittedCount = 0;
+            let pendingCount = 0;
+
+            const filteredData = teachersData.filter(t =>
+                t.name.toLowerCase().includes(filterText.toLowerCase()) ||
+                t.department.toLowerCase().includes(filterText.toLowerCase())
+            );
+
+            filteredData.forEach(teacher => {
+                const isSubmitted = teacher.link && teacher.link.trim() !== '';
+
+                // นับจำนวนรวมจากข้อมูลทั้งหมด
+                if (isSubmitted) {
+                    if (!filterText) submittedCount++;
+                } else {
+                    if (!filterText) pendingCount++;
+                }
+
+                // รูปโปรไฟล์ (แปลงลิงก์ Google Drive อัตโนมัติ)
+                const formattedPhotoUrl = formatGoogleDriveImageUrl(teacher.photo);
+                const photoUrl = formattedPhotoUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(teacher.name)}&background=random&font-size=0.33`;
+
+                // สถานะและไอคอน
+                const statusColor = isSubmitted ? 'bg-green-100 text-green-800 border-green-200' : 'bg-red-100 text-red-800 border-red-200';
+                const statusIcon = isSubmitted ? '<i data-lucide="check-circle" class="w-4 h-4 inline mr-1"></i>ส่งแล้ว' : '<i data-lucide="x-circle" class="w-4 h-4 inline mr-1"></i>ยังไม่ส่ง';
+
+                // คลาสและข้อความสำหรับปุ่ม "ส่งงาน / ส่งใหม่"
+                const submitBtnClass = isSubmitted
+                    ? 'flex-1 py-2.5 bg-amber-100 hover:bg-amber-200 text-amber-700 rounded-xl text-sm font-bold transition-colors flex items-center justify-center gap-1.5 shadow-sm border border-amber-200'
+                    : 'flex-1 py-2.5 bg-primary-500 hover:bg-primary-400 text-slate-900 rounded-xl text-sm font-bold transition-colors flex items-center justify-center gap-1.5 shadow-sm hover:shadow-[0_0_15px_rgba(234,179,8,0.3)]';
+
+                const submitBtnText = isSubmitted ? '<i data-lucide="refresh-cw" class="w-4 h-4"></i> ส่งใหม่' : '<i data-lucide="upload-cloud" class="w-4 h-4"></i> ส่งงาน';
+
+                // โค้ดสำหรับปุ่ม "ดู" (View Link)
+                const viewBtnHTML = isSubmitted
+                    ? `<a href="${teacher.link}" target="_blank" class="flex-1 py-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-xl text-sm font-bold transition-colors flex items-center justify-center gap-1.5 shadow-sm border border-emerald-200"><i data-lucide="eye" class="w-4 h-4"></i> ดู</a>`
+                    : `<button disabled class="flex-1 py-2.5 bg-slate-50 text-slate-400 rounded-xl text-sm font-bold flex items-center justify-center gap-1.5 cursor-not-allowed border border-slate-100"><i data-lucide="eye-off" class="w-4 h-4"></i> ดู</button>`;
+
+                // เวลาที่ส่งงาน
+                const timestampText = isSubmitted ? `<p class="text-[10px] text-slate-400 font-medium text-center mt-3 bg-slate-50 py-1 rounded-md border border-slate-100">ส่งเมื่อ: ${teacher.timestamp}</p>` : `<p class="text-[10px] text-transparent text-center mt-3 py-1">.</p>`;
+
+                const cardHTML = `
+                    <div class="glass-card rounded-[1.5rem] p-6 flex flex-col items-center card-hover-effect relative overflow-hidden group">
+                        ${isSubmitted ? '<div class="absolute top-0 right-0 w-20 h-20 overflow-hidden"><div class="absolute transform rotate-45 bg-gradient-to-r from-emerald-400 to-emerald-500 text-center text-white font-bold py-1 right-[-40px] top-[30px] w-[180px] shadow-sm text-[10px] tracking-wider uppercase">Success</div></div>' : ''}
+                        
+                        <div class="relative mb-4 mt-2 group-hover:scale-105 transition-transform duration-300">
+                            <div class="absolute inset-0 bg-primary-200 rounded-full blur-md opacity-0 group-hover:opacity-40 transition-opacity"></div>
+                            <img src="${photoUrl}" alt="${teacher.name}" class="relative w-24 h-24 rounded-full object-cover border-[4px] shadow-sm ${isSubmitted ? 'border-emerald-100' : 'border-white'} bg-slate-100" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(teacher.name)}'">
+                        </div>
+                        
+                        <h3 class="font-extrabold text-slate-800 text-center leading-tight text-lg">${teacher.name}</h3>
+                        <p class="text-xs font-medium text-slate-500 mt-1 mb-4 text-center bg-slate-50 px-2.5 py-0.5 rounded-md border border-slate-100">${teacher.department}</p>
+                        
+                        <div class="px-3 py-1 rounded-full text-xs font-bold border ${statusColor} bg-opacity-50 mb-1 backdrop-blur-sm">
+                            ${statusIcon}
+                        </div>
+                        
+                        <div class="mt-auto w-full pt-4">
+                            <div class="flex gap-2 w-full">
+                                <button onclick="openModal('${teacher.id}')" class="${submitBtnClass}">
+                                    ${submitBtnText}
+                                </button>
+                                ${viewBtnHTML}
+                            </div>
+                            ${timestampText}
+                        </div>
+                    </div>
+                `;
+                grid.insertAdjacentHTML('beforeend', cardHTML);
+            });
+
+            lucide.createIcons(); // render icons newly added to DOM
+
+            // อัปเดตตัวเลขสรุป
+            if (!filterText) {
+                document.getElementById('count-submitted').textContent = submittedCount;
+                document.getElementById('count-pending').textContent = pendingCount;
+            }
+
+            if (filteredData.length === 0) {
+                grid.innerHTML = '<div class="col-span-full text-center py-10 text-gray-500">ไม่พบรายชื่อที่ค้นหา</div>';
+            }
+        }
+
+        function filterTeachers() {
+            const searchText = document.getElementById('searchInput').value;
+            renderTeachersGrid(searchText);
+        }
+
+        function openModal(teacherId) {
+            // เช็คว่าระบบเปิดอยู่หรือไม่
+            if (systemConfig.Status !== 'OPEN') {
+                Swal.fire('ระบบปิด', 'ขณะนี้อยู่นอกเวลาการส่งงาน', 'warning');
+                return;
+            }
+
+            const teacher = teachersData.find(t => t.id == teacherId);
+            if (!teacher) return;
+
+            document.getElementById('modal-teacher-id').value = teacher.id;
+            document.getElementById('modal-name').textContent = teacher.name;
+            document.getElementById('modal-dept').textContent = teacher.department;
+
+            // รูปโปรไฟล์ใน Modal (แปลงลิงก์ Google Drive อัตโนมัติ)
+            const formattedPhotoUrl = formatGoogleDriveImageUrl(teacher.photo);
+            document.getElementById('modal-photo').src = formattedPhotoUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(teacher.name)}&background=random`;
+
+            // ใส่ลิงก์เดิมถ้ามี
+            document.getElementById('modal-link').value = teacher.link || '';
+
+            document.getElementById('submitModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('submitModal').classList.add('hidden');
+            document.getElementById('submitForm').reset();
+        }
+
+        async function submitWork(e) {
+            e.preventDefault();
+
+            const teacherId = document.getElementById('modal-teacher-id').value;
+            const link = document.getElementById('modal-link').value;
+            const btn = document.getElementById('btn-submit');
+
+            // เปลี่ยนปุ่มเป็นกำลังโหลด
+            const originalBtnHtml = btn.innerHTML;
+            btn.innerHTML = '<div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div> กำลังบันทึก...';
+            btn.disabled = true;
+
+            try {
+                // ส่ง POST request แบบ text/plain
+                const response = await fetch(GAS_WEBAPP_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        action: 'submit',
+                        id: teacherId,
+                        link: link
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.status === 'success') {
+                    // อัปเดตข้อมูลใน UI
+                    const teacherIndex = teachersData.findIndex(t => t.id == teacherId);
+                    if (teacherIndex > -1) {
+                        teachersData[teacherIndex].link = link;
+
+                        // สร้าง Timestamp แบบไทย
+                        const now = new Date();
+                        const thTime = now.toLocaleString('th-TH', { dateStyle: 'short', timeStyle: 'short' });
+                        teachersData[teacherIndex].timestamp = thTime;
+                    }
+
+                    closeModal();
+                    renderTeachersGrid(document.getElementById('searchInput').value); // Render ทับ
+
+                    Swal.fire({
+                        title: 'สำเร็จ!',
+                        text: 'บันทึกข้อมูลการส่งงานเรียบร้อยแล้ว',
+                        icon: 'success',
+                        confirmButtonText: 'ตกลง',
+                        confirmButtonColor: '#3b82f6'
+                    });
+                } else {
+                    throw new Error(result.message || "Unknown Error");
+                }
+
+            } catch (error) {
+                console.error(error);
+                Swal.fire('ผิดพลาด', 'ไม่สามารถบันทึกข้อมูลได้ กรุณาลองใหม่', 'error');
+            } finally {
+                // คืนสถานะปุ่ม
+                btn.innerHTML = originalBtnHtml;
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+
+</html>
