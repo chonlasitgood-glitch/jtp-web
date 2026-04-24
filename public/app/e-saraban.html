@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบหนังสือราชการภายใน (E-Document)</title>
+
+    <!-- Google Fonts: Prompt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind Config for Font -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Prompt', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#fefce8',
+                            100: '#fef9c3',
+                            200: '#fef08a',
+                            300: '#fde047',
+                            400: '#facc15',
+                            500: '#eab308',
+                            600: '#ca8a04',
+                            700: '#a16207',
+                            800: '#854d0e',
+                            900: '#713f12',
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        .modal-open {
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 font-sans h-screen flex overflow-hidden">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-slate-900 text-white flex flex-col hidden md:flex transition-all duration-300 z-20 shadow-xl">
+        <div class="h-16 flex items-center px-6 border-b border-slate-700">
+            <i class="fa-solid fa-folder-tree text-2xl text-primary-400 mr-3"></i>
+            <span class="text-lg font-bold tracking-wide">E-Archive</span>
+        </div>
+
+        <div class="p-4">
+            <div class="bg-slate-800 p-3 rounded-lg text-sm text-slate-300 border border-slate-700">
+                <i class="fa-solid fa-circle-info text-primary-400 mr-1"></i> ระบบจัดเก็บและค้นหาหนังสืออิเล็กทรอนิกส์
+            </div>
+        </div>
+
+        <nav class="flex-1 px-4 space-y-1 overflow-y-auto">
+            <p class="px-2 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 mt-2">แฟ้มเอกสาร</p>
+            <a href="#" onclick="switchTab('internal')" id="nav-internal"
+                class="flex items-center px-3 py-2.5 bg-primary-500 text-slate-900 rounded-lg group transition-colors">
+                <i class="fa-solid fa-folder-open w-6 text-slate-900"></i>
+                <span class="flex-1">หนังสือภายใน</span>
+                <span id="badge-internal"
+                    class="bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">2</span>
+            </a>
+            <a href="#" onclick="switchTab('pr')" id="nav-pr"
+                class="flex items-center px-3 py-2.5 text-slate-300 hover:bg-slate-800 hover:text-white rounded-lg group transition-colors mt-1">
+                <i class="fa-solid fa-bullhorn w-6 text-slate-400 group-hover:text-white"></i>
+                <span class="flex-1">หนังสือประชาสัมพันธ์</span>
+                <span id="badge-pr"
+                    class="bg-primary-500 text-slate-900 text-xs font-bold px-2 py-0.5 rounded-full">1</span>
+            </a>
+
+            <p class="px-2 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 mt-6">จัดการระบบ</p>
+            <a href="#"
+                class="flex items-center px-3 py-2.5 text-slate-300 hover:bg-slate-800 hover:text-white rounded-lg group transition-colors">
+                <i class="fa-solid fa-magnifying-glass w-6 text-slate-400 group-hover:text-white"></i>
+                <span class="flex-1">ค้นหาขั้นสูง</span>
+            </a>
+            <a href="#"
+                class="flex items-center px-3 py-2.5 text-slate-300 hover:bg-slate-800 hover:text-white rounded-lg group transition-colors">
+                <i class="fa-solid fa-bookmark w-6 text-slate-400 group-hover:text-white"></i>
+                <span class="flex-1">รายการที่บันทึกไว้</span>
+            </a>
+        </nav>
+
+        <div class="p-4 border-t border-slate-700">
+            <div class="flex items-center">
+                <img src="https://ui-avatars.com/api/?name=Somchai+P&background=0D8ABC&color=fff" alt="User Avatar"
+                    class="h-10 w-10 rounded-full border-2 border-slate-600">
+                <div class="ml-3">
+                    <p class="text-sm font-medium text-white">นายสมชาย รักดี</p>
+                    <p class="text-xs text-slate-400">เจ้าหน้าที่บริหารงานทั่วไป</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col h-screen overflow-hidden relative">
+
+        <!-- Top Header -->
+        <header
+            class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-4 sm:px-6 z-10 shadow-sm">
+            <div class="flex items-center">
+                <button class="md:hidden text-slate-500 hover:text-slate-700 focus:outline-none mr-4">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+                <h1 class="text-xl font-semibold text-slate-800 hidden sm:block" id="page-title">หนังสือภายใน</h1>
+            </div>
+
+            <div class="flex items-center space-x-4 w-full sm:w-auto ml-4 sm:ml-0">
+                <div class="relative w-full sm:w-80">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                        <i class="fa-solid fa-magnifying-glass text-slate-400"></i>
+                    </span>
+                    <input type="text" placeholder="ค้นหาเลขที่, เรื่อง, หรือคำค้น..."
+                        class="w-full pl-10 pr-4 py-2 bg-slate-100 border-transparent rounded-lg text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors">
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Scrollable Area -->
+        <main class="flex-1 overflow-x-hidden overflow-y-auto bg-slate-50 p-4 sm:p-6" id="main-content">
+
+            <!-- VIEW: Internal Documents -->
+            <div id="view-internal">
+                <div class="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div>
+                        <h2 class="text-lg font-bold text-slate-800">รายการหนังสือภายใน (มอบหมาย)</h2>
+                        <p class="text-sm text-slate-500">เอกสารที่ผู้อำนวยการมอบหมายให้คุณดำเนินการ</p>
+                    </div>
+                    <div class="flex space-x-2">
+                        <select
+                            class="border border-slate-300 rounded-lg text-sm p-2 focus:ring-primary-500 focus:border-primary-500 outline-none bg-white shadow-sm">
+                            <option>สถานะ: ทั้งหมด</option>
+                            <option>สถานะ: ยังไม่อ่าน</option>
+                            <option>สถานะ: ดำเนินการแล้ว</option>
+                        </select>
+                        <select
+                            class="border border-slate-300 rounded-lg text-sm p-2 focus:ring-primary-500 focus:border-primary-500 outline-none bg-white shadow-sm">
+                            <option>ปีงบประมาณ: 2567</option>
+                            <option>ปีงบประมาณ: 2566</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-50 text-slate-600 text-sm border-b border-slate-200">
+                                    <th class="py-3 px-4 font-semibold w-12 text-center"></th>
+                                    <th class="py-3 px-4 font-semibold w-48">เลขที่ / ลงวันที่</th>
+                                    <th class="py-3 px-4 font-semibold">เรื่อง</th>
+                                    <th class="py-3 px-4 font-semibold w-48">จากหน่วยงาน</th>
+                                    <th class="py-3 px-4 font-semibold w-32">ชั้นความเร็ว</th>
+                                    <th class="py-3 px-4 font-semibold w-40">มอบหมายให้</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm divide-y divide-slate-100" id="internal-list">
+                                <!-- Data populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW: PR Documents -->
+            <div id="view-pr" class="hidden">
+                <div class="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div>
+                        <h2 class="text-lg font-bold text-slate-800">ศูนย์รวมหนังสือประชาสัมพันธ์</h2>
+                        <p class="text-sm text-slate-500">ประกาศ ระเบียบ และจดหมายเวียนเพื่อทราบ</p>
+                    </div>
+                    <div class="flex space-x-2">
+                        <select
+                            class="border border-slate-300 rounded-lg text-sm p-2 focus:ring-primary-500 focus:border-primary-500 outline-none bg-white shadow-sm">
+                            <option>หมวดหมู่: ทั้งหมด</option>
+                            <option>หมวดหมู่: ประกาศ</option>
+                            <option>หมวดหมู่: ระเบียบ</option>
+                            <option>หมวดหมู่: จดหมายเวียน</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- PR Cards (Grid layout) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="pr-list">
+                    <!-- Data populated by JS -->
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Modal: Document Details -->
+    <div id="doc-modal" class="fixed inset-0 z-50 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="fixed inset-0 bg-slate-900 bg-opacity-60 transition-opacity backdrop-blur-sm"></div>
+
+        <div class="fixed inset-0 z-10 overflow-y-auto">
+            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+
+                <div
+                    class="relative transform overflow-hidden rounded-xl bg-white text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-3xl border border-slate-200">
+
+                    <!-- Header -->
+                    <div class="bg-slate-50 px-6 py-4 border-b border-slate-200 flex justify-between items-center">
+                        <div class="flex items-center space-x-3">
+                            <span id="modal-badge"></span>
+                            <h3 class="text-lg font-bold text-slate-800" id="modal-title">รายละเอียดหนังสือ</h3>
+                        </div>
+                        <button onclick="closeModal()"
+                            class="text-slate-400 hover:text-slate-700 focus:outline-none bg-white rounded-full w-8 h-8 flex items-center justify-center border border-slate-200 shadow-sm hover:bg-slate-100 transition-colors">
+                            <i class="fa-solid fa-xmark text-lg"></i>
+                        </button>
+                    </div>
+
+                    <!-- Body -->
+                    <div class="px-6 py-6 bg-white">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-5 text-sm">
+                            <div>
+                                <p class="text-slate-500 mb-1 text-xs uppercase tracking-wider font-semibold">
+                                    เลขที่หนังสือ</p>
+                                <p class="font-medium text-slate-900 text-base" id="modal-doc-no">-</p>
+                            </div>
+                            <div>
+                                <p class="text-slate-500 mb-1 text-xs uppercase tracking-wider font-semibold">ลงวันที่
+                                </p>
+                                <p class="font-medium text-slate-900 text-base" id="modal-date">-</p>
+                            </div>
+                            <div class="md:col-span-2">
+                                <p class="text-slate-500 mb-1 text-xs uppercase tracking-wider font-semibold">เรื่อง</p>
+                                <p class="font-bold text-lg text-slate-900" id="modal-subject">-</p>
+                            </div>
+                            <div class="md:col-span-2">
+                                <p class="text-slate-500 mb-1 text-xs uppercase tracking-wider font-semibold">จาก
+                                    (หน่วยงาน)</p>
+                                <p class="font-medium text-slate-900 text-base" id="modal-sender">-</p>
+                            </div>
+
+                            <!-- Assignment Section (Conditionally shown for internal) -->
+                            <div id="modal-assignment-section"
+                                class="md:col-span-2 mt-2 bg-primary-50 rounded-xl border border-primary-100 p-4 hidden">
+                                <h4 class="font-bold text-primary-700 mb-3 flex items-center">
+                                    <i class="fa-solid fa-thumbtack text-primary-500 mr-2"></i> การมอบหมาย
+                                </h4>
+                                <div class="flex items-start text-sm">
+                                    <div class="flex flex-col items-center mr-4">
+                                        <div
+                                            class="w-8 h-8 rounded-full bg-white border-2 border-primary-200 flex items-center justify-center text-primary-500 font-bold z-10">
+                                            <i class="fa-solid fa-user-tie"></i>
+                                        </div>
+                                        <div class="w-0.5 h-10 bg-primary-200 my-1"></div>
+                                        <div
+                                            class="w-8 h-8 rounded-full bg-primary-500 border-2 border-primary-200 flex items-center justify-center text-white font-bold z-10">
+                                            <i class="fa-solid fa-user"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1 pt-1">
+                                        <div>
+                                            <p class="text-slate-500 text-xs">ผู้มอบหมาย (ถึง)</p>
+                                            <p class="font-semibold text-slate-800">ผู้อำนวยการกองบริหารกลาง</p>
+                                        </div>
+                                        <div class="mt-4">
+                                            <p class="text-slate-500 text-xs">มอบหมายให้</p>
+                                            <p class="font-semibold text-slate-800" id="modal-assigned-to">นายสมชาย
+                                                รักดี (คุณ)</p>
+                                            <div
+                                                class="mt-2 bg-white p-3 rounded-lg border border-primary-100 shadow-sm relative">
+                                                <i
+                                                    class="fa-solid fa-quote-left text-primary-200 absolute top-2 right-2 text-xl opacity-50"></i>
+                                                <p class="text-slate-700 italic" id="modal-assign-note">"โปรดดำเนินการ"
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Attachments -->
+                        <div class="mt-8 border-t border-slate-100 pt-6">
+                            <h4 class="font-semibold text-slate-800 mb-4 flex items-center"><i
+                                    class="fa-solid fa-paperclip mr-2 text-slate-500"></i> ไฟล์เอกสารแนบ</h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div
+                                    class="flex items-center p-3 border border-slate-200 rounded-lg hover:border-primary-400 hover:shadow-sm cursor-pointer transition-all bg-slate-50 group">
+                                    <div
+                                        class="w-10 h-10 bg-red-100 rounded flex items-center justify-center mr-3 text-red-500 group-hover:bg-red-500 group-hover:text-white transition-colors">
+                                        <i class="fa-solid fa-file-pdf text-xl"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-sm font-medium text-slate-800 truncate" id="modal-filename">
+                                            scan_doc_001.pdf</p>
+                                        <p class="text-xs text-slate-500">2.4 MB</p>
+                                    </div>
+                                    <i
+                                        class="fa-solid fa-download text-slate-300 group-hover:text-primary-500 ml-2"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer Actions -->
+                    <div
+                        class="bg-slate-50 px-6 py-4 border-t border-slate-200 flex flex-col-reverse sm:flex-row sm:justify-end gap-3">
+                        <button type="button" onclick="closeModal()"
+                            class="w-full sm:w-auto inline-flex justify-center items-center rounded-lg bg-white px-5 py-2.5 text-sm font-medium text-slate-700 shadow-sm ring-1 ring-inset ring-slate-300 hover:bg-slate-50 transition-colors">
+                            ปิด
+                        </button>
+                        <button type="button"
+                            class="w-full sm:w-auto inline-flex justify-center items-center rounded-lg bg-slate-800 px-5 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-slate-900 transition-colors">
+                            <i class="fa-solid fa-print mr-2"></i> พิมพ์เอกสาร
+                        </button>
+                        <button type="button" id="btn-modal-action" onclick="acknowledgeDoc()"
+                            class="w-full sm:w-auto inline-flex justify-center items-center rounded-lg bg-primary-500 px-5 py-2.5 text-sm font-medium text-slate-900 shadow-sm hover:bg-primary-600 transition-colors">
+                            <i class="fa-solid fa-check mr-2"></i> รับทราบ
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Mockup Data: Internal Documents
+        let internalDocs = [
+            {
+                id: 1,
+                docNo: "ศธ ๐๒๑๐.๔/ว ๑๒๓",
+                date: "๑๕ ต.ค. ๖๖",
+                subject: "ขอเชิญประชุมคณะกรรมการบริหารจัดการงบประมาณ ประจำปีงบประมาณ พ.ศ. ๒๕๖๗",
+                sender: "กองนโยบายและแผน",
+                speed: "ด่วนที่สุด",
+                status: "unread",
+                assignedTo: "นายสมชาย รักดี",
+                assignNote: "โปรดเตรียมข้อมูลงบประมาณหมวดค่าตอบแทน เพื่อประกอบการพิจารณาในที่ประชุมด้วย",
+                filename: "วาระการประชุม_คณะกรรมการฯ.pdf"
+            },
+            {
+                id: 2,
+                docNo: "ศธ ๐๒๑๐.๑/๔๕๖",
+                date: "๑๔ ต.ค. ๖๖",
+                subject: "ขออนุมัติเบิกจ่ายค่าวัสดุสำนักงานประจำเดือนกันยายน",
+                sender: "งานพัสดุ กองบริหารกลาง",
+                speed: "ปกติ",
+                status: "unread",
+                assignedTo: "นายสมชาย รักดี",
+                assignNote: "ตรวจสอบความถูกต้องของรายการวัสดุ และทำบันทึกเสนอ ผอ. อนุมัติต่อไป",
+                filename: "รายการเบิกจ่ายวัสดุ_กย66.pdf"
+            },
+            {
+                id: 3,
+                docNo: "ศธ ๐๒๑๐.๒/๑๑๒",
+                date: "๑๓ ต.ค. ๖๖",
+                subject: "รายงานผลการดำเนินงานโครงการอบรมสัมมนาประจำปี",
+                sender: "กองพัฒนาบุคลากร",
+                speed: "ปกติ",
+                status: "read",
+                assignedTo: "นายสมชาย รักดี",
+                assignNote: "เพื่อทราบ และจัดเก็บเข้าแฟ้มโครงการ",
+                filename: "รายงานผลโครงการอบรม_ปี66.pdf"
+            }
+        ];
+
+        // Mockup Data: PR Documents
+        let prDocs = [
+            {
+                id: 101,
+                docNo: "ป. ๐๑/๒๕๖๖",
+                date: "๑๐ ต.ค. ๖๖",
+                subject: "ประกาศมาตรการประหยัดพลังงานในสำนักงาน",
+                sender: "กองบริหารกลาง",
+                status: "unread",
+                category: "ประกาศ",
+                filename: "ประกาศมาตรการประหยัดพลังงาน.pdf",
+                views: 45
+            },
+            {
+                id: 102,
+                docNo: "ว. ๗๘๙",
+                date: "๐๕ ต.ค. ๖๖",
+                subject: "ขอเชิญร่วมกิจกรรมจิตอาสาพัฒนาสิ่งแวดล้อม",
+                sender: "กลุ่มงานกิจกรรมพิเศษ",
+                status: "read",
+                category: "จดหมายเวียน",
+                filename: "กำหนดการจิตอาสา.pdf",
+                views: 120
+            },
+            {
+                id: 103,
+                docNo: "ร. ๐๕/๒๕๖๖",
+                date: "๐๑ ต.ค. ๖๖",
+                subject: "ระเบียบว่าด้วยการเบิกจ่ายค่าใช้จ่ายในการเดินทางไปราชการ (ฉบับแก้ไขปรับปรุง)",
+                sender: "กองคลัง",
+                status: "read",
+                category: "ระเบียบ",
+                filename: "ระเบียบการเดินทาง_ปรับปรุง66.pdf",
+                views: 210
+            }
+        ];
+
+        let currentOpenedDoc = null;
+
+        function getSpeedBadge(speed) {
+            if (!speed) return '';
+            switch (speed) {
+                case 'ด่วนที่สุด': return '<span class="px-2 py-1 text-[10px] font-bold rounded bg-red-100 text-red-700 border border-red-200">ด่วนที่สุด</span>';
+                case 'ด่วนมาก': return '<span class="px-2 py-1 text-[10px] font-bold rounded bg-orange-100 text-orange-700 border border-orange-200">ด่วนมาก</span>';
+                case 'ด่วน': return '<span class="px-2 py-1 text-[10px] font-bold rounded bg-yellow-100 text-yellow-700 border border-yellow-200">ด่วน</span>';
+                default: return '<span class="px-2 py-1 text-[10px] font-medium rounded bg-slate-100 text-slate-600 border border-slate-200">ปกติ</span>';
+            }
+        }
+
+        function getCategoryBadge(category) {
+            switch (category) {
+                case 'ประกาศ': return 'bg-purple-100 text-purple-700 border-purple-200';
+                case 'ระเบียบ': return 'bg-teal-100 text-teal-700 border-teal-200';
+                case 'จดหมายเวียน': return 'bg-primary-100 text-blue-700 border-primary-200';
+                default: return 'bg-slate-100 text-slate-700 border-slate-200';
+            }
+        }
+
+        function renderInternalTable() {
+            const tbody = document.getElementById('internal-list');
+            tbody.innerHTML = '';
+            let unreadCount = 0;
+
+            internalDocs.forEach(doc => {
+                let isUnread = doc.status === 'unread';
+                if (isUnread) unreadCount++;
+
+                let trClass = 'hover:bg-primary-50 cursor-pointer transition-colors group ';
+                let textClass = isUnread ? 'text-slate-900 font-semibold' : 'text-slate-600';
+                let iconHtml = isUnread ?
+                    '<div class="w-3 h-3 bg-primary-500 rounded-full mx-auto shadow-[0_0_5px_rgba(59,130,246,0.6)]"></div>' :
+                    '<i class="fa-solid fa-check text-slate-300"></i>';
+
+                const tr = document.createElement('tr');
+                tr.className = trClass + (isUnread ? 'bg-white' : 'bg-slate-50/50');
+                tr.onclick = () => openModal(doc, 'internal');
+
+                tr.innerHTML = `
+                    <td class="py-4 px-4 text-center align-top border-l-4 ${isUnread ? 'border-primary-500' : 'border-transparent'}">${iconHtml}</td>
+                    <td class="py-4 px-4 align-top">
+                        <p class="${textClass}">${doc.docNo}</p>
+                        <p class="text-xs text-slate-500 font-normal mt-1">${doc.date}</p>
+                    </td>
+                    <td class="py-4 px-4 align-top">
+                        <p class="${textClass} line-clamp-2">${doc.subject}</p>
+                    </td>
+                    <td class="py-4 px-4 align-top text-sm ${textClass}">${doc.sender}</td>
+                    <td class="py-4 px-4 align-top">${getSpeedBadge(doc.speed)}</td>
+                    <td class="py-4 px-4 align-top">
+                        <div class="flex items-center text-sm ${textClass}">
+                            <i class="fa-solid fa-user-check text-primary-400 mr-2"></i> ${doc.assignedTo}
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            const badge = document.getElementById('badge-internal');
+            if (unreadCount > 0) {
+                badge.innerText = unreadCount;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+        }
+
+        function renderPRTable() {
+            const list = document.getElementById('pr-list');
+            list.innerHTML = '';
+            let unreadCount = 0;
+
+            prDocs.forEach(doc => {
+                let isUnread = doc.status === 'unread';
+                if (isUnread) unreadCount++;
+
+                const card = document.createElement('div');
+                card.className = `bg-white border ${isUnread ? 'border-primary-300 shadow-md ring-1 ring-primary-100' : 'border-slate-200 shadow-sm'} rounded-xl p-5 hover:shadow-md transition-all cursor-pointer relative overflow-hidden`;
+                card.onclick = () => openModal(doc, 'pr');
+
+                if (isUnread) {
+                    card.innerHTML += `<div class="absolute top-0 right-0 w-16 h-16 overflow-hidden">
+                                        <div class="absolute transform rotate-45 bg-primary-500 text-center text-white font-bold py-1 right-[-35px] top-[10px] w-[120px] text-[10px] shadow-sm">ใหม่</div>
+                                       </div>`;
+                }
+
+                card.innerHTML += `
+                    <div class="flex justify-between items-start mb-3 pr-4">
+                        <span class="px-2.5 py-1 text-[10px] font-bold rounded-full border ${getCategoryBadge(doc.category)}">${doc.category}</span>
+                        <span class="text-xs text-slate-400"><i class="fa-regular fa-calendar mr-1"></i> ${doc.date}</span>
+                    </div>
+                    <h3 class="${isUnread ? 'text-slate-900 font-bold' : 'text-slate-700 font-semibold'} text-base mb-2 line-clamp-2">${doc.subject}</h3>
+                    <p class="text-sm text-slate-500 mb-4"><i class="fa-solid fa-building text-slate-400 mr-1.5"></i> ${doc.sender}</p>
+                    
+                    <div class="border-t border-slate-100 pt-3 flex justify-between items-center text-xs text-slate-400">
+                        <span>เลขที่: ${doc.docNo}</span>
+                        <span><i class="fa-solid fa-eye mr-1"></i> ${doc.views}</span>
+                    </div>
+                `;
+                list.appendChild(card);
+            });
+
+            const badge = document.getElementById('badge-pr');
+            if (unreadCount > 0) {
+                badge.innerText = unreadCount;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+        }
+
+        function switchTab(tab) {
+            const viewInternal = document.getElementById('view-internal');
+            const viewPR = document.getElementById('view-pr');
+            const pageTitle = document.getElementById('page-title');
+            const navInternal = document.getElementById('nav-internal');
+            const navPR = document.getElementById('nav-pr');
+
+            // Reset Default Styles
+            navInternal.className = "flex items-center px-3 py-2.5 text-slate-300 hover:bg-slate-800 hover:text-white rounded-lg group transition-colors mt-1";
+            navInternal.querySelector('i').className = "fa-solid fa-folder-open w-6 text-slate-400 group-hover:text-white";
+
+            navPR.className = "flex items-center px-3 py-2.5 text-slate-300 hover:bg-slate-800 hover:text-white rounded-lg group transition-colors mt-1";
+            navPR.querySelector('i').className = "fa-solid fa-bullhorn w-6 text-slate-400 group-hover:text-white";
+
+            if (tab === 'internal') {
+                viewInternal.classList.remove('hidden');
+                viewPR.classList.add('hidden');
+                pageTitle.innerText = 'หนังสือภายใน';
+
+                navInternal.className = "flex items-center px-3 py-2.5 bg-primary-500 text-slate-900 rounded-lg group transition-colors mt-1";
+                navInternal.querySelector('i').className = "fa-solid fa-folder-open w-6 text-slate-900";
+                renderInternalTable();
+            } else if (tab === 'pr') {
+                viewInternal.classList.add('hidden');
+                viewPR.classList.remove('hidden');
+                pageTitle.innerText = 'หนังสือประชาสัมพันธ์';
+
+                navPR.className = "flex items-center px-3 py-2.5 bg-primary-500 text-slate-900 rounded-lg group transition-colors mt-1";
+                navPR.querySelector('i').className = "fa-solid fa-bullhorn w-6 text-slate-900";
+                renderPRTable();
+            }
+        }
+
+        function openModal(doc, type) {
+            currentOpenedDoc = { doc, type };
+
+            document.getElementById('modal-doc-no').innerText = doc.docNo;
+            document.getElementById('modal-date').innerText = doc.date;
+            document.getElementById('modal-subject').innerText = doc.subject;
+            document.getElementById('modal-sender').innerText = doc.sender;
+            document.getElementById('modal-filename').innerText = doc.filename;
+
+            const assignmentSection = document.getElementById('modal-assignment-section');
+            const btnAction = document.getElementById('btn-modal-action');
+            const badgeContainer = document.getElementById('modal-badge');
+
+            if (type === 'internal') {
+                badgeContainer.innerHTML = getSpeedBadge(doc.speed);
+                assignmentSection.classList.remove('hidden');
+                document.getElementById('modal-assigned-to').innerText = doc.assignedTo;
+                document.getElementById('modal-assign-note').innerText = `"${doc.assignNote}"`;
+
+                if (doc.status === 'unread') {
+                    btnAction.innerHTML = '<i class="fa-solid fa-check mr-2"></i> รับทราบการมอบหมาย';
+                    btnAction.className = "w-full sm:w-auto inline-flex justify-center items-center rounded-lg bg-primary-500 px-5 py-2.5 text-sm font-medium text-slate-900 shadow-sm hover:bg-primary-600 transition-colors";
+                    btnAction.disabled = false;
+                } else {
+                    btnAction.innerHTML = '<i class="fa-solid fa-check-double mr-2"></i> รับทราบแล้ว';
+                    btnAction.className = "w-full sm:w-auto inline-flex justify-center items-center rounded-lg bg-slate-200 px-5 py-2.5 text-sm font-medium text-slate-500 cursor-not-allowed";
+                    btnAction.disabled = true;
+                }
+
+            } else if (type === 'pr') {
+                badgeContainer.innerHTML = `<span class="px-2.5 py-1 text-xs font-bold rounded-full border ${getCategoryBadge(doc.category)}">${doc.category}</span>`;
+                assignmentSection.classList.add('hidden');
+
+                if (doc.status === 'unread') {
+                    btnAction.innerHTML = '<i class="fa-solid fa-hand-holding-hand mr-2"></i> กดรับหนังสือ';
+                    btnAction.className = "w-full sm:w-auto inline-flex justify-center items-center rounded-lg bg-green-600 px-5 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-green-700 transition-colors";
+                    btnAction.disabled = false;
+                } else {
+                    btnAction.innerHTML = '<i class="fa-solid fa-check-double mr-2"></i> รับหนังสือแล้ว';
+                    btnAction.className = "w-full sm:w-auto inline-flex justify-center items-center rounded-lg bg-slate-200 px-5 py-2.5 text-sm font-medium text-slate-500 cursor-not-allowed";
+                    btnAction.disabled = true;
+                }
+            }
+
+            const modal = document.getElementById('doc-modal');
+            modal.classList.remove('hidden');
+            document.body.classList.add('modal-open');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('doc-modal');
+            modal.classList.add('hidden');
+            document.body.classList.remove('modal-open');
+            currentOpenedDoc = null;
+        }
+
+        function acknowledgeDoc() {
+            if (!currentOpenedDoc) return;
+            const { doc, type } = currentOpenedDoc;
+
+            doc.status = 'read'; // เปลี่ยนสถานะเป็นอ่านแล้ว
+
+            if (type === 'internal') {
+                renderInternalTable();
+            } else {
+                doc.views++; // เพิ่มยอดเข้าชมให้ฝั่งประชาสัมพันธ์
+                renderPRTable();
+            }
+
+            closeModal();
+        }
+
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', () => {
+            renderInternalTable();
+            renderPRTable();
+        });
+
+    </script>
+</body>
+
+</html>
